@@ -1,0 +1,8 @@
+/* Empty. Add your own CSS if you like */
+
+
+/*Hide scroll bar on every screen*/
+.scroll-bar-indicator
+{
+  display: none;
+}
