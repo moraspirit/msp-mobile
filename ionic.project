@@ -1,6 +1,6 @@
 {
   "name": "msp-mobile",
-  "app_id": "",
+  "app_id": "bafdfdc6",
   "gulpStartupTasks": [
     "sass",
     "watch"

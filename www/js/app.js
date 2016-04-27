@@ -4,8 +4,23 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
 
+angular.module('starter',
+  ['ionic',
+  'starter.controllers',
+  'ionic.service.core','ngCordova',
+  'ionic.service.push']
+)
+/*
+
+  .config(['$ionicAppProvider', function($ionicAppProvider) {
+    $ionicAppProvider.identify({
+      app_id: 'bafdfdc6',
+      api_key: '811677f18d99b6126c55560dc9f74f75a209c3ff08d0a828',
+      dev_push: true
+    });
+  }])
+*/
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
