@@ -2,45 +2,42 @@
 
   <!-- Center content -->
   <ion-side-menu-content>
-
-    <!-- Nav bar -->
-    <ion-nav-bar align-title="center" class="bar-dark">
-      <ion-nav-back-button>
+    <ion-nav-bar class="bar-assertive">
+      <ion-nav-back-button class="no-text">
       </ion-nav-back-button>
-
       <ion-nav-buttons side="left">
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
       </ion-nav-buttons>
-
-     <!-- <ion-nav-buttons side="right">
-       <a href="#/app/notifications"><button menu-close class="button button-icon button-clear ion-ios-bell" style="margin-right: 10px">
-        </button></a>
-        <button class="button button-icon button-clear ion-person" menu-toggle="right">
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-android-more-vertical" id="menu-popover" ng-click="popover.show($event)">
         </button>
-      </ion-nav-buttons>-->
-
-
+      </ion-nav-buttons>
     </ion-nav-bar>
 
-    <ion-nav-view name="menuContent">
-    </ion-nav-view>
-
+    <ion-nav-view name="fabContent"></ion-nav-view>
+    <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
 
   <!-- Left menu -->
   <ion-side-menu side="left" >
-    <ion-header-bar align-title="left"  class="bar-assertive">
-      <h1 class="title">Moraspirit</h1>
+    <ion-header-bar class="expanded">
+      <!--<img src="img/logo.png" class="avatar motion spin fade">-->
+      <div class="menu-bottom">
+        <img src="../img/msp_text_logo_300.png" style="width: 75%; height: auto">
+      </div>
     </ion-header-bar>
-    <ion-content>
+    <ion-content class="stable-bg has-expanded-header">
       <ion-list>
-        <ion-item menu-close href="#/app/articals" class="item-icon-left">
+        <ion-item menu-close href="#/app/articles" class="item-icon-left">
           <i class='icon ion-android-list'></i> Articles
         </ion-item>
         <ion-item menu-close href="#/app/album" class="item-icon-left">
           <i class='icon ion-images'></i>
           Photo Album
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/components">
+          Components+
         </ion-item>
         <ion-item menu-close href="#/app/slug" class="item-icon-left">
           <i class='icon ion-android-walk'></i>

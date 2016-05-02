@@ -9,7 +9,7 @@ angular.module('starter',
   ['ionic',
   'starter.controllers',
   'ionic.service.core','ngCordova',
-  'ionic.service.push']
+  'ionic.service.push','ionic-material']
 )
 /*
 
@@ -43,14 +43,34 @@ angular.module('starter',
     .state('app', {
     url: '/app',
     abstract: true,
-    templateUrl: 'templates/menu.html'
-  })
+    templateUrl: 'templates/menu.html',
+    controller: 'AppCtrl'
 
-  .state('app.articals', {
-    url: '/articals',
+    })
+
+  .state('app.articles', {
+    url: '/articles',
     views: {
       'menuContent': {
-        templateUrl: 'templates/articals.html'
+        templateUrl: 'templates/articles.html',
+        controller: 'ArticlesController'
+      }
+    }
+  })
+  .state('app.article-full', {
+    url: '/articles/:id',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/article-full.html',
+        controller: 'ArticleController'
+      },
+      'fabContent': {
+        // template: '<button id="fab-tweet" class="button button-fab button-fab-top-right expanded button-energized-900 flap"><i class="icon ion-social-twitter"></i></button>',
+        // controller: function ($timeout) {
+        //   $timeout(function () {
+        //     document.getElementById('fab-tweet').classList.toggle('on');
+        //   }, 200);
+        // }
       }
     }
   })
@@ -81,5 +101,5 @@ angular.module('starter',
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/articals');
+  $urlRouterProvider.otherwise('/app/articles');
 });
