@@ -10,6 +10,12 @@ ionic emulate android
 ```
 use emulator or a real device always if possible.
 
+**API server**
+```
+npm install
+node server/server.js
+```
+
 **run the app live on device**
 
 make sure your device and pc is connected to same network. also install **phonegap** app on device from google play store.
