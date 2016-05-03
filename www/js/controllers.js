@@ -82,15 +82,48 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+.controller('AlbumController', function($scope, $stateParams, $timeout, $http,ionicMaterialInk, ionicMaterialMotion) {
+  /*$scope.$parent.showHeader();
+  $scope.$parent.clearFabs();
+  $scope.isExpanded = true;
+  $scope.$parent.setExpanded(true);
+  $scope.$parent.setHeaderFab(false);
+
+  // Activate ink for controller
+  ionicMaterialInk.displayEffect();
+
+  ionicMaterialMotion.pushDown({
+    selector: '.push-down'
+  });
+  ionicMaterialMotion.fadeSlideInRight({
+    selector: '.animate-fade-slide-in .item'
+  });*/
+  $scope.data= {};
+  $scope.data.albums = [];
+
+  $http.get("http://localhost:3000/albums")
+    .then(function(data) {
+      $scope.data.albums = data.data.data;
+      console.log(data.data.data);
+    });
+
+})
+
+.controller('RecentScoresCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+  $scope.$parent.showHeader();
+  $scope.$parent.clearFabs();
+  $scope.isExpanded = true;
+  $scope.$parent.setExpanded(true);
+  $scope.$parent.setHeaderFab('right');
+
+  $timeout(function() {
+    ionicMaterialMotion.fadeSlideIn({
+      selector: '.animate-fade-slide-in .item'
+    });
+  }, 200);
+
+  // Activate ink for controller
+  ionicMaterialInk.displayEffect();
 })
 
 .controller('ArticlesController', function($scope, $stateParams, ionicMaterialInk) {

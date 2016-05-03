@@ -9,7 +9,7 @@ angular.module('starter',
   ['ionic',
   'starter.controllers',
   'ionic.service.core','ngCordova',
-  'ionic.service.push','ionic-material']
+  'ionic.service.push','ionic-material','ionicLazyLoad']
 )
 /*
 
@@ -79,7 +79,8 @@ angular.module('starter',
       url: '/album',
       views: {
         'menuContent': {
-          templateUrl: 'templates/album.html'
+          templateUrl: 'templates/album.html',
+          controller: 'AlbumController'
         }
       }
     })
@@ -96,7 +97,8 @@ angular.module('starter',
     url: '/slug',
     views: {
       'menuContent': {
-        templateUrl: 'templates/slug.html'
+        templateUrl: 'templates/slug.html',
+        controller: 'RecentScoresCtrl'
       }
     }
   });

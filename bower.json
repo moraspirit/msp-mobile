@@ -11,6 +11,8 @@
   "dependencies": {
     "robotodraft": "^1.1.0",
     "ionic-material": "^0.4.2",
-    "ionic-rating": "^0.3.0"
+    "ionic-rating": "^0.3.0",
+    "easyfont-roboto-slab": "easyfont/roboto-slab",
+    "ionic-image-lazy-load": "ion-image-lazy-load#*"
   }
 }

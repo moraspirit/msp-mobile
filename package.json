@@ -3,7 +3,9 @@
   "version": "1.1.1",
   "description": "msp-mobile: An Ionic project",
   "dependencies": {
+    "cors": "^2.7.1",
     "express": "^4.13.4",
+    "fb": "^1.0.2",
     "gulp": "^3.5.6",
     "gulp-concat": "^2.2.0",
     "gulp-minify-css": "^0.3.0",

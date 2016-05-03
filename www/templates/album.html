@@ -1,5 +1,101 @@
-<ion-view view-title="Browse">
-  <ion-content>
-    <h1>Browse</h1>
+<ion-view view-title="gallery">
+  <ion-content ng-class="{expanded:isExpanded}">
+
+    <div class="list half">
+      <div ng-repeat="album in data.albums" ng-if="$odd">
+
+        <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
+          <div class="ink dark-bg">
+            <h2 style="text-transform: uppercase">{{album.name}}</h2>
+            <img class="full-image" image-lazy-src="{{'http://graph.facebook.com/'+album.cover_photo+'/picture'}}" image-lazy-loader="dots">
+          </div>
+          <div class="item tabs tabs-secondary tabs-icon-left">
+            <a class="tab-item stable-bg assertive">
+              <i class="icon ion-heart"></i>
+              22
+            </a>
+            <a class="tab-item stable-bg positive-900">
+              <i class="icon ion-chatbubbles"></i>
+              9
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="list half">
+      <div ng-repeat="album in data.albums" ng-if="$even">
+
+        <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
+          <div class="ink dark-bg">
+            <h2 style="text-transform: uppercase">{{album.name}}</h2>
+            <img class="full-image" image-lazy-src="{{'http://graph.facebook.com/'+album.cover_photo+'/picture'}}" image-lazy-loader="dots">
+          </div>
+          <div class="item tabs tabs-secondary tabs-icon-left">
+            <a class="tab-item stable-bg assertive">
+              <i class="icon ion-heart"></i>
+              22
+            </a>
+            <a class="tab-item stable-bg positive-900">
+              <i class="icon ion-chatbubbles"></i>
+              9
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<div class="list half">
+      <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
+        <div class="ink dark-bg">
+          <h2>MORALE 2016</h2>
+          <img class="full-image" src="../img/album/12496014_1394934570530212_7205230964920320390_o.jpg">
+        </div>
+        <div class="item tabs tabs-secondary tabs-icon-left">
+          <a class="tab-item stable-bg assertive">
+            <i class="icon ion-heart"></i>
+            4
+          </a>
+          <a class="tab-item stable-bg positive-900">
+            <i class="icon ion-chatbubbles"></i>
+            2
+          </a>
+        </div>
+      </div>
+      <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
+        <div class="ink dark-bg">
+          <h2>COLORS AWARDS 2015</h2>
+          <img class="full-image" src="../img/album/12970885_1412811388742530_732812249651158107_o.jpg">
+        </div>
+        <div class="item tabs tabs-secondary tabs-icon-left">
+          <a class="tab-item stable-bg assertive">
+            <i class="icon ion-heart"></i>
+            6
+          </a>
+          <a class="tab-item stable-bg positive-900">
+            <i class="icon ion-chatbubbles"></i>
+            1
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="list half">
+      <div ui-sref="app.profile" class="card card-gallery item item-text-wrap">
+        <div class="ink dark-bg">
+          <h2>OFFICIAL BIRTHDAY CELEBRATION</h2>
+          <img class="full-image" src="../img/album/13147373_1430769420280060_1521894977529849355_o.jpg">
+        </div>
+        <div class="item tabs tabs-secondary tabs-icon-left">
+          <a class="tab-item stable-bg assertive">
+            <i class="icon ion-heart"></i>
+            22
+          </a>
+          <a class="tab-item stable-bg positive-900">
+            <i class="icon ion-chatbubbles"></i>
+            9
+          </a>
+        </div>
+      </div>
+
+  </div> -->
   </ion-content>
 </ion-view>
