@@ -14,5 +14,8 @@
     "ionic-rating": "^0.3.0",
     "easyfont-roboto-slab": "easyfont/roboto-slab",
     "ionic-image-lazy-load": "ion-image-lazy-load#*"
+  },
+  "resolutions": {
+    "angular-sanitize": "1.3.13"
   }
 }

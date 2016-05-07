@@ -5,12 +5,12 @@ var express = require('express');
 var mysql      = require('mysql');
 var FB = require('fb');
 var cors = require('cors');
-FB.setAccessToken('EAACEdEose0cBAA0jCzZBU9tdjZAKkj3QOZBxORCbZACduOETgQDfSXl6fh4seDjPgKLX4wHD407osZCBAruniD6SVntKHiFJAuyAMQScF0cqBZBY2cL1CJSY6nPWZB9FJJIDfjfhNa9ndIJJex5fKPsaCsKbJgVITbnJuPwiXbUSwZDZD');
+FB.setAccessToken('EAAOoAjs48vsBALhOXL7RmRegkJsiXYQ64LUXR1627Hegp6WwOJlmHQLA9hDwb0EspDqscHvbtn13obmQ1qn35lEA0YxVWOK36UvJbm2CHn9HMT0BtUOifzlRC6BYa5rjvHWgonLhhA9dr0RyiPxGhd57ATeObZB2HOmvqNQZDZD');
 
 var connection = mysql.createConnection({
   host     : 'localhost',
-  user     : 'mobileapp',
-  password : 'abc123',
+  user     : 'root',
+  password : '',
   database : 'morasp5_moraspirit_main_db'
 });
 var app = express();

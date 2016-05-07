@@ -4,8 +4,17 @@
 **steps to build the repo:**
 ```
 git clone https://github.com/moraspirit/msp-mobile.git
+npm install 
+bower install
 ionic platform add android
+
+
 ionic emulate android
+or 
+ionic build android
+ionic run android
+or 
+ionic serve -run
 
 ```
 use emulator or a real device always if possible.
