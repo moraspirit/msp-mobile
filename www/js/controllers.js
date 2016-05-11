@@ -82,8 +82,8 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('AlbumController', function($scope, $stateParams, $timeout, $http,ionicMaterialInk, ionicMaterialMotion) {
-  /*$scope.$parent.showHeader();
+.controller('AlbumController', function( $scope, $stateParams, $timeout, $http,ionicMaterialInk, ionicMaterialMotion) {
+ /* $scope.$parent.showHeader();
   $scope.$parent.clearFabs();
   $scope.isExpanded = true;
   $scope.$parent.setExpanded(true);
@@ -100,12 +100,16 @@ angular.module('starter.controllers', [])
   });*/
   $scope.data= {};
   $scope.data.albums = [];
+  $scope.goToAlbum = function(id){
+    window.open('https://www.facebook.com/moraspirit.fanpage/photos/?tab=album&album_id=' + id );
+  };
 
   $http.get("http://localhost:3000/albums")
     .then(function(data) {
       $scope.data.albums = data.data.data;
       console.log(data.data.data);
     });
+
 
 })
 
