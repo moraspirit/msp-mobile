@@ -1,5 +1,15 @@
 angular.module('starter.controllers', [])
 
+  .filter('URLmaker', function() {
+    return function(input) {
+      // do some bounds checking here to ensure it has that index.
+      var splittedString = input.split('/');
+      var address = 'http://moraspirit.com/sites/default/files/styles/teaser_image/public/' + splittedString[2] +'/' + splittedString[3]+'/' +splittedString[4]
+      console.log(address);
+      return address;
+    };
+  })
+
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicBackdrop) {
   $scope.isExpanded = false;
   $scope.hasHeaderFabLeft = false;
@@ -130,8 +140,16 @@ angular.module('starter.controllers', [])
   ionicMaterialInk.displayEffect();
 })
 
-.controller('ArticlesController', function($scope, $stateParams, ionicMaterialInk) {
-  ionicMaterialInk.displayEffect();
+.controller('ArticlesController', function($http, $scope, $stateParams, ionicMaterialInk) {
+  //ionicMaterialInk.displayEffect();
+  $scope.data= {};
+  $scope.data.articles = [];
+
+  $http.get("http://localhost:3000/articles")
+    .then(function(rows) {
+      $scope.data.articles = rows.data;
+      //console.log(rows.data);
+    });
 
 
 })
