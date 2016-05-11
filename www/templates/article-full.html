@@ -13,7 +13,7 @@
     <div class="content double-padding animate-fade-slide-in-right">
       <!--post content-->
       <div class="field-item even" property="content:encoded">
-        {{article.body_value}}
+        <div ng-bind-html="article.body_value"></div>
       </div>
 
       <h3 class="outline padding balanced inline img-rounded">
