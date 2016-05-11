@@ -3,10 +3,13 @@ angular.module('starter.controllers', [])
   .filter('URLmaker', function() {
     return function(input) {
       // do some bounds checking here to ensure it has that index.
-      var splittedString = input.split('/');
-      var address = 'http://moraspirit.com/sites/default/files/styles/teaser_image/public/' + splittedString[2] +'/' + splittedString[3]+'/' +splittedString[4]
-      console.log(address);
-      return address;
+      if(input)
+      {
+        var splittedString = input.split('/');
+        var address = 'http://moraspirit.com/sites/default/files/styles/teaser_image/public/' + splittedString[2] +'/' + splittedString[3]+'/' +splittedString[4]
+        console.log(address);
+        return address;
+      }
     };
   })
 
@@ -144,7 +147,6 @@ angular.module('starter.controllers', [])
   //ionicMaterialInk.displayEffect();
   $scope.data= {};
   $scope.data.articles = [];
-
   $http.get("http://localhost:3000/articles")
     .then(function(rows) {
       $scope.data.articles = rows.data;
@@ -154,11 +156,17 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ArticleController', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+.controller('ArticleController', function($http, $scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
 
   //article id
-  var id = $stateParams;
-  console.log(id);
+  var id = $stateParams.id;
+  $scope.article = null;
+  $http.get("http://localhost:3000/articles/" + id)
+    .then(function(row) {
+      $scope.article = row.data[0];
+      //console.log(rows.data);
+    });
+
 
   // Set Header
   $scope.$parent.showHeader();
@@ -182,6 +190,9 @@ angular.module('starter.controllers', [])
 
   // Set Ink
   ionicMaterialInk.displayEffect();
+
+
+
 })
 
 
