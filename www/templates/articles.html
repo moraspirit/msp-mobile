@@ -5,13 +5,17 @@
       <div ng-repeat="article in data.articles">
 
     <div class="list card stable-bg">
-      <div class="item item-avatar"><img src="img/ionic.png">
-        <h2 style="text-transform: uppercase">{{article.title}}</h2>
+      <div class="item item-text-wrap">
+
+
+         <h2 style="text-transform: uppercase">{{article.title}}</h2>
+
+
         <p>by&nbsp;<a style="font-weight: 300; font-size: 0.9em;" href="#">{{article.name}}</a></p>
       </div>
 
       <div class="item item-image">
-        <img class="full-image" image-lazy-src= '{{article.uri | URLmaker}}' image-lazy-loader="dots">
+        <img class="full-image" image-lazy-src= "{{article.uri | URLmaker}}" image-lazy-loader="ios">
       </div>
 
       <div class="item item-body"><p style="text-align: justify; font-family: 'Roboto Slab'; text-transform: uppercase;">{{article.body_summary}}<p>
