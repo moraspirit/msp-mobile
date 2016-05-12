@@ -6,9 +6,7 @@ angular.module('starter.controllers', [])
       if(input)
       {
         var splittedString = input.split('/');
-        var address = 'http://moraspirit.com/sites/default/files/styles/teaser_image/public/' + splittedString[2] +'/' + splittedString[3]+'/' +splittedString[4]
-        console.log(address);
-        return address;
+        return 'http://moraspirit.com/sites/default/files/styles/teaser_image/public/' + splittedString[2] +'/' + splittedString[3]+'/' +splittedString[4]
       }
     };
   })
