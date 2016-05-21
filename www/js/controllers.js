@@ -121,6 +121,28 @@ angular.module('starter.controllers', [])
       console.log(data.data.data);
     });
 
+  // infinity scroll
+
+  $scope.numberOfItemsToDisplay = 10;
+  $scope.articleOffset = 0;
+
+  $scope.items = [];
+  $scope.loadMore = function() {
+    $http.get("http://localhost:3000/albumsMore/"+ $scope.articleOffset).success(function(items) {
+      items.data.forEach(function(entry) {
+        $scope.data.albums.push(entry);;
+      });
+      $scope.numberOfItemsToDisplay += 10;
+      $scope.articleOffset += 10;
+
+      $scope.$broadcast('scroll.infiniteScrollComplete');
+    });
+  };
+
+  $scope.$on('$stateChangeSuccess', function() {
+    $scope.loadMore();
+  });
+
 
 })
 
