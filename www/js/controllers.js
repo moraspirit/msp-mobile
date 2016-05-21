@@ -124,16 +124,17 @@ angular.module('starter.controllers', [])
   // infinity scroll
 
   $scope.numberOfItemsToDisplay = 10;
-  $scope.articleOffset = 0;
+  $scope.articleOffset = 1;
 
   $scope.items = [];
   $scope.loadMore = function() {
+    $scope.numberOfItemsToDisplay += 10;
+    $scope.articleOffset += 10;
     $http.get("http://localhost:3000/albumsMore/"+ $scope.articleOffset).success(function(items) {
       items.data.forEach(function(entry) {
         $scope.data.albums.push(entry);;
       });
-      $scope.numberOfItemsToDisplay += 10;
-      $scope.articleOffset += 10;
+
 
       $scope.$broadcast('scroll.infiniteScrollComplete');
     });

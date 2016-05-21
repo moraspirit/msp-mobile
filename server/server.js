@@ -96,6 +96,7 @@ app.get('/albums', function (req, res) {
 app.get('/albumsMore/:articleOffset', function (req, res) {
   var articleOffset = req.params.articleOffset;
   FB.api('moraspirit.fanpage/albums?fields=name,cover_photo,likes.limit(0).summary(true),comments.limit(0).summary(true)&limit=10&offset=' + articleOffset , function (data) {
+    console.log(articleOffset);
     if(!data || data.error) {
       console.log(!res ? 'error occurred' : res.error);
       res.status(500).json(data);
