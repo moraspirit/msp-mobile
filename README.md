@@ -49,7 +49,7 @@
 
 >make sure your device and pc is connected to same network
 
->`phonegap serve android`
+>`phonegap serve android --port 2000`
 
 >open the phonegap app, type url given by phonegap command and hit 'connect'.
 
