@@ -34,4 +34,4 @@ phonegap serve android
 open the app, type url given by phonegap command and hit 'connect'.
 
 ![moraspirit logo](http://moraspirit.com/sites/default/files/msp_text_logo_300.png)  
-baked with ♥♥ in UOM.
+baked with  in UOM.

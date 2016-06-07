@@ -5,11 +5,14 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 
+// create the constant module
+angular.module('starter.constants', []).constant('API_HOST', 'http://cdfae887.ngrok.io' );
+
 angular.module('starter',
   ['ionic',
   'starter.controllers',
   'ionic.service.core','ngCordova',
-  'ionic.service.push','ionic-material','ionicLazyLoad']
+  'ionic.service.push','ionic-material','ionicLazyLoad','starter.constants']
 )
 /*
 
@@ -105,3 +108,4 @@ angular.module('starter',
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/articles');
 });
+

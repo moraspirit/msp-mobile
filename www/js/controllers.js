@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['starter.constants']).factory('CoolFactory', CoolFactory)
 
   .filter('URLmaker', function() {
     return function(input) {
@@ -93,7 +93,7 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('AlbumController', function( $scope, $stateParams, $timeout, $http,ionicMaterialInk, ionicMaterialMotion) {
+.controller('AlbumController', function( $scope, $stateParams, $timeout, $http,ionicMaterialInk, ionicMaterialMotion, CoolFactory) {
  /* $scope.$parent.showHeader();
   $scope.$parent.clearFabs();
   $scope.isExpanded = true;
@@ -115,7 +115,7 @@ angular.module('starter.controllers', [])
     window.open('https://www.facebook.com/moraspirit.fanpage/photos/?tab=album&album_id=' + id );
   };
 
-  $http.get("http://localhost:3000/albums")
+  CoolFactory.hitTheServer('/albums/','')
     .then(function(data) {
       $scope.data.albums = data.data.data;
       console.log(data.data.data);
@@ -130,9 +130,9 @@ angular.module('starter.controllers', [])
   $scope.loadMore = function() {
     $scope.numberOfItemsToDisplay += 10;
     $scope.articleOffset += 10;
-    $http.get("http://localhost:3000/albumsMore/"+ $scope.articleOffset).success(function(items) {
+    CoolFactory.hitTheServer('/albumsMore/',$scope.articleOffset).success(function(items) {
       items.data.forEach(function(entry) {
-        $scope.data.albums.push(entry);;
+        $scope.data.albums.push(entry);
       });
 
 
@@ -164,11 +164,14 @@ angular.module('starter.controllers', [])
   ionicMaterialInk.displayEffect();
 })
 
-.controller('ArticlesController', function($http, $scope, $stateParams, ionicMaterialInk) {
+.controller('ArticlesController', function($http, $scope, $stateParams, ionicMaterialInk,CoolFactory) {
   //ionicMaterialInk.displayEffect();
   $scope.data= {};
   $scope.data.articles = [];
-  $http.get("http://localhost:3000/articles")
+
+  //CoolFactory.$inject = ['$http', 'API_HOST'];
+
+  CoolFactory.hitTheServer('/articles','')
     .then(function(rows) {
       $scope.data.articles = rows.data;
       //console.log(rows.data);
@@ -177,12 +180,12 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ArticleController', function($http, $scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+.controller('ArticleController', function($http, $scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, CoolFactory) {
 
   //article id
   var id = $stateParams.id;
   $scope.article = null;
-  $http.get("http://localhost:3000/articles/" + id)
+  CoolFactory.hitTheServer('/articles/', id)
     .then(function(row) {
       $scope.article = row.data[0];
       //console.log(rows.data);
@@ -263,3 +266,14 @@ angular.module('starter.controllers', [])
     $scope.token = data.token;
   });
 });
+
+
+// functions to do the http requests using the API_HOST string ( API_HOST = link of the NODE server)
+function CoolFactory($http, API_HOST){
+  var services = {};
+  services.hitTheServer = function(route, id){
+    console.log(route+", "+id);
+    return $http.get(API_HOST+ route + id);
+  };
+  return services;
+}
