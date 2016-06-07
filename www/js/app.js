@@ -6,106 +6,154 @@
 // 'starter.controllers' is found in controllers.js
 
 // create the constant module
-angular.module('starter.constants', []).constant('API_HOST', 'http://f4f453af.ngrok.io' );
+angular.module('starter.constants', []).constant('API_HOST', 'http://9aab2cf0.ngrok.io');
 
 angular.module('starter',
-  ['ionic',
-  'starter.controllers',
-  'ionic.service.core','ngCordova',
-  'ionic.service.push','ionic-material','ionicLazyLoad','starter.constants']
+  ['ionic', 'ionic.service.core',
+    'starter.controllers',
+    'ngCordova',
+    'ionic.service.push', 'ionic-material', 'ionicLazyLoad', 'starter.constants']
 )
+
+/*.controller('DashCtrl', function($scope, $ionicPush, $ionicPlatform) {
+ $ionicPlatform.ready(function () {
+ $ionicPush.init({
+ "debug": true,
+ "onNotification": function (notification) {
+ var payload = notification.payload;
+ console.log(notification, payload);
+ },
+ "onRegister": function (data) {
+ console.log(data.token);
+ }
+ });
+
+ $ionicPush.register();
+ });
+ })*/
+
 /*
+ .config(['$ionicAppProvider', function($ionicAppProvider) {
+ $ionicAppProvider.identify({
+ app_id: 'bafdfdc6',
+ api_key: '811677f18d99b6126c55560dc9f74f75a209c3ff08d0a828',
+ dev_push: true
+ });
+ }])
 
-  .config(['$ionicAppProvider', function($ionicAppProvider) {
-    $ionicAppProvider.identify({
-      app_id: 'bafdfdc6',
-      api_key: '811677f18d99b6126c55560dc9f74f75a209c3ff08d0a828',
-      dev_push: true
-    });
-  }])
 */
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
+  .run(function ($ionicPlatform) {
+    $ionicPlatform.ready(function () {
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs)
+      /* if (window.cordova && window.cordova.plugins.Keyboard) {
+       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+       cordova.plugins.Keyboard.disableScroll(true);
 
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-})
+       }
+       if (window.StatusBar) {
+       // org.apache.cordova.statusbar required
+       StatusBar.styleDefault();
+       }*/
+      $ionicPlatform.ready(function () {
+       /* var push = new Ionic.Push({
+          "debug": true,
+          "onNotification": function (notification) {
+            var payload = notification.payload;
+            console.log(notification, payload);
+          },
+          "onRegister": function (data) {
+            console.log(data.token);
+          },
+          "pluginConfig": {
+            "ios": {
+              "badge": true,
+              "sound": true
+            },
+            "android": {
+              "iconColor": "#343434"
+            }
+          }
+        });
 
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
+        var callback = function(pushToken) {
+          console.log(pushToken.token);
+        }
 
-    .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
+        push.register(callback);
 
-    })
+*/
+      });
 
-  .state('app.articles', {
-    url: '/articles',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/articles.html',
-        controller: 'ArticlesController'
-      }
-    }
-  })
-  .state('app.article-full', {
-    url: '/articles/:id',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/article-full.html',
-        controller: 'ArticleController'
-      },
-      'fabContent': {
-        // template: '<button id="fab-tweet" class="button button-fab button-fab-top-right expanded button-energized-900 flap"><i class="icon ion-social-twitter"></i></button>',
-        // controller: function ($timeout) {
-        //   $timeout(function () {
-        //     document.getElementById('fab-tweet').classList.toggle('on');
-        //   }, 200);
-        // }
-      }
-    }
+    });
   })
 
-  .state('app.album', {
-      url: '/album',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/album.html',
-          controller: 'AlbumController'
-        }
-      }
-    })
-    .state('app.notifications', {
-      url: '/notifications',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/notifications.html',
-        }
-      }
-    })
+  .config(function ($stateProvider, $urlRouterProvider) {
+    $stateProvider
 
-  .state('app.slug', {
-    url: '/slug',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/slug.html',
-        controller: 'RecentScoresCtrl'
-      }
-    }
+      .state('app', {
+        url: '/app',
+        abstract: true,
+        templateUrl: 'templates/menu.html',
+        controller: 'AppCtrl'
+
+      })
+
+      .state('app.articles', {
+        url: '/articles',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/articles.html',
+            controller: 'ArticlesController'
+          }
+        }
+      })
+      .state('app.article-full', {
+        url: '/articles/:id',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/article-full.html',
+            controller: 'ArticleController'
+          },
+          'fabContent': {
+            // template: '<button id="fab-tweet" class="button button-fab button-fab-top-right expanded button-energized-900 flap"><i class="icon ion-social-twitter"></i></button>',
+            // controller: function ($timeout) {
+            //   $timeout(function () {
+            //     document.getElementById('fab-tweet').classList.toggle('on');
+            //   }, 200);
+            // }
+          }
+        }
+      })
+
+      .state('app.album', {
+        url: '/album',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/album.html',
+            controller: 'AlbumController'
+          }
+        }
+      })
+      .state('app.notifications', {
+        url: '/notifications',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/notifications.html',
+          }
+        }
+      })
+
+      .state('app.slug', {
+        url: '/slug',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/slug.html',
+            controller: 'RecentScoresCtrl'
+          }
+        }
+      });
+    // if none of the above states are matched, use this as the fallback
+    $urlRouterProvider.otherwise('/app/articles');
   });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/articles');
-});
 
