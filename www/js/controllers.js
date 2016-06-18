@@ -114,7 +114,7 @@ angular.module('starter.controllers', ['starter.constants']).factory('CoolFactor
     $scope.goToAlbum = function (id) {
       window.open('https://www.facebook.com/moraspirit.fanpage/photos/?tab=album&album_id=' + id);
     };
-    
+
     CoolFactory.hitTheServer('/albums/', '')
       .then(function (data) {
         $scope.data.albums = data.data.data;
@@ -124,7 +124,7 @@ angular.module('starter.controllers', ['starter.constants']).factory('CoolFactor
     $scope.hasMoreData = true;
 
     // infinity scroll
-    
+
     //initial values
     $scope.numberOfItemsToDisplay = 10;
     $scope.articleOffset = 1;
@@ -132,13 +132,15 @@ angular.module('starter.controllers', ['starter.constants']).factory('CoolFactor
     $scope.items = [];
 
     $scope.loadMore = function () {
-      if(!$scope.permissionToLoadMore){return;}
+      if (!$scope.permissionToLoadMore) {
+        return;
+      }
       $scope.numberOfItemsToDisplay += 10;
       $scope.articleOffset += 10;
 
       CoolFactory.hitTheServer('/albumsMore/', $scope.articleOffset).success(function (items) {
 
-        if(items.data.length > 0){
+        if (items.data.length > 0) {
           items.data.forEach(function (entry) {
             $scope.data.albums.push(entry);
           });
@@ -146,7 +148,7 @@ angular.module('starter.controllers', ['starter.constants']).factory('CoolFactor
           $scope.hasMoreData = false;
           console.log("All the albums are loaded!! no more to load...");
         }
-        
+
         $scope.$broadcast('scroll.infiniteScrollComplete');
       });
     };
@@ -179,14 +181,53 @@ angular.module('starter.controllers', ['starter.constants']).factory('CoolFactor
     //ionicMaterialInk.displayEffect();
     $scope.data = {};
     $scope.data.articles = [];
-
+    $scope.permissionToLoadMore = false;
     //CoolFactory.$inject = ['$http', 'API_HOST'];
 
     CoolFactory.hitTheServer('/articles', '')
       .then(function (rows) {
         $scope.data.articles = rows.data;
         //console.log(rows.data);
+        $scope.permissionToLoadMore = true;
       });
+
+
+    $scope.hasMoreData = true;
+
+    // infinity scroll
+
+    //initial values
+    $scope.numberOfItemsToDisplay = 10;
+    $scope.articleOffset = 1;
+
+    $scope.items = [];
+
+    $scope.loadMore = function () {
+      if (!$scope.permissionToLoadMore) {
+        return;
+      }
+      $scope.numberOfItemsToDisplay += 10;
+      $scope.articleOffset += 10;
+
+      CoolFactory.hitTheServer('/articlesMore/', $scope.articleOffset).success(function (items) {
+        console.log("success");
+        console.log(items);
+        if (items.length > 0) {
+          items.forEach(function (entry) {
+            $scope.data.articles.push(entry);
+          });
+        } else {
+          $scope.hasMoreData = false;
+          console.log("All the articles are loaded!! no more to load...");
+        }
+
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+      });
+    };
+
+    $scope.$on('$stateChangeSuccess', function () {
+      $scope.loadMore();
+    });
 
 
   })
