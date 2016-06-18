@@ -27,7 +27,7 @@
 
 
 **Steps to run the live app on a real device (Using IONIC RUN):**
->download **ngrok** from [ngrok official website
+>download **ngrok** from [ngrok official website](https://ngrok.com/) - _”I want to expose a local server behind a NAT or firewall to the internet.”_
 
 >run **ngrok.exe** or `$ ngrok` if Linux
 

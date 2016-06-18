@@ -75,8 +75,8 @@ app.get('/articles/:articleId', function (req, res) {
     }
   });
 
-
 });
+
 
 app.get('/albums', function (req, res) {
   FB.api('moraspirit.fanpage/albums?fields=name,cover_photo,likes.limit(0).summary(true),comments.limit(0).summary(true)&limit=10', function (data) {
@@ -107,8 +107,7 @@ app.get('/albumsMore/:articleOffset', function (req, res) {
     }
   });
 
-
-})
+});
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
