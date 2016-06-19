@@ -12,11 +12,11 @@
         </button>
       </ion-nav-buttons>
 
-      <ion-nav-buttons side="right">
+<!--      <ion-nav-buttons side="right">
         <button class="button button-icon button-clear ion-android-more-vertical" id="menu-popover"
                 ng-click="popover.show($event)">
         </button>
-      </ion-nav-buttons>
+      </ion-nav-buttons>-->
 
     </ion-nav-bar>
 
@@ -27,25 +27,40 @@
   <!-- Left menu -->
   <ion-side-menu side="left">
     <ion-header-bar class="expanded">
-      <img src="img/MSP HiQuality LOGO.png" class="avatar motion spin fade">
       <div class="menu-bottom">
         <img src="img/msp_text_logo_300.png" style="width: 75%; height: auto">
       </div>
     </ion-header-bar>
     <ion-content class="has-expanded-header">
-      <ion-list>
-        <ion-item menu-close href="#/app/articles" class="item-icon-left"><i class='icon ion-clipboard'></i>
-         ARTICLES
+      <ion-list style="padding-top: 8px;">
+        <ion-item menu-close href="#/app/articles" class="item-icon-left">
+          <i class='icon mdi mdi-file-document'></i>
+          Articles
         </ion-item>
-        <ion-item menu-close href="#/app/album" class="item-icon-left"><i class='icon ion-images'></i>
-          GALLERY
+        <ion-item menu-close href="#/app/album" class="item-icon-left">
+          <i class='icon mdi mdi-image-multiple'></i>
+          Gallery
         </ion-item>
-        <ion-item menu-close href="#/app/slug" class="item-icon-left"><i class='icon ion-ios-mic'></i>
-          SCORES
+        <hr style="opacity: 0.3" />
+        <ion-item menu-close style="opacity: 0.5; font-weight: 500">
+          SLUG 2016
         </ion-item>
-        <ion-item menu-close href="#/app/rankings" class="item-icon-left"><i class='icon ion-stats-bars'></i>
-          RANKINGS
+        <ion-item menu-close href="#/app/slug" class="item-icon-left">
+          <i class='icon mdi mdi-clock'></i>
+          Recent
         </ion-item>
+        <ion-item menu-close href="#/app/rankings" class="item-icon-left">
+          <i class='icon mdi mdi-trophy-variant-outline'></i>
+          Rankings
+        </ion-item>
+
+        <hr style="opacity: 0.3" />
+
+        <ion-item menu-close href="#/app/about" class="item-icon-left">
+          <i class='icon mdi mdi-information-outline'></i>
+          About
+        </ion-item>
+
       </ion-list>
     </ion-content>
   </ion-side-menu>

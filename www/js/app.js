@@ -9,25 +9,14 @@
 angular.module('starter.constants', []).constant('API_HOST', 'http://139.59.0.34');
 
 angular.module('starter',
-  ['ionic', 'starter.controllers', 'starter.constants','ionic-material','ngCordova','ionic.service.push',  'ionicLazyLoad','ionic.service.core']
+
+  ['ionic', 'ionic.service.core',
+    'starter.controllers',
+    'ngCordova', 'nl2br',
+    'ionic.service.push', 'ionic-material', 'ionicLazyLoad', 'starter.constants']
 )
 
-/*.controller('DashCtrl', function($scope, $ionicPush, $ionicPlatform) {
- $ionicPlatform.ready(function () {
- $ionicPush.init({
- "debug": true,
- "onNotification": function (notification) {
- var payload = notification.payload;
- console.log(notification, payload);
- },
- "onRegister": function (data) {
- console.log(data.token);
- }
- });
 
- $ionicPush.register();
- });
- })*/
 
 /*
  .config(['$ionicAppProvider', function($ionicAppProvider) {
@@ -38,49 +27,36 @@ angular.module('starter',
  });
  }])
 
-*/
+ */
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      /* if (window.cordova && window.cordova.plugins.Keyboard) {
-       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-       cordova.plugins.Keyboard.disableScroll(true);
 
-       }
-       if (window.StatusBar) {
-       // org.apache.cordova.statusbar required
-       StatusBar.styleDefault();
-       }*/
-      $ionicPlatform.ready(function () {
-       /* var push = new Ionic.Push({
-          "debug": true,
-          "onNotification": function (notification) {
-            var payload = notification.payload;
-            console.log(notification, payload);
+      var push = new Ionic.Push({
+        "debug": true,
+        "onNotification": function (notification) {
+          var payload = notification.payload;
+          console.log(notification, payload);
+        },
+        "onRegister": function (data) {
+          console.log(data.token);
+        },
+        "pluginConfig": {
+          "ios": {
+            "badge": true,
+            "sound": true
           },
-          "onRegister": function (data) {
-            console.log(data.token);
-          },
-          "pluginConfig": {
-            "ios": {
-              "badge": true,
-              "sound": true
-            },
-            "android": {
-              "iconColor": "#343434"
-            }
+          "android": {
+            "iconColor": "#343434"
           }
-        });
-
-        var callback = function(pushToken) {
-          console.log(pushToken.token);
         }
-
-        push.register(callback);
-
-*/
       });
+
+      var callback = function (pushToken) {
+        console.log(pushToken.token);
+      }
+
+      push.register(callback);
+
 
     });
   })
@@ -171,5 +147,5 @@ angular.module('starter',
         }
       });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/rankings');
+    $urlRouterProvider.otherwise('/app/about');
   });

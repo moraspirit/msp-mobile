@@ -1,7 +1,7 @@
 <ion-view view-title="Gallery">
   <ion-content  >
 
-    <div class="list half" >
+    <div class="list half" style="padding: 16px 0px 16px 8px">
       <div ng-repeat="album in data.albums | limitTo:numberOfItemsToDisplay" ng-if="$odd"  ng-click="goToAlbum(album.id)">
 
         <div class="card card-gallery item item-text-wrap">
@@ -24,7 +24,8 @@
       </div>
     </div>
 
-    <div class="list half" style="margin-top: 4%">
+    <div class="list half" style="padding: 16px 20px 16px 0px;
+">
       <div ng-repeat="album in data.albums | limitTo:numberOfItemsToDisplay" ng-if="$even" ng-click="goToAlbum(album.id)">
 
         <div  class="card card-gallery item item-text-wrap">

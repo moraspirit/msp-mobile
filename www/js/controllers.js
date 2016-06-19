@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['starter.constants']).factory('CoolFactory', CoolFactory)
+angular.module('starter.controllers', ['starter.constants','ionic.service.core', 'ionic.service.push']).factory('CoolFactory', CoolFactory)
 
   .filter('URLmaker', function () {
     return function (input) {
@@ -269,8 +269,23 @@ angular.module('starter.controllers', ['starter.constants']).factory('CoolFactor
 
 
   })
+  .controller('DashCtrl', function($scope, $ionicPush, $ionicPlatform) {
+    $ionicPlatform.ready(function() {
+      $ionicPush.init({
+        "debug": true,
+        "onNotification": function(notification) {
+          var payload = notification.payload;
+          console.log(notification, payload);
+        },
+        "onRegister": function(data) {
+          console.log(data.token);
+        }
+      });
 
-
+      $ionicPush.register();
+    });
+  })
+/*
   .controller('PushCtrl', function ($scope, $rootScope, $ionicUser, $ionicPush) {
 
     $scope.identifyUser = function () {
@@ -306,6 +321,7 @@ angular.module('starter.controllers', ['starter.constants']).factory('CoolFactor
         canRunActionsOnWake: true, //Can run actions outside the app,
         onNotification: function (notification) {
           // Handle new push notifications here
+
           return true;
         }
       });
@@ -319,7 +335,7 @@ angular.module('starter.controllers', ['starter.constants']).factory('CoolFactor
     });
   })
 
-
+*/
 
 
 
@@ -327,19 +343,19 @@ angular.module('starter.controllers', ['starter.constants']).factory('CoolFactor
 
     $scope.data=[
       {
-        "img":"img/material2.jpg",
+        "img":"img/uni_logos/ruh.jpg",
         "name":"Uni two",
         "points":1002,
         "position":2
       },
       {
-        "img":"img/material1.jpg",
+        "img":"img/uni_logos/uom.png",
         "name":"Uni one",
         "points":1001,
         "position":1
       },
       {
-        "img":"img/material3.jpg",
+        "img":"img/uni_logos/University_of_Peradeniya_crest.png",
         "name":"Uni three",
         "points":1003,
         "position":3
@@ -355,7 +371,6 @@ angular.module('starter.controllers', ['starter.constants']).factory('CoolFactor
   .controller('AboutCtrl',function($scope){
 
   });
-
 
 
 

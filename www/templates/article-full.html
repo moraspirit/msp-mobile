@@ -6,14 +6,14 @@
       </div>
     </div>
     <div class="mid-bar dark-bg z1 padding">
-      <h3 style="text-transform: uppercase">{{article.title}}</h3>
+      <h3 style="">{{article.title}}</h3>
       <p style="text-transform: uppercase;     font-size: small;">on {{article.created}}  &nbsp; by {{article.name}}</p>
     </div>
 
     <div class="content double-padding animate-fade-slide-in-right">
       <!--post content-->
       <div class="field-item even" property="content:encoded">
-        <div ng-bind-html="article.body_value"></div>
+        <p ng-bind-html="article.body_value | nl2br"></p>
       </div>
 
       <h3 class="outline padding balanced inline img-rounded">
