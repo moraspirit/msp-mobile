@@ -26,49 +26,36 @@ angular.module('starter',
  });
  }])
 
-*/
+ */
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      /* if (window.cordova && window.cordova.plugins.Keyboard) {
-       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-       cordova.plugins.Keyboard.disableScroll(true);
 
-       }
-       if (window.StatusBar) {
-       // org.apache.cordova.statusbar required
-       StatusBar.styleDefault();
-       }*/
-      $ionicPlatform.ready(function () {
-       /* var push = new Ionic.Push({
-          "debug": true,
-          "onNotification": function (notification) {
-            var payload = notification.payload;
-            console.log(notification, payload);
+      var push = new Ionic.Push({
+        "debug": true,
+        "onNotification": function (notification) {
+          var payload = notification.payload;
+          console.log(notification, payload);
+        },
+        "onRegister": function (data) {
+          console.log(data.token);
+        },
+        "pluginConfig": {
+          "ios": {
+            "badge": true,
+            "sound": true
           },
-          "onRegister": function (data) {
-            console.log(data.token);
-          },
-          "pluginConfig": {
-            "ios": {
-              "badge": true,
-              "sound": true
-            },
-            "android": {
-              "iconColor": "#343434"
-            }
+          "android": {
+            "iconColor": "#343434"
           }
-        });
-
-        var callback = function(pushToken) {
-          console.log(pushToken.token);
         }
-
-        push.register(callback);
-
-*/
       });
+
+      var callback = function (pushToken) {
+        console.log(pushToken.token);
+      }
+
+      push.register(callback);
+
 
     });
   })
