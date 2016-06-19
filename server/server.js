@@ -16,13 +16,13 @@ var connection = mysql.createConnection({
 var app = express();
 app.use(cors());
 
-connection.connect(function (err) {
-  if (!err) {
-    console.log("Database is connected ... \n\n");
-  } else {
-    console.log("Error connecting database ... \n\n");
-  }
-});
+//connection.connect(function (err) {
+//  if (!err) {
+//    console.log("Database is connected ... \n\n");
+//  } else {
+//    console.log("Error connecting database ... \n\n");
+//  }
+//});
 
 // this will keep the mysql connection alive.
 setInterval(function () {
