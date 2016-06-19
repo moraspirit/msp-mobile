@@ -15,7 +15,9 @@
 
 **Setup and start the API server:**
 
->`npm install`
+>`npm install` 
+
+> import the morasp5_moraspirit_main_db database dump in to your localhost and, modify the credentials in server/server.js  lines 12,13 
 
 >`node server/server.js`
 

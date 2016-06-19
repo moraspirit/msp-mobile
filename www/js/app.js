@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 
 // create the constant module
-angular.module('starter.constants', []).constant('API_HOST', 'https://6b4e8525.ngrok.io');
+angular.module('starter.constants', []).constant('API_HOST', 'https://e8247b68.ngrok.io');
 
 angular.module('starter',
   ['ionic', 'ionic.service.core',
