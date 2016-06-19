@@ -24,6 +24,11 @@ connection.connect(function (err) {
   }
 });
 
+// this will keep the mysql connection alive.
+setInterval(function () {
+  connection.query('SELECT 1');
+}, 5000);
+
 app.get('/', function (req, res) {
   // SELECT * FROM `msp_node`  LEFT JOIN `msp_users` ON msp_node.uid= msp_users.uid ORDER BY msp_node.created DESC  LIMIT 10
   // SELECT title, name, msp_node.created FROM `msp_node` LEFT JOIN `msp_users` ON msp_node.uid= msp_users.uid ORDER BY msp_node.created DESC  LIMIT 10
