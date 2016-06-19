@@ -306,6 +306,7 @@ angular.module('starter.controllers', ['starter.constants']).factory('CoolFactor
         canRunActionsOnWake: true, //Can run actions outside the app,
         onNotification: function (notification) {
           // Handle new push notifications here
+        
           return true;
         }
       });
