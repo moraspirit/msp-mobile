@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.moraspirit.mspmobile" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>moraspirit</name>
-  <description>
-        moraspirit official app.
+  <description>&#xD;
+        moraspirit official app.&#xD;
     </description>
-  <author email="admin@moraspirit.com" href="http://moraspirit.com/">
-      moraspirit
+  <author email="admin@moraspirit.com" href="http://moraspirit.com/">&#xD;
+      moraspirit&#xD;
     </author>
   <content src="index.html"/>
   <access origin="*"/>
