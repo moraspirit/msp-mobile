@@ -11,7 +11,7 @@ angular.module('starter.constants', []).constant('API_HOST', 'http://139.59.0.34
 angular.module('starter',
   ['ionic', 'ionic.service.core',
     'starter.controllers',
-    'ngCordova',
+    'ngCordova', 'nl2br',
     'ionic.service.push', 'ionic-material', 'ionicLazyLoad', 'starter.constants']
 )
 
