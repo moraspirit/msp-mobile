@@ -1,4 +1,4 @@
-<ion-view view-title="articles">
+<ion-view view-title="Articles">
   <ion-content class="padding">
     <!-- card one -->
     <div class="list">
@@ -8,7 +8,7 @@
       <div class="item item-text-wrap">
 
 
-         <h2 style="text-transform: uppercase; font-weight: 500">{{article.title}}</h2>
+         <h2 style="font-weight: 500">{{article.title}}</h2>
 
 
         <p>by&nbsp;<a style="font-weight: 300; font-size: 0.9em;" href="#">{{article.name}}</a></p>
@@ -18,18 +18,16 @@
         <img class="full-image"  ng-src= "{{article.uri | URLmaker}}">
       </div>
 
-      <div class="item item-body"><p style="text-align: justify; font-family: 'Roboto Slab'; text-transform: uppercase;">{{article.body_summary}}<p>
+      <div class="item item-body"><p style="">{{article.body_summary}}<p>
 
           <!--<a class="subdued">5 comments</a></p>-->
       </div>
 
       <div class="item tabs tabs-secondary tabs-icon-left">
-        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"> <i class="icon ion-thumbsup"></i>
-        like</a>
         <a href="#/app/articles/{{article.nid}}" class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"> <i class="icon ion-document-text"></i>
-        read more</a>
+        Read More</a>
         <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"> <i class="icon ion-share"></i>
-        share</a>
+        Share</a>
       </div>
     </div>
       </div>
