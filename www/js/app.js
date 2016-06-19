@@ -15,23 +15,7 @@ angular.module('starter',
     'ionic.service.push', 'ionic-material', 'ionicLazyLoad', 'starter.constants']
 )
 
-.controller('DashCtrl', function($scope, $ionicPush, $ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    $ionicPush.init({
-      "debug": true,
-      "onNotification": function(notification) {
-        var payload = notification.payload;
-        console.log(notification, payload);
-      },
-      "onRegister": function(data) {
-        console.log(data.token);
-        push.saveToken(token);
-      }
-    });
 
-    $ionicPush.register();
-  });
- })
 
 /*
  .config(['$ionicAppProvider', function($ionicAppProvider) {

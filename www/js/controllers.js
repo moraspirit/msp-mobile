@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['starter.constants']).factory('CoolFactory', CoolFactory)
+angular.module('starter.controllers', ['starter.constants','ionic.service.core', 'ionic.service.push']).factory('CoolFactory', CoolFactory)
 
   .filter('URLmaker', function () {
     return function (input) {
@@ -269,8 +269,23 @@ angular.module('starter.controllers', ['starter.constants']).factory('CoolFactor
 
 
   })
+  .controller('DashCtrl', function($scope, $ionicPush, $ionicPlatform) {
+    $ionicPlatform.ready(function() {
+      $ionicPush.init({
+        "debug": true,
+        "onNotification": function(notification) {
+          var payload = notification.payload;
+          console.log(notification, payload);
+        },
+        "onRegister": function(data) {
+          console.log(data.token);
+        }
+      });
 
-
+      $ionicPush.register();
+    });
+  })
+/*
   .controller('PushCtrl', function ($scope, $rootScope, $ionicUser, $ionicPush) {
 
     $scope.identifyUser = function () {
@@ -306,7 +321,7 @@ angular.module('starter.controllers', ['starter.constants']).factory('CoolFactor
         canRunActionsOnWake: true, //Can run actions outside the app,
         onNotification: function (notification) {
           // Handle new push notifications here
-        
+
           return true;
         }
       });
@@ -319,7 +334,7 @@ angular.module('starter.controllers', ['starter.constants']).factory('CoolFactor
       $scope.token = data.token;
     });
   });
-
+*/
 
 // functions to do the http requests using the API_HOST string ( API_HOST = link of the NODE server)
 function CoolFactory($http, API_HOST) {
