@@ -6,13 +6,10 @@
 // 'starter.controllers' is found in controllers.js
 
 // create the constant module
-angular.module('starter.constants', []).constant('API_HOST', 'https://6b4e8525.ngrok.io');
+angular.module('starter.constants', []).constant('API_HOST', 'http://139.59.0.34');
 
 angular.module('starter',
-  ['ionic', 'ionic.service.core',
-    'starter.controllers',
-    'ngCordova',
-    'ionic.service.push', 'ionic-material', 'ionicLazyLoad', 'starter.constants']
+  ['ionic', 'starter.controllers', 'starter.constants','ionic-material','ngCordova','ionic.service.push',  'ionicLazyLoad','ionic.service.core']
 )
 
 /*.controller('DashCtrl', function($scope, $ionicPush, $ionicPlatform) {
@@ -152,8 +149,27 @@ angular.module('starter',
             controller: 'RecentScoresCtrl'
           }
         }
+      })
+
+      .state('app.rankings',{
+        url:'/rankings',
+        views:{
+          'menuContent':{
+            templateUrl:'templates/rankings.html',
+            controller:'RatingsCtrl'
+          }
+        }
+      })
+
+      .state('app.about',{
+        url:'/about',
+        views:{
+          'menuContent':{
+            templateUrl:'templates/about.html',
+            controller:'AboutCtrl'
+          }
+        }
       });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/articles');
+    $urlRouterProvider.otherwise('/app/rankings');
   });
-

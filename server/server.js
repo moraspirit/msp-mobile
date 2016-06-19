@@ -16,13 +16,13 @@ var connection = mysql.createConnection({
 var app = express();
 app.use(cors());
 
-connection.connect(function (err) {
-  if (!err) {
-    console.log("Database is connected ... \n\n");
-  } else {
-    console.log("Error connecting database ... \n\n");
-  }
-});
+//connection.connect(function (err) {
+//  if (!err) {
+//    console.log("Database is connected ... \n\n");
+//  } else {
+//    console.log("Error connecting database ... \n\n");
+//  }
+//});
 
 app.get('/', function (req, res) {
   // SELECT * FROM `msp_node`  LEFT JOIN `msp_users` ON msp_node.uid= msp_users.uid ORDER BY msp_node.created DESC  LIMIT 10
