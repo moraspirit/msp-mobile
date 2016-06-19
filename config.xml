@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.moraspirit.mspmobile" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>moraspirit</name>
-  <description>&#xD;
-        moraspirit official app.&#xD;
-    </description>
-  <author email="admin@moraspirit.com" href="http://moraspirit.com/">&#xD;
-      moraspirit&#xD;
-    </author>
-  <content src="http://192.168.8.102:8100" original-src="index.html"/>
+  <name>Moraspirit</name>
+  <description>
+    Moraspirit Official Mobile App.
+  </description>
+  <author email="admin@moraspirit.com" href="http://moraspirit.com/">
+    moraspirit
+  </author>
+  <content src="index.html"/>
   <access origin="*"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
