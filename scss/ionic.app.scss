@@ -21,7 +21,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // My custom color. I’ll override the default for $positive.
 // Note that it’s before we load the rest of Ionic.
 // This is important!
-$assertive:                       #ba1512 !default;
+//$assertive:                       #ba1512 !default;
 $dark:                            #262626 !default;
 $font-family-sans-serif: "RobotoDraft";
 // Include all of Ionic
@@ -29,4 +29,23 @@ $font-family-sans-serif: "RobotoDraft";
 
 .paddedIcon{
   margin-left: 20px;
+}
+
+.item-complex.item-icon-left .item-content {
+  padding-left: 72px;
+}
+
+$navDrawerIconSize : 24px;
+.item-icon-left .icon:before, .item-icon-right .icon:before {
+  width: $navDrawerIconSize;
+}
+
+.item-icon-left .icon, .item-icon-right .icon {
+  font-size: $navDrawerIconSize;
+  opacity: 0.54;
+}
+
+.item-complex .item-content, .item-radio .item-content{
+  padding-top: 14px;
+  padding-bottom: 14px;
 }
