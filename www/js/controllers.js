@@ -5,7 +5,7 @@ angular.module('starter.controllers', ['starter.constants','ionic.service.core',
       // do some bounds checking here to ensure it has that index.
       if (input) {
         var splittedString = input.split('/');
-        return 'http://moraspirit.com/sites/default/files/styles/teaser_image/public/' + splittedString[2] + '/' + splittedString[3] + '/' + splittedString[4]
+        return 'http://moraspirit.com/sites/default/files/styles/teaser_image/public/' + splittedString[2] + '/' + splittedString[3] + '/' + splittedString[4];
       }
     };
   })
@@ -294,7 +294,7 @@ angular.module('starter.controllers', ['starter.constants','ionic.service.core',
         // Set your user_id here, or generate a random one.
         user.user_id = $ionicUser.generateGUID();
       }
-      ;
+
 
       // Metadata
       angular.extend(user, {
@@ -333,8 +333,48 @@ angular.module('starter.controllers', ['starter.constants','ionic.service.core',
       console.log('Ionic Push: Got token ', data.token);
       $scope.token = data.token;
     });
-  });
+  })
+
 */
+
+
+
+  .controller('RatingsCtrl',function($scope){
+
+    $scope.data=[
+      {
+        "img":"img/uni_logos/ruh.jpg",
+        "name":"Uni two",
+        "points":1002,
+        "position":2
+      },
+      {
+        "img":"img/uni_logos/uom.png",
+        "name":"Uni one",
+        "points":1001,
+        "position":1
+      },
+      {
+        "img":"img/uni_logos/University_of_Peradeniya_crest.png",
+        "name":"Uni three",
+        "points":1003,
+        "position":3
+      }
+    ];
+
+
+
+  })
+
+
+
+  .controller('AboutCtrl',function($scope){
+
+  });
+
+
+
+
 
 // functions to do the http requests using the API_HOST string ( API_HOST = link of the NODE server)
 function CoolFactory($http, API_HOST) {

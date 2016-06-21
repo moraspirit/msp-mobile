@@ -9,9 +9,10 @@
 angular.module('starter.constants', []).constant('API_HOST', 'http://139.59.0.34');
 
 angular.module('starter',
+
   ['ionic', 'ionic.service.core',
     'starter.controllers',
-    'ngCordova',
+    'ngCordova', 'nl2br',
     'ionic.service.push', 'ionic-material', 'ionicLazyLoad', 'starter.constants']
 )
 
@@ -124,8 +125,27 @@ angular.module('starter',
             controller: 'RecentScoresCtrl'
           }
         }
+      })
+
+      .state('app.rankings',{
+        url:'/rankings',
+        views:{
+          'menuContent':{
+            templateUrl:'templates/rankings.html',
+            controller:'RatingsCtrl'
+          }
+        }
+      })
+
+      .state('app.about',{
+        url:'/about',
+        views:{
+          'menuContent':{
+            templateUrl:'templates/about.html',
+            controller:'AboutCtrl'
+          }
+        }
       });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/articles');
+    $urlRouterProvider.otherwise('/app/about');
   });
-
