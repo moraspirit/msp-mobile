@@ -2,11 +2,11 @@
 <widget id="com.moraspirit.mspmobile" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Moraspirit</name>
   <description>
-    Moraspirit Official Mobile App.
-  </description>
+        Moraspirit Official Mobile App.
+    </description>
   <author email="admin@moraspirit.com" href="http://moraspirit.com/">
-    moraspirit
-  </author>
+      moraspirit
+    </author>
   <content src="index.html"/>
   <access origin="*"/>
   <preference name="webviewbounce" value="false"/>
