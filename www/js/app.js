@@ -119,7 +119,7 @@ angular.module('starter',
           window.plugins.toast.showWithOptions(
             {
               message: data.message,
-              duration: "100000", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
+              duration: "20000", // which is 2000 ms. "long" is 4000. Or specify the nr of ms yourself.
               position: "bottom",
               addPixelsY: -40,  // added a negative value to move it up a bit (default 0)
               styling: {
@@ -135,14 +135,14 @@ angular.module('starter',
             // on success
             function (result) {
               console.log("Toast message successful");
-              navigator.vibrate(1000);
+              navigator.vibrate(500);
 
 
 
               // if the toast was touched
               if (result && result.event) {
                 console.log("The toast was tapped");
-                navigator.vibrate(10);
+                navigator.vibrate([20, 20]);
 
                 // route and go to the "recent" view
 
