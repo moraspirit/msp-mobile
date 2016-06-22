@@ -7,14 +7,14 @@
 
 // create the constant module
 
-angular.module('starter.constants', []).constant('API_HOST', ' https://29c96c06.ngrok.io');   //'http://139.59.0.34'
+angular.module('starter.constants', []).constant('API_HOST', 'http://139.59.0.34');   //'http://139.59.0.34'
 
 angular.module('starter',
 
   ['ionic', 'ionic.service.core',
     'starter.controllers',
     'ngCordova', 'nl2br',
-    'ionic.service.push', 'ionic-material', 'ionicLazyLoad', 'starter.constants']
+    'ionic.service.push', 'ionic-material', 'ionicLazyLoad', 'starter.constants','ionic-cache-src']
 )
 
 

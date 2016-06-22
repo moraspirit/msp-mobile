@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['starter.constants','ionic.service.core', 'ionic.service.push']).factory('CoolFactory', CoolFactory)
+angular.module('starter.controllers', ['starter.constants','ionic.service.core', 'ionic.service.push', 'ionic-cache-src']).factory('CoolFactory', CoolFactory)
 
   .filter('URLmaker', function () {
     return function (input) {
@@ -234,6 +234,10 @@ angular.module('starter.controllers', ['starter.constants','ionic.service.core',
 
     // Share via native share sheet
     $scope.shareAnywhere = function(message, subject, file, link) {
+
+      //vibrate
+      navigator.vibrate(20);
+      
       $cordovaSocialSharing
         .share(message, subject, file, link)
         .then(function(result) {

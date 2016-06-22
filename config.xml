@@ -17,6 +17,7 @@
   <preference name="BackupWebStorage" value="none"/>
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
+  <preference name="AndroidPersistentFileLocation" value="Internal"/>
   <feature name="StatusBar">
     <param name="ios-package" onload="true" value="CDVStatusBar"/>
   </feature>
@@ -49,5 +50,6 @@
   <plugin name="de.appplant.cordova.plugin.badge" source="npm"/>
   <plugin name="cordova-plugin-x-toast" source="npm"/>
   <plugin name="cordova-plugin-whitelist" source="npm"/>
+  <plugin name="cordova-plugin-file" source="npm"/>
   <allow-navigation href="*"/>
 </widget>
