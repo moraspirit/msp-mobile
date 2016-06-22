@@ -46,4 +46,6 @@
   <plugin name="phonegap-plugin-push" spec="1.6.0">
     <variable name="SENDER_ID" value="101029977116"/>
   </plugin>
+  <plugin name="de.appplant.cordova.plugin.badge" source="npm"/>
+  <plugin name="cordova-plugin-x-toast" source="npm"/>
 </widget>
