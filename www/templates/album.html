@@ -1,5 +1,5 @@
 <ion-view view-title="Gallery">
-  <ion-content  >
+  <ion-content lazy-scroll >
 
     <div class="list half" style="padding: 16px 0px 16px 8px">
       <div ng-repeat="album in data.albums | limitTo:numberOfItemsToDisplay" ng-if="$odd"  ng-click="goToAlbum(album.id)">
@@ -7,7 +7,7 @@
         <div class="card card-gallery item item-text-wrap">
           <div class="ink dark-bg">
             <h2 style="text-transform: uppercase">{{album.name}}</h2>
-            <img class="full-image" image-lazy-src="{{'http://graph.facebook.com/'+album.cover_photo.id+'/picture'}}" image-lazy-loader="ios">
+            <img class="full-image" image-lazy-src="{{'http://graph.facebook.com/'+album.cover_photo.id+'/picture?type=normal'}}" image-lazy-loader="lines" >>
           </div>
           <div class="item tabs tabs-secondary tabs-icon-left">
             <a class="tab-item stable-bg assertive">
@@ -26,12 +26,12 @@
 
     <div class="list half" style="padding: 16px 20px 16px 0px;
 ">
-      <div ng-repeat="album in data.albums | limitTo:numberOfItemsToDisplay" ng-if="$even" ng-click="goToAlbum(album.id)">
+      <div ng-repeat="album in data.albums | limitTo:numberOfItemsToDisplay" ng-if="$even " ng-click="goToAlbum(album.id)">
 
         <div  class="card card-gallery item item-text-wrap">
           <div class="ink dark-bg">
             <h2 style="text-transform: uppercase">{{album.name}}</h2>
-            <img class="full-image" image-lazy-src="{{'http://graph.facebook.com/'+album.cover_photo.id+'/picture'}}" image-lazy-loader="ios">
+            <img class="full-image" image-lazy-src="{{'http://graph.facebook.com/'+album.cover_photo.id+'/picture?type=normal'}}" image-lazy-loader="lines">  >
           </div>
           <div class="item tabs tabs-secondary tabs-icon-left">
             <a class="tab-item stable-bg assertive">

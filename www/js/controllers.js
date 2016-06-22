@@ -177,7 +177,7 @@ angular.module('starter.controllers', ['starter.constants','ionic.service.core',
     ionicMaterialInk.displayEffect();
   })
 
-  .controller('ArticlesController', function ($http, $scope, $stateParams, ionicMaterialInk, CoolFactory) {
+  .controller('ArticlesController', function ($http, $scope, $stateParams, ionicMaterialInk, CoolFactory, $cordovaSocialSharing) {
     //ionicMaterialInk.displayEffect();
     $scope.data = {};
     $scope.data.articles = [];
@@ -229,6 +229,17 @@ angular.module('starter.controllers', ['starter.constants','ionic.service.core',
       $scope.loadMore();
     });
 
+
+    // Share via native share sheet
+    $scope.shareAnywhere = function(message, subject, file, link) {
+      $cordovaSocialSharing
+        .share(message, subject, file, link)
+        .then(function(result) {
+          //alert("Success " + result);
+        }, function(err) {
+          alert("Cannot share right now! " + err);
+        });
+    }
 
   })
 
@@ -370,9 +381,7 @@ angular.module('starter.controllers', ['starter.constants','ionic.service.core',
 
   .controller('AboutCtrl',function($scope){
 
-  });
-
-
+  })
 
 
 
