@@ -280,7 +280,7 @@ angular.module('starter.controllers', ['starter.constants','ionic.service.core',
 
 
   })
-  .controller('DashCtrl', function($scope, $ionicPush, $ionicPlatform) {
+  /*.controller('DashCtrl', function($scope, $ionicPush, $ionicPlatform) {
     $ionicPlatform.ready(function() {
       $ionicPush.init({
         "debug": true,
@@ -295,7 +295,7 @@ angular.module('starter.controllers', ['starter.constants','ionic.service.core',
 
       $ionicPush.register();
     });
-  })
+  })*/
 /*
   .controller('PushCtrl', function ($scope, $rootScope, $ionicUser, $ionicPush) {
 

@@ -43,4 +43,7 @@
   <plugin name="cordova-plugin-console" spec="~1.0.3"/>
   <plugin name="cordova-plugin-splashscreen" spec="~3.2.2"/>
   <plugin name="cordova-plugin-x-socialsharing" source="npm"/>
+  <plugin name="phonegap-plugin-push" spec="1.6.0">
+    <variable name="SENDER_ID" value="101029977116"/>
+  </plugin>
 </widget>

@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 
 // create the constant module
-angular.module('starter.constants', []).constant('API_HOST', 'https://a0892061.ngrok.io');
+angular.module('starter.constants', []).constant('API_HOST', 'http://139.59.0.34/');
 
 angular.module('starter',
 
@@ -31,7 +31,7 @@ angular.module('starter',
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
 
-      var push = new Ionic.Push({
+      /*var push = new Ionic.Push({
         "debug": true,
         "onNotification": function (notification) {
           var payload = notification.payload;
@@ -57,8 +57,50 @@ angular.module('starter',
 
       push.register(callback);
 
+*/
+
+      var push = PushNotification.init({
+        android: {
+          senderID: "12345679",
+          sound: true,
+          vibrate: true,
+
+        },
+        ios: {
+          alert: "true",
+          badge: "true",
+          sound: "true"
+        },
+        windows: {}
+      });
+
+      push.on('registration', function(data) {
+        // data.registrationId
+        console.log(data.registrationId);
+      });
+
+      push.on('notification', function(data) {
+        // data.message,
+        // data.title,
+        // data.count,
+        // data.sound,
+        // data.image,
+        // data.additionalData
+
+
+
+      });
+
+      push.on('error', function(e) {
+        // e.message
+      });
+
 
     });
+
+
+
+
   })
 
   .config(function ($stateProvider, $urlRouterProvider) {
