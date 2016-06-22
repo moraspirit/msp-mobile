@@ -30,8 +30,8 @@ angular.module('starter',
  */
   .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
-
-      /*var push = new Ionic.Push({
+/*
+      var push = new Ionic.Push({
         "debug": true,
         "onNotification": function (notification) {
           var payload = notification.payload;
@@ -46,7 +46,10 @@ angular.module('starter',
             "sound": true
           },
           "android": {
-            "iconColor": "#343434"
+            "iconColor": "#343434",
+            "senderID": "101029977116",
+            "sound": true,
+            "vibrate": true,
           }
         }
       });
@@ -56,12 +59,12 @@ angular.module('starter',
       }
 
       push.register(callback);
-
 */
+
 
       var push = PushNotification.init({
         android: {
-          senderID: "12345679",
+          senderID: "101029977116",
           sound: true,
           vibrate: true,
 
@@ -76,7 +79,8 @@ angular.module('starter',
 
       push.on('registration', function(data) {
         // data.registrationId
-        console.log(data.registrationId);
+        console.log("registration ID is  " +data.registrationId);
+
       });
 
       push.on('notification', function(data) {
@@ -86,7 +90,8 @@ angular.module('starter',
         // data.sound,
         // data.image,
         // data.additionalData
-
+        console.log(data.message);
+        console.log(data.title);
 
 
       });
