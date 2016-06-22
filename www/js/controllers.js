@@ -112,6 +112,7 @@ angular.module('starter.controllers', ['starter.constants','ionic.service.core',
     $scope.data.albums = [];
     $scope.permissionToLoadMore = false;
     $scope.goToAlbum = function (id) {
+      navigator.vibrate(20);
       window.open('https://www.facebook.com/moraspirit.fanpage/photos/?tab=album&album_id=' + id);
     };
 

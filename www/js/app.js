@@ -7,7 +7,7 @@
 
 // create the constant module
 
-angular.module('starter.constants', []).constant('API_HOST', 'http://139.59.0.34');
+angular.module('starter.constants', []).constant('API_HOST', ' https://29c96c06.ngrok.io');   //'http://139.59.0.34'
 
 angular.module('starter',
 
