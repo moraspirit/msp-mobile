@@ -18,9 +18,9 @@ Styles for navigation drawer
   transition: all .5s ease-in-out;
 }
 
-.menu.menu-left * {
-  font-weight: bold;
-}
+/*.menu.menu-left * {*/
+  /*font-weight: bold;*/
+/*}*/
 
 
 .image-loader-container {
