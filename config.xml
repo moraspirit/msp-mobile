@@ -9,6 +9,7 @@
     </author>
   <content src="index.html"/>
   <access origin="*"/>
+  <access origin="*"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
@@ -16,6 +17,7 @@
   <preference name="BackupWebStorage" value="none"/>
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
+  <preference name="AndroidPersistentFileLocation" value="Internal"/>
   <feature name="StatusBar">
     <param name="ios-package" onload="true" value="CDVStatusBar"/>
   </feature>
@@ -38,8 +40,16 @@
     <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png"/>
     <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png"/>
   </platform>
-  <plugin name="cordova-plugin-whitelist" spec="~1.2.2"/>
   <plugin name="cordova-plugin-statusbar" spec="~2.1.3"/>
   <plugin name="cordova-plugin-console" spec="~1.0.3"/>
   <plugin name="cordova-plugin-splashscreen" spec="~3.2.2"/>
+  <plugin name="cordova-plugin-x-socialsharing" source="npm"/>
+  <plugin name="phonegap-plugin-push" spec="1.6.0">
+    <variable name="SENDER_ID" value="101029977116"/>
+  </plugin>
+  <plugin name="de.appplant.cordova.plugin.badge" source="npm"/>
+  <plugin name="cordova-plugin-x-toast" source="npm"/>
+  <plugin name="cordova-plugin-whitelist" source="npm"/>
+  <plugin name="cordova-plugin-file" source="npm"/>
+  <allow-navigation href="*"/>
 </widget>

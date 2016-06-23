@@ -1,4 +1,9 @@
 <ion-view view-title="Articles">
+
+
+
+
+
   <ion-content class="padding">
     <!-- card one -->
     <div class="list">
@@ -15,7 +20,7 @@
       </div>
 
       <div class="item item-image">
-        <img class="full-image"  ng-src= "{{article.uri | URLmaker}}">
+        <img class="full-image"  cache-src="{{article.uri | URLmaker}}">
       </div>
 
       <div class="item item-body"><p style="">{{article.body_summary}}<p>
@@ -26,8 +31,13 @@
       <div class="item tabs tabs-secondary tabs-icon-left">
         <a href="#/app/articles/{{article.nid}}" class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"> <i class="icon ion-document-text"></i>
         read more</a>
-        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"> <i class="icon ion-share"></i>
+
+        <!--  shareAnywhere(message, subject, file, url)  -->
+        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"
+           ng-click="shareAnywhere('{{article.title}}', 'MoraSpirit News', null, 'http://www.moraspirit.com/node/{{article.nid}}')">
+          <i class="icon ion-share"></i>
         share</a>
+
       </div>
     </div>
       </div>
