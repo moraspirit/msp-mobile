@@ -154,6 +154,6 @@ app.get('/albumsMore/:articleOffset', function (req, res) {
 
 });
 
-app.listen(6000, function () {
-  console.log('Example app listening on port 6000!');
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
 });
