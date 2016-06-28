@@ -7,11 +7,12 @@ var FB = require('fb');
 var cors = require('cors');
 FB.setAccessToken('EAAOoAjs48vsBAJwpXuMhANsJ5ZCnkIAv9LHvNgIco3YllaxR665VNaBEpo0D0RGjF2MuIZAqfZB5ZCeKEusCOw9NFWEgD8tZB0M7xC9lEv7OhU1Iim9yaz2Q7RwNnfR5vPT2fSewbFdbW8ZBNOypDK');
 
-var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '1234',
+var connection = mysql.createPool({
+  host: 'moraspirit.com',
+  user: 'morasp5_slug2016',
+  password: '!amSLUG2016',
   database: 'morasp5_moraspirit_main_db'
+
 });
 var app = express();
 app.use(cors());
@@ -36,6 +37,8 @@ app.get('/', function (req, res) {
   // SELECT n.nid, n.title, u.name, n.created, fdb.body_summary, nfi.uri FROM (SELECT * from `msp_node_revision` NATURAL JOIN `msp_node` ) n LEFT JOIN `msp_field_data_body` fdb ON fdb.entity_id = n.nid LEFT JOIN (SELECT * FROM (SELECT entity_id, `field_featured_article_image_fid` AS fidd FROM `msp_field_data_field_featured_article_image` UNION SELECT entity_id, `field_sports_image_fid` AS fidd FROM `msp_field_revision_field_sports_image`) AS fi LEFT JOIN `msp_file_managed` fm ON fi.fidd = fm.fid) nfi ON nfi.entity_id = n.nid LEFT JOIN `msp_users` u ON n.uid= u.uid ORDER BY n.created DESC  LIMIT 10
 
   var query = 'SELECT n.nid, n.title, u.name, n.created, fdb.body_summary, nfi.uri FROM (SELECT * from `msp_node_revision` NATURAL JOIN `msp_node` ) n LEFT JOIN `msp_field_data_body` fdb ON fdb.entity_id = n.nid LEFT JOIN (SELECT * FROM (SELECT entity_id, `field_featured_article_image_fid` AS fidd FROM `msp_field_data_field_featured_article_image` UNION SELECT entity_id, `field_sports_image_fid` AS fidd FROM `msp_field_revision_field_sports_image`) AS fi LEFT JOIN `msp_file_managed` fm ON fi.fidd = fm.fid) nfi ON nfi.entity_id = n.nid LEFT JOIN `msp_users` u ON n.uid= u.uid ORDER BY n.created DESC  LIMIT 10 ';
+
+
   connection.query(query, function (err, rows, fields) {
     if (err) {
       res.status(500).json(err);
