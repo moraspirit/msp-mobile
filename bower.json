@@ -16,12 +16,16 @@
     "easyfont-roboto-slab": "easyfont/roboto-slab",
     "ionic-image-lazy-load": "ion-image-lazy-load#*",
     "mdi": "^1.6.50",
-    "angular-nl2br": "^1.0.3"
+    "angular-nl2br": "^1.0.3",
+    "ionic-cache-src": "^0.7.3",
+    "ngstorage": "^0.3.10",
+    "angular-svg-round-progressbar": "^0.4.4"
   },
   "resolutions": {
     "angular-sanitize": "1.3.13",
     "angular": "1.5.7",
-    "ionic": "1.3.1",
-    "angular-animate": "1.3.13"
+    "ionic": "^1.3.1",
+    "angular-animate": "1.3.13",
+    "angular-svg-round-progressbar": "~0.2.10"
   }
 }

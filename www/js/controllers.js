@@ -237,7 +237,7 @@ angular.module('starter.controllers', ['starter.constants','ionic.service.core',
 
       //vibrate
       navigator.vibrate(20);
-      
+
       $cordovaSocialSharing
         .share(message, subject, file, link)
         .then(function(result) {
