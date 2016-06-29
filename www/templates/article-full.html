@@ -1,6 +1,6 @@
 <ion-view view-title="">
-  <ion-content ng-class="{expanded:$scope.isExpanded}" >
-    <div class="hero slide-up" style="background-image: url('{{article.uri | URLmaker}}') {{backgroundStyle}}" >
+  <ion-content>
+    <div class="hero" style="background-image: url('{{article.uri | URLmaker}}') {{backgroundStyle}}" >
       <div class="content">
 
       </div>
@@ -10,7 +10,7 @@
       <p style="text-transform: uppercase;     font-size: small;">on {{article.created}}  &nbsp; by {{article.name}}</p>
     </div>
 
-    <div class="content double-padding animate-fade-slide-in-right">
+    <div class="content double-padding">
       <!--post content-->
       <div class="field-item even" property="content:encoded">
         <p ng-bind-html="article.body_value | nl2br"></p>

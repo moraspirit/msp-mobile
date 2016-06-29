@@ -92,22 +92,8 @@ angular.module('starter.controllers', ['starter.constants','ionic.service.core',
     };
   })
 
-  .controller('AlbumController', function ($scope, $stateParams, $timeout, $http, ionicMaterialInk, ionicMaterialMotion, CoolFactory) {
-    /* $scope.$parent.showHeader();
-     $scope.$parent.clearFabs();
-     $scope.isExpanded = true;
-     $scope.$parent.setExpanded(true);
-     $scope.$parent.setHeaderFab(false);
+  .controller('AlbumController', function ($scope, $stateParams, $http, CoolFactory) {
 
-     // Activate ink for controller
-     ionicMaterialInk.displayEffect();
-
-     ionicMaterialMotion.pushDown({
-     selector: '.push-down'
-     });
-     ionicMaterialMotion.fadeSlideInRight({
-     selector: '.animate-fade-slide-in .item'
-     });*/
     $scope.data = {};
     $scope.data.albums = [];
     $scope.permissionToLoadMore = false;
@@ -249,7 +235,7 @@ angular.module('starter.controllers', ['starter.constants','ionic.service.core',
 
   })
 
-  .controller('ArticleController', function ($http, $scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, CoolFactory) {
+  .controller('ArticleController', function ($http, $scope, $stateParams,  CoolFactory) {
 
     //article id
     var id = $stateParams.id;
@@ -259,31 +245,6 @@ angular.module('starter.controllers', ['starter.constants','ionic.service.core',
         $scope.article = row.data[0];
         //console.log(rows.data);
       });
-
-
-    // Set Header
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.isExpanded = false;
-    $scope.$parent.setExpanded(false);
-    $scope.$parent.setHeaderFab(false);
-
-    // Set Motion
-    $timeout(function () {
-      ionicMaterialMotion.slideUp({
-        selector: '.slide-up'
-      });
-    }, 300);
-
-    $timeout(function () {
-      ionicMaterialMotion.fadeSlideInRight({
-        startVelocity: 3000
-      });
-    }, 700);
-
-    // Set Ink
-    ionicMaterialInk.displayEffect();
-
 
   })
 
