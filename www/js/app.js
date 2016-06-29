@@ -7,7 +7,7 @@
 
 // create the constant module
 
-angular.module('starter.constants', []).constant('API_HOST', 'http://139.59.0.34:3000');   //'http://139.59.0.34'
+angular.module('starter.constants', []).constant('API_HOST', 'http://139.59.0.34:6000');   //'http://139.59.0.34'
 
 angular.module('starter',
 
@@ -265,5 +265,5 @@ angular.module('starter',
         }
       });
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/about');
+    $urlRouterProvider.otherwise('/app/articles');
   });
