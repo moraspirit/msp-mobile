@@ -5,7 +5,7 @@ var express = require('express');
 var mysql = require('mysql');
 var FB = require('fb');
 var cors = require('cors');
-FB.setAccessToken('EAAOoAjs48vsBAJwpXuMhANsJ5ZCnkIAv9LHvNgIco3YllaxR665VNaBEpo0D0RGjF2MuIZAqfZB5ZCeKEusCOw9NFWEgD8tZB0M7xC9lEv7OhU1Iim9yaz2Q7RwNnfR5vPT2fSewbFdbW8ZBNOypDK');
+FB.setAccessToken('EAAOoAjs48vsBAEDsCtu0AsStZAveePZCXaJZB8NXTFdwFrAjRYodyJ828TwAaZABen2ZB3G38oEiyExGczNSByijxjpUBLmAZCXRzsQxUPhd2KeWrSEd2SwdMqK87xxRDDMlY1IzeNtXRtAf4HlH3SoHmZAxcWjVFUZD');
 
 var pool = mysql.createPool({
   host: 'moraspirit.com',
