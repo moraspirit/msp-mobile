@@ -1,45 +1,44 @@
 <ion-view view-title="Articles">
 
 
-
-
-
   <ion-content class="padding">
-    <!-- card one -->
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
     <div class="list">
       <div ng-repeat="article in data.articles">
 
-    <div class="list card stable-bg">
-      <div class="item item-text-wrap">
+        <div class="list card stable-bg">
+          <div class="item item-text-wrap">
 
 
-         <h2 style="font-weight: 500">{{article.title}}</h2>
+            <h2 style="font-weight: 500">{{article.title}}</h2>
 
 
-        <p>by&nbsp;<a style="font-weight: 300; font-size: 0.9em;" href="#">{{article.name}}</a></p>
-      </div>
+            <p>by&nbsp;<a style="font-weight: 300; font-size: 0.9em;" href="#">{{article.name}}</a></p>
+          </div>
 
-      <div class="item item-image">
-        <img class="full-image"  cache-src="{{article.uri | URLmaker}}">
-      </div>
+          <div class="item item-image">
+            <img class="full-image" cache-src="{{article.uri | URLmaker}}">
+          </div>
 
-      <div class="item item-body"><p style="">{{article.body_summary}}<p>
+          <div class="item item-body"><p style="">{{article.body_summary}}
+            <p>
 
-          <!--<a class="subdued">5 comments</a></p>-->
-      </div>
+              <!--<a class="subdued">5 comments</a></p>-->
+          </div>
 
-      <div class="item tabs tabs-secondary tabs-icon-left">
-        <a href="#/app/articles/{{article.nid}}" class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"> <i class="icon ion-document-text"></i>
-        read more</a>
+          <div class="item tabs tabs-secondary tabs-icon-left">
+            <a href="#/app/articles/{{article.nid}}" class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5">
+              <i class="icon ion-document-text"></i>
+              read more</a>
 
-        <!--  shareAnywhere(message, subject, file, url)  -->
-        <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"
-           ng-click="shareAnywhere( article.title, 'MoraSpirit News', null, 'http://www.moraspirit.com/node/{{article.nid}}')">
-          <i class="icon ion-share"></i>
-        share</a>
+            <!--  shareAnywhere(message, subject, file, url)  -->
+            <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5"
+               ng-click="shareAnywhere( article.title, 'MoraSpirit News', null, 'http://www.moraspirit.com/node/{{article.nid}}')">
+              <i class="icon ion-share"></i>
+              share</a>
 
-      </div>
-    </div>
+          </div>
+        </div>
       </div>
     </div>
 
