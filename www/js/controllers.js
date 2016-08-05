@@ -147,22 +147,8 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
 
   })
 
-  .controller('RecentScoresCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
-
-    $scope.$parent.showHeader();
-    $scope.$parent.clearFabs();
-    $scope.isExpanded = true;
-    $scope.$parent.setExpanded(true);
-    $scope.$parent.setHeaderFab('right');
-
-    $timeout(function () {
-      ionicMaterialMotion.fadeSlideIn({
-        selector: '.animate-fade-slide-in .item'
-      });
-    }, 200);
-
-    // Activate ink for controller
-    ionicMaterialInk.displayEffect();
+  .controller('RecentScoresCtrl', function ($scope, $stateParams) {
+    
   })
 
   .controller('ArticlesController', function ($http, API_HOST, $scope, $stateParams, ionicMaterialInk, CoolFactory, $cordovaSocialSharing) {
@@ -293,6 +279,24 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
         "position": 3
       }
     ];
+
+    /*$scope.rankings = null;
+
+    CoolFactory.hitTheServer('/articles/', id)
+      .success(function (data) {
+        window.localStorage.setItem('rankings', JSON.stringify(data[0]));
+        $scope.rankings = data[0];
+        //console.log(rows.data);
+      })
+      .error(function () {
+
+        if (window.localStorage.getItem('rankings') !== undefined) {
+          $scope.rankings = JSON.parse(window.localStorage.getItem('articles'));
+        }
+
+        //console.log(rows.data);
+      });
+*/
 
 
   })

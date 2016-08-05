@@ -38,3 +38,13 @@ Styles for navigation drawer
   align-content: stretch;
   align-items: center;
 }
+
+.wrap{
+  white-space: normal;
+  box-shadow: inset 0px 0px 0px 1px #f2f2f2;
+}
+
+.pull-left.resent{
+  color: #8c8c8c;
+}
+

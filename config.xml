@@ -49,10 +49,11 @@
   </plugin>
   <plugin name="de.appplant.cordova.plugin.badge" source="npm"/>
   <plugin name="cordova-plugin-whitelist" source="npm"/>
-  <plugin name="cordova-plugin-file" source="npm"/>
   <plugin name="cordova-plugin-badge" spec="https://github.com/katzer/cordova-plugin-badge.git"/>
   <plugin name="cordova-plugin-x-toast" spec="~2.5.2"/>
   <plugin name="cordova-plugin-vibration" spec="~2.1.1"/>
   <plugin name="cordova-plugin-app-event" spec="~1.2.0"/>
+  <plugin name="cordova-plugin-file" spec="~4.2.0"/>
+  <plugin name="cordova-plugin-file-transfer" spec="~1.5.1"/>
   <allow-navigation href="*"/>
 </widget>

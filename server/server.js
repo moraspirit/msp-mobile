@@ -65,7 +65,6 @@ app.get('/articles', function (req, res) {
       }
     });
   });
-
 });
 
 app.get('/articles/:articleId', function (req, res) {
@@ -90,8 +89,6 @@ app.get('/articles/:articleId', function (req, res) {
       }
     });
   });
-
-
 });
 
 

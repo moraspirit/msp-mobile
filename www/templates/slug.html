@@ -28,52 +28,46 @@
 
   </ion-content>-->
 
-  <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
-    <div class="item card-item">
-      <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
-        <div class="item item-avatar item-text-wrap" style="text-transform: uppercase;">
-          <span class="avatar" style="background-image: url('img/uni_logos/uom.png');"></span>
-          <strong>university of moratuwa</strong> won by 4 wickets.
-          <div class="card-footer text-right" style="text-transform: lowercase;">
-            <i class="icon ion-chatbubbles positive"></i> 6
-            <i class="icon ion-heart assertive"></i> 23
-            <div class="pull-left">
-              <i class="icon ion-clock"></i> just now
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="item card-item">
-      <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
-        <div class="item item-avatar item-text-wrap" style="text-transform: uppercase;">
-          <span class="avatar" style="background-image: url('img/uni_logos/University_of_Peradeniya_crest.png');"></span>
-          <strong>university of peradeniya</strong> won basketball beating <strong>university of jaffna</strong>.
-          <div class="card-footer text-right" style="text-transform: lowercase;">
-            <i class="icon ion-chatbubble positive"></i> 2
-            <i class="icon ion-heart assertive"></i> 4
-            <div class="pull-left">
-              <i class="icon ion-clock"></i> 12 mins ago
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="item card-item">
-      <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
-        <div class="item item-avatar item-text-wrap" style="text-transform: uppercase;">
-          <span class="avatar" style="background-image: url('img/uni_logos/ruh.jpg');"></span>
-          <strong>UNIVERSITY OF RUHUNA</strong> won badminton championship.
+  <ion-content>
+    <ion-list>
 
-          <div class="card-footer text-right" style="text-transform: lowercase;">
-            <i class="icon ion-chatbubble positive"></i> 2
-            <i class="icon ion-heart assertive"></i> 4
-            <div class="pull-left">
-              <i class="icon ion-clock"></i> 3 hrs ago
-            </div>
-          </div>
+      <!--  Actual code (To be tested ith back backend data)
+      <ion-item class="wrap" ng-repeat="notification in notifications">
+        {{notification.body}}
+        <div class="pull-left resent">
+          <i class="icon ion-clock"></i> {{notification.timeStamp}}
         </div>
-      </div>
-    </div>
+      </ion-item>
+      -->
+
+      <!-- dummy data -->
+      <ion-item class="wrap">
+        UOM won by 4 wickets. MoraSpirit – The Spirit of University Sports was launched in September 2009.
+
+        <div class="pull-left resent">
+          <i class="icon ion-clock"></i> just now
+        </div>
+      </ion-item>
+
+      <ion-item class="wrap">
+        UOM won by 4 wickets. MoraSpirit – The Spirit of University Sports was launched in September 2009.
+        <div class="pull-left resent">
+          <i class="icon ion-clock"></i> just now
+        </div>
+      </ion-item>
+      <ion-item class="wrap">
+        UOM won by 4 wickets. MoraSpirit – The Spirit of University Sports was launched in September 2009.
+        <div class="pull-left resent">
+          <i class="icon ion-clock"></i> just now
+        </div>
+      </ion-item>
+      <ion-item class="wrap">
+        UOM won by 4 wickets. MoraSpirit – The Spirit of University Sports was launched in September 2009.
+        <div class="pull-left resent">
+          <i class="icon ion-clock"></i> just now
+        </div>
+      </ion-item>
+
+    </ion-list>
   </ion-content>
 </ion-view>
