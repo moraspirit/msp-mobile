@@ -122,7 +122,7 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
         console.log(data.data);
         $scope.data.albums = data.data;
         window.localStorage.setItem('albums', JSON.stringify(data.data));
-      
+
         $scope.permissionToLoadMore = true;
       })
       .error(function () {
@@ -287,7 +287,7 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
 
   .controller('RatingsCtrl', function ($scope) {
 
-    $scope.data = [
+    $scope.rankings = [
       {
         "img": "img/uni_logos/ruh.jpg",
         "name": "Uni two",
@@ -310,19 +310,17 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
 
     /*$scope.rankings = null;
 
-    CoolFactory.hitTheServer('/articles/', id)
+    CoolFactory.hitTheServer('/rankings/', '')
       .success(function (data) {
-        window.localStorage.setItem('rankings', JSON.stringify(data[0]));
-        $scope.rankings = data[0];
-        //console.log(rows.data);
+
+        data = bindImage(data);
+        window.localStorage.setItem('rankings', JSON.stringify(data));
+        $scope.rankings = data;
       })
       .error(function () {
-
         if (window.localStorage.getItem('rankings') !== undefined) {
-          $scope.rankings = JSON.parse(window.localStorage.getItem('articles'));
+          $scope.rankings = JSON.parse(window.localStorage.getItem('rankings'));
         }
-
-        //console.log(rows.data);
       });
 */
 
@@ -342,4 +340,13 @@ function CoolFactory($http, API_HOST) {
     return $http.get(API_HOST + route + id);
   };
   return services;
+}
+
+// function to add 'img' attribute to each object in JSON array
+function bindImage(data){
+  data.forEach(function(record){
+    record.img = 'img/uni_logos/' + record.name + '.jpg';
+  }
+  );
+  return data;
 }
