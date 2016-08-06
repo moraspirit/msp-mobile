@@ -1,4 +1,4 @@
-<ion-view view-title="Rankings">
+<ion-view view-title="SLUG 2016 Rankings">
 
   <!-- <ion-header-bar align-title="left" class="bar-positive">
     <h1 class="title">The Leading point score is:</h1>
@@ -9,8 +9,8 @@
     <div class="rankingtable">
       <div class="rankingtable-cell">
         <ul class="rankingleader">
-          <li ng-repeat="data in rankings | orderBy: 'points'">
-            <span class="rankinglist_num">{{data.position}}</span>
+          <li ng-repeat="data in rankings | orderBy: 'points': true">
+            <span class="rankinglist_num">{{$index+1}}</span>
             <img class="rankingimg" src="{{data.img}}" />
             <h2>{{data.name}}<span class="rankingnumber">{{data.points}}</span></h2>
           </li>

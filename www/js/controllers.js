@@ -287,26 +287,66 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
 
   .controller('RatingsCtrl', function ($scope) {
 
-    $scope.rankings = [
+    var data = [
       {
-        "img": "img/uni_logos/ruh.jpg",
-        "name": "Uni two",
-        "points": 1002,
-        "position": 2
+        "name": "SAB",
+        "points": 1002
       },
       {
-        "img": "img/uni_logos/uom.png",
-        "name": "Uni one",
-        "points": 1001,
-        "position": 1
+        "name": "MOR",
+        "points": 1084
       },
       {
-        "img": "img/uni_logos/University_of_Peradeniya_crest.png",
-        "name": "Uni three",
-        "points": 1003,
-        "position": 3
+        "name": "PER",
+        "points": 1003
+      },
+      {
+        "name": "COL",
+        "points": 1003
+      },
+      {
+        "name": "EST",
+        "points": 856
+      },
+      {
+        "name": "SEA",
+        "points": 888
+      },
+      {
+        "name": "VPA",
+        "points": 567
+      },
+      {
+        "name": "RHU",
+        "points": 899
+      },
+      {
+        "name": "UVA",
+        "points": 755
+      },
+      {
+        "name": "RAJ",
+        "points": 948
+      },
+      {
+        "name": "JAF",
+        "points": 845
+      },
+      {
+        "name": "WAY",
+        "points": 945
+      },
+      {
+        "name": "COL",
+        "points": 936
+      },
+      {
+        "name": "KEL",
+        "points": 900
       }
     ];
+
+    $scope.rankings  = bindImage(data);
 
     /*$scope.rankings = null;
 
@@ -345,8 +385,33 @@ function CoolFactory($http, API_HOST) {
 // function to add 'img' attribute to each object in JSON array
 function bindImage(data){
   data.forEach(function(record){
-    record.img = 'img/uni_logos/' + record.name + '.jpg';
+
+      switch(record.name) {
+        case 'MOR':
+          record.img = 'img/uni_logos/MOR.png';
+          record.name = 'UOM';
+          break;
+        case 'COL':
+          record.img = 'img/uni_logos/COL.png';
+          record.name = 'UOC';
+          break;
+        case 'SJP':
+          record.img = 'img/uni_logos/SJP.png';
+          record.name = 'USJP';
+          break;
+        case 'PER':
+          record.img = 'img/uni_logos/PER.png';
+          record.name = 'UOP';
+          break;
+        case 'KEL':
+          record.img = 'img/uni_logos/KEL.png';
+          record.name = 'UOK';
+          break;
+        default:
+          record.img = 'img/uni_logos/'+ record.name + '.png';
+      }
   }
   );
   return data;
 }
+
