@@ -3,11 +3,11 @@
   <ion-content>
     <ion-list>
 
-      <ion-item class="wrap" ng-repeat="notification in notifications">
+      <ion-item class="wrap" ng-repeat="notification in notifications | orderBy: 'time' : true">
         {{notification.message}}
         <br>
         <div class="pull-left resent">
-          <i class="icon ion-clock"></i> just now
+          <i class="icon ion-clock"></i> {{notification.time}}
         </div>
       </ion-item>
     </ion-list>

@@ -92,9 +92,10 @@ angular.module('starter',
 
         console.log(data.title);
         console.log(data.message);
+        console.log(data.additionalData.payload.time);
 
         // save the notification locally
-        saveNotification(data.title, data.message);
+        saveNotification(data.title, data.message, data.additionalData.payload.time );
 
 
 
@@ -286,20 +287,20 @@ angular.module('starter',
   });
 
 
-function saveNotification(topic, message){
+function saveNotification(topic, message, time){
   // save the notification locally
-  var notification = {topic: topic, message: message};
+  var notification = {topic: topic, message: message, time:time};
   var tempArray = [];
-  var notificationsArray = JSON.parse(window.localStorage.getItem('savedNotifications'));
+  var notificationsArray = JSON.parse(window.localStorage.getItem('pushNotifications'));
   console.log("previous notifications:- " + notificationsArray);
   if (notificationsArray) {
     notificationsArray.push(notification);
     console.log(notificationsArray);
-    window.localStorage.setItem('savedNotifications', JSON.stringify(notificationsArray));
+    window.localStorage.setItem('pushNotifications', JSON.stringify(notificationsArray));
   }
   else{
     tempArray.push(notification);
     console.log(tempArray);
-    window.localStorage.setItem('savedNotifications', JSON.stringify(tempArray));
+    window.localStorage.setItem('pushNotifications', JSON.stringify(tempArray));
   }
 }

@@ -150,8 +150,8 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
   .controller('RecentScoresCtrl', function ($scope, $state) {
 
 
-    $scope.notifications = JSON.parse(window.localStorage.getItem('savedNotifications'));
-   
+    $scope.notifications = JSON.parse(window.localStorage.getItem('pushNotifications'));
+
   })
 
   .controller('ArticlesController', function ($http, API_HOST, $scope, $stateParams, ionicMaterialInk, CoolFactory, $cordovaSocialSharing) {
