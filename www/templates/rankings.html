@@ -9,9 +9,6 @@
     <div class="rankingtable">
       <div class="rankingtable-cell">
         <ul class="rankingleader">
-          <div id="decoration"></div>
-          <div id="decoration2"></div>
-          <div id="decoration3"></div>
           <li ng-repeat="data in data | orderBy: 'points'">
             <span class="rankinglist_num">{{data.position}}</span>
             <img class="rankingimg" src="{{data.img}}" />

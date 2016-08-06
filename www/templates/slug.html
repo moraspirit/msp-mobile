@@ -1,48 +1,21 @@
 <ion-view view-title="SLUG 2016 Recent">
-  <!--<ion-content>
-    <h1 style="text-align:center">SLUG 2016</h1>
-
-    <div class="list">
-
-      <a class="item item-icon-left" href="#">
-        <i class="icon ion-android-watch"></i>
-        Current Matches
-      </a>
-
-      <a class="item item-icon-left" href="#">
-        <i class="icon ion-android-clipboard"></i>
-        Match schedule
-      </a>
-
-      <a class="item item-icon-left" href="#">
-        <i class="icon ion-mic-a"></i>
-        Points Table
-      </a>
-
-      <a class="item item-icon-left" href="#" >
-        <i class="icon ion-person-stalker"></i>
-        Friends
-      </a>
-
-</div>
-
-  </ion-content>-->
 
   <ion-content>
     <ion-list>
 
-      <!--  Actual code (To be tested ith back backend data)
+
       <ion-item class="wrap" ng-repeat="notification in notifications">
-        {{notification.body}}
+        {{notification.message}}
+        <br>
         <div class="pull-left resent">
-          <i class="icon ion-clock"></i> {{notification.timeStamp}}
+          <i class="icon ion-clock"></i> just now
         </div>
       </ion-item>
-      -->
 
-      <!-- dummy data -->
-      <ion-item class="wrap">
-        UOM won by 4 wickets. MoraSpirit – The Spirit of University Sports was launched in September 2009.
+
+      <!-- dummy data
+      <ion-item class="wrap" ng-repeat="notification in notifications">
+       {{notification.message}}
 
         <div class="pull-left resent">
           <i class="icon ion-clock"></i> just now
@@ -67,7 +40,7 @@
           <i class="icon ion-clock"></i> just now
         </div>
       </ion-item>
-
+--->
     </ion-list>
   </ion-content>
 </ion-view>

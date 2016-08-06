@@ -14,11 +14,11 @@ angular.module('starter',
   ['ionic', 'ionic.service.core',
     'starter.controllers',
     'ngCordova', 'nl2br',
-    'ionic.service.push', 'ionic-material', 'ionicLazyLoad', 'starter.constants','ionic-cache-src']
+    'ionic.service.push', 'ionic-material', 'ionicLazyLoad', 'starter.constants', 'ionic-cache-src']
 )
 
 
-  .run(function ($ionicPlatform) {
+  .run(function ($ionicPlatform, $state) {
     $ionicPlatform.ready(function () {
       /*
        var push = new Ionic.Push({
@@ -59,9 +59,7 @@ angular.module('starter',
           senderID: "101029977116",
           sound: true,
           vibrate: true,
-
           iconColor: 'lightgray'
-
 
         },
         ios: {
@@ -77,6 +75,7 @@ angular.module('starter',
         var deviceToken = data.registrationId;
         console.log("registration ID is  " + deviceToken);
         // send deviceToken to the server API that will be sending the push notifications and save there in an array or something
+        //new* this is not needed as using the IONIC IO dashboard to send notifications
 
       });
 
@@ -94,8 +93,11 @@ angular.module('starter',
         console.log(data.title);
         console.log(data.message);
 
+        // save the notification locally
+        saveNotification(data.title, data.message);
 
-        //direct the route to the recent view
+
+
 
 
         // this block should call when a notification comes  -- move this block to the right place in the project
@@ -114,6 +116,9 @@ angular.module('starter',
         // when the notification was received while the app was in the foreground
         if (data.additionalData.foreground) {
           console.log("App was in the foreground")
+
+          // save the notification locally
+          saveNotification(data.title, data.message);
 
           // make a toast message!!!
           window.plugins.toast.showWithOptions(
@@ -138,13 +143,13 @@ angular.module('starter',
               navigator.vibrate(500);
 
 
-
               // if the toast was touched
               if (result && result.event) {
                 console.log("The toast was tapped");
                 navigator.vibrate([20, 20]);
 
-                // route and go to the "recent" view
+
+               
 
               }
             },
@@ -160,6 +165,7 @@ angular.module('starter',
         // true if the application is started (it was not  in the back ground) by clicking on the push notification, false if the app is already started.
         if (data.additionalData.coldstart) {
           console.log("The app was started after the  push is clicked")
+
 
         }
 
@@ -267,3 +273,22 @@ angular.module('starter',
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/articles');
   });
+
+
+function saveNotification(topic, message){
+  // save the notification locally
+  var notification = {topic: topic, message: message};
+  var tempArray = [];
+  var notificationsArray = JSON.parse(window.localStorage.getItem('savedNotifications'));
+  console.log("previous notifications:- " + notificationsArray);
+  if (notificationsArray) {
+    notificationsArray.push(notification);
+    console.log(notificationsArray);
+    window.localStorage.setItem('savedNotifications', JSON.stringify(notificationsArray));
+  }
+  else{
+    tempArray.push(notification);
+    console.log(tempArray);
+    window.localStorage.setItem('savedNotifications', JSON.stringify(tempArray));
+  }
+}
