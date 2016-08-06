@@ -292,6 +292,11 @@ function saveNotification(topic, message, time){
   var notification = {topic: topic, message: message, time:time};
   var tempArray = [];
   var notificationsArray = JSON.parse(window.localStorage.getItem('pushNotifications'));
+
+  if(notificationsArray.length > 20){
+    notificationsArray.shift();
+  }
+
   console.log("previous notifications:- " + notificationsArray);
   if (notificationsArray) {
     notificationsArray.push(notification);
