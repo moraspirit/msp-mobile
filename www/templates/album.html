@@ -1,7 +1,9 @@
 <ion-view view-title="Gallery">
   <ion-content lazy-scroll >
 
-    <div class="list half" style="padding: 16px 0px 16px 8px">
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+    <div class="list half" style="padding: 16px 10px 16px 0px">
       <div ng-repeat="album in data.albums | limitTo:numberOfItemsToDisplay" ng-if="$odd"  ng-click="goToAlbum(album.id)">
 
         <div class="card card-gallery item item-text-wrap">

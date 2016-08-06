@@ -102,11 +102,19 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
       window.open('https://www.facebook.com/moraspirit.fanpage/photos/?tab=album&album_id=' + id);
     };
 
-   /* CoolFactory.hitTheServer('/albums/', '')
-      .then(function (data) {
-        $scope.data.albums = data.data.data;
-        $scope.permissionToLoadMore = true;
-      });*/
+
+
+    $scope.doRefresh = function () {
+      CoolFactory.hitTheServer('/albums/', '')
+        .then(function (data) {
+          $scope.data.albums = data.data.data;
+          $scope.permissionToLoadMore = true;
+        });
+
+      //Stop the ion-refresher from spinning
+      $scope.$broadcast('scroll.refreshComplete');
+    };
+
 
     CoolFactory.hitTheServer('/albums/', '')
       .success(function (data) {
