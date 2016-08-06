@@ -149,6 +149,9 @@ angular.module('starter',
                 navigator.vibrate([20, 20]);
 
 
+                // route and go to the "recent" view
+                $state.go('app.slug');
+
               }
             },
             // on failure
