@@ -102,10 +102,27 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
       window.open('https://www.facebook.com/moraspirit.fanpage/photos/?tab=album&album_id=' + id);
     };
 
-    CoolFactory.hitTheServer('/albums/', '')
+   /* CoolFactory.hitTheServer('/albums/', '')
       .then(function (data) {
         $scope.data.albums = data.data.data;
         $scope.permissionToLoadMore = true;
+      });*/
+
+    CoolFactory.hitTheServer('/albums/', '')
+      .success(function (data) {
+
+        console.log(data.data);
+        $scope.data.albums = data.data;
+        window.localStorage.setItem('albums', JSON.stringify(data.data));
+        console.log(JSON.parse(window.localStorage.getItem('albums')));
+        $scope.permissionToLoadMore = true;
+      })
+      .error(function () {
+        console.log("No internet connection! retrieving data from cache");
+        if (window.localStorage.getItem('albums') !== undefined) {
+          $scope.data.albums = JSON.parse(window.localStorage.getItem('albums'));
+          $scope.permissionToLoadMore = true;
+        }
       });
 
     $scope.hasMoreData = true;

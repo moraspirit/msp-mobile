@@ -176,8 +176,6 @@ angular.module('starter',
           console.log("The app was started after the  push is clicked")
           //direct the route to the recent view
           $state.go('app.slug');
-
-
         }
 
 
