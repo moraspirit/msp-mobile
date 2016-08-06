@@ -4,7 +4,7 @@
     <ion-refresher on-refresh="doRefresh()"></ion-refresher>
 
     <div class="list half" style="padding: 16px 10px 16px 0px">
-      <div ng-repeat="album in data.albums | limitTo:numberOfItemsToDisplay" ng-if="$odd"  ng-click="goToAlbum(album.id)">
+      <div ng-repeat="album in data.albums | limitTo:numberOfItemsToDisplay" ng-if="$odd && album.id!='213000905390257'"  ng-click="goToAlbum(album.id)">
 
         <div class="card card-gallery item item-text-wrap">
           <div class="ink dark-bg">
@@ -28,7 +28,7 @@
 
     <div class="list half" style="padding: 16px 20px 16px 0px;
 ">
-      <div ng-repeat="album in data.albums | limitTo:numberOfItemsToDisplay" ng-if="$even " ng-click="goToAlbum(album.id)">
+      <div ng-repeat="album in data.albums | limitTo:numberOfItemsToDisplay" ng-if="$even && id!='213000905390257'"  ng-click="goToAlbum(album.id)">
 
         <div  class="card card-gallery item item-text-wrap">
           <div class="ink dark-bg">

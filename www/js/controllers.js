@@ -122,7 +122,7 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
         console.log(data.data);
         $scope.data.albums = data.data;
         window.localStorage.setItem('albums', JSON.stringify(data.data));
-        console.log(JSON.parse(window.localStorage.getItem('albums')));
+      
         $scope.permissionToLoadMore = true;
       })
       .error(function () {
