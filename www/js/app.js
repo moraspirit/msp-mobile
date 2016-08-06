@@ -18,7 +18,7 @@ angular.module('starter',
 )
 
 
-  .run(function ($ionicPlatform, $state) {
+  .run(function ($ionicPlatform, $state, $window) {
     $ionicPlatform.ready(function () {
       /*
        var push = new Ionic.Push({
@@ -80,7 +80,7 @@ angular.module('starter',
       });
 
 
-      // this block will only when the app is on (not exit or in the background)
+      // this block will run only when the app is on (not exit or in the background)
       // this block will run as soon as you open the app when there is push notification have sent to the device
       push.on('notification', function (data) {
         // data.message,
@@ -115,10 +115,16 @@ angular.module('starter',
 
         // when the notification was received while the app was in the foreground
         if (data.additionalData.foreground) {
-          console.log("App was in the foreground")
+          console.log("App was in the foreground");
 
-          // save the notification locally
-          saveNotification(data.title, data.message);
+          if($state.current.name == 'app.slug'){
+            console.log("current state is slug");
+            $state.go($state.current, {}, {reload: true});
+          }
+
+
+        /*  // save the notification locally
+          saveNotification(data.title, data.message);*/
 
           // make a toast message!!!
           window.plugins.toast.showWithOptions(
@@ -152,6 +158,7 @@ angular.module('starter',
                 // route and go to the "recent" view
                 $state.go('app.slug');
 
+
               }
             },
             // on failure
@@ -168,6 +175,7 @@ angular.module('starter',
           console.log("The app was started after the  push is clicked")
           //direct the route to the recent view
           $state.go('app.slug');
+
 
         }
 
@@ -244,6 +252,7 @@ angular.module('starter',
       })
 
       .state('app.slug', {
+        cache: false,
         url: '/slug',
         views: {
           'menuContent': {
