@@ -149,8 +149,6 @@ angular.module('starter',
                 navigator.vibrate([20, 20]);
 
 
-               
-
               }
             },
             // on failure
@@ -165,7 +163,8 @@ angular.module('starter',
         // true if the application is started (it was not  in the back ground) by clicking on the push notification, false if the app is already started.
         if (data.additionalData.coldstart) {
           console.log("The app was started after the  push is clicked")
-
+          //direct the route to the recent view
+          $state.go('app.slug');
 
         }
 
