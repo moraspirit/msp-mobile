@@ -20,6 +20,9 @@ angular.module('starter',
 
   .run(function ($ionicPlatform, $state, $window) {
     $ionicPlatform.ready(function () {
+
+      navigator.splashscreen.hide();
+
       /*
        var push = new Ionic.Push({
        "debug": true,
