@@ -11,20 +11,19 @@ angular.module('starter.constants', []).constant('API_HOST', 'http://139.59.0.34
 
 angular.module('starter',
 
-  ['ionic', 'ionic.service.core',
+  ['ionic','ionic.service.core',
     'starter.controllers',
     'ngCordova', 'nl2br',
     'ionic.service.push', 'ionic-material', 'ionicLazyLoad', 'starter.constants', 'ionic-cache-src']
 )
 
 
-  .run(function ($ionicPlatform, $state, $window) {
+  .run(function ($ionicPlatform, $state) {
     $ionicPlatform.ready(function () {
 
       navigator.splashscreen.hide();
 
-      /*
-       var push = new Ionic.Push({
+    /*   var push1 = new Ionic.Push({
        "debug": true,
        "onNotification": function (notification) {
        var payload = notification.payload;
@@ -49,10 +48,9 @@ angular.module('starter',
 
        var callback = function (pushToken) {
        console.log(pushToken.token);
-       }
+       };
 
-       push.register(callback);
-       */
+       push1.register(callback);*/
 
       // Clear the badge number automatically if the user taps on the app icon
       // cordova.plugins.notification.badge.configure({ autoClear: true });
@@ -294,7 +292,7 @@ function saveNotification(topic, message, time){
   var tempArray = [];
   var notificationsArray = JSON.parse(window.localStorage.getItem('pushNotifications'));
 
-  if(notificationsArray.length > 20){
+  if(notificationsArray && notificationsArray.length > 20){
     notificationsArray.shift();
   }
 
