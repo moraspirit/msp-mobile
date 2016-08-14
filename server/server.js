@@ -7,6 +7,7 @@ var FB = require('fb');
 var cors = require('cors');
 
 var https = require("https");
+var myParser = require("body-parser");
 
 FB.setAccessToken('EAAOoAjs48vsBAEDsCtu0AsStZAveePZCXaJZB8NXTFdwFrAjRYodyJ828TwAaZABen2ZB3G38oEiyExGczNSByijxjpUBLmAZCXRzsQxUPhd2KeWrSEd2SwdMqK87xxRDDMlY1IzeNtXRtAf4HlH3SoHmZAxcWjVFUZD');
 
@@ -19,6 +20,10 @@ var pool = mysql.createPool({
 
 var app = express();
 app.use(cors());
+
+// to consume post data
+app.use(myParser.json());
+app.use(myParser.urlencoded({extended : true}));
 
 // TODO: comment the API methods about what is returning
 
@@ -154,15 +159,13 @@ app.get('/albumsMore/:articleOffset', function (req, res) {
 
 });
 
-app.get('/push/:notification', function (req, res) {
+app.post('/push', function (req, res) {
 
   // var pushAdminID = req.params.pushAdminID; check this for authentication ??? -- nee a proper way
 
   // set the notification data
-  var notification = req.params.notification;
-  var parsedNotification = notification.split(":");
-  var title = parsedNotification[1];
-  var message = parsedNotification[2];
+  var title = req.body.title;
+  var message = req.body.message;
   var timeStamp = (new Date()).toLocaleString();
 
   var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDFhNWUyYy1hODE2LTQwZGItYWFiZS0yNmI4MDIyZDQ1OTgifQ.2tajbRdGiauVBg2Ui4M0Th32cebalo1e6NEscO-vpiI'    // API Token - taken from ionic.io
