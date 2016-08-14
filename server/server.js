@@ -5,6 +5,9 @@ var express = require('express');
 var mysql = require('mysql');
 var FB = require('fb');
 var cors = require('cors');
+
+var https = require("https");
+
 FB.setAccessToken('EAAOoAjs48vsBAEDsCtu0AsStZAveePZCXaJZB8NXTFdwFrAjRYodyJ828TwAaZABen2ZB3G38oEiyExGczNSByijxjpUBLmAZCXRzsQxUPhd2KeWrSEd2SwdMqK87xxRDDMlY1IzeNtXRtAf4HlH3SoHmZAxcWjVFUZD');
 
 var pool = mysql.createPool({
@@ -151,6 +154,62 @@ app.get('/albumsMore/:articleOffset', function (req, res) {
 
 });
 
+app.get('/push/:notification', function (req, res) {
+
+  // var pushAdminID = req.params.pushAdminID; check this for authentication ??? -- nee a proper way
+
+  // set the notification data
+  var notification = req.params.notification;
+  var parsedNotification = notification.split(":");
+  var title = parsedNotification[1];
+  var message = parsedNotification[2];
+  var timeStamp = (new Date()).toLocaleString();
+
+  var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDFhNWUyYy1hODE2LTQwZGItYWFiZS0yNmI4MDIyZDQ1OTgifQ.2tajbRdGiauVBg2Ui4M0Th32cebalo1e6NEscO-vpiI'    // API Token - taken from ionic.io
+  var tokens = ["cgvSXqLECxM:APA91bE30GkbLW_vjTMFf4whL64iaZPK4xROecaxcqXaAn_yoVY1F2WwufFz3IkDu26csxEIo8Y0YOdH6vGZnzsiduy1rKPUIL3Sc3gR_R0fRtlFr_IqN2VxoQB58yW0azzOMA2D2rWL"];   // these should be saved inside the server when each app is being registered with push notifi. service
+  var profile = 'moraspirit';  // security-profile-name
+
+  var msg = {
+    "tokens": tokens,
+    "profile": profile,
+    "notification": {
+      "title": title,
+      "message": message,
+      "payload": {
+        "time": timeStamp
+      }
+    }
+  };
+  var myData = JSON.stringify(msg);
+
+  var options = {
+    hostname: 'api.ionic.io',
+    port: 443,   // bcs https
+    path: '/push/notifications',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + jwt
+    }
+  };
+  var req = https.request(options, function (res) {
+    //console.log('Status: ' + res.statusCode);
+    // console.log('Headers: ' + JSON.stringify(res.headers));
+    res.setEncoding('utf8');
+    res.on('data', function (body) {
+      console.log("Notification sent successfully!");
+      console.log('Body: ' + body);
+    });
+  });
+  req.on('error', function (e) {
+    console.log('problem with request: ' + e.message);
+  });
+// write data to request body
+  req.write(myData);
+  req.end();
+
+});
+
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+  console.log('MoraSpirit Mobile APP API is listening on port 3000!');
 });

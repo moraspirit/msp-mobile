@@ -21,7 +21,7 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
         this.classList.toggle('active');
       });
     }
-
+    
     ////////////////////////////////////////
     // Layout Methods
     ////////////////////////////////////////
