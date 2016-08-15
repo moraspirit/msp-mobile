@@ -9,6 +9,13 @@ var cors = require('cors');
 var https = require("https");
 var myParser = require("body-parser");
 
+//lets require/import the mongodb native drivers.
+var mongodb = require('mongodb');
+//"MongoClient" interface in order to connect to a mongodb server.
+var MongoClient = mongodb.MongoClient;
+// Connection URL. (This is where your mongodb server is running)
+var url = 'mongodb://mspmalith:123123@ds153765.mlab.com:53765/moraspiritpush';
+
 FB.setAccessToken('EAAOoAjs48vsBAEDsCtu0AsStZAveePZCXaJZB8NXTFdwFrAjRYodyJ828TwAaZABen2ZB3G38oEiyExGczNSByijxjpUBLmAZCXRzsQxUPhd2KeWrSEd2SwdMqK87xxRDDMlY1IzeNtXRtAf4HlH3SoHmZAxcWjVFUZD');
 
 var pool = mysql.createPool({
@@ -23,7 +30,7 @@ app.use(cors());
 
 // to consume post data
 app.use(myParser.json());
-app.use(myParser.urlencoded({extended : true}));
+app.use(myParser.urlencoded({extended: true}));
 
 // TODO: comment the API methods about what is returning
 
@@ -159,6 +166,8 @@ app.get('/albumsMore/:articleOffset', function (req, res) {
 
 });
 
+
+// API call from MoraSpirit PushPanel IONIC app
 app.post('/push', function (req, res) {
 
   // var pushAdminID = req.params.pushAdminID; check this for authentication ??? -- nee a proper way
@@ -169,47 +178,128 @@ app.post('/push', function (req, res) {
   var timeStamp = (new Date()).toLocaleString();
 
   var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDFhNWUyYy1hODE2LTQwZGItYWFiZS0yNmI4MDIyZDQ1OTgifQ.2tajbRdGiauVBg2Ui4M0Th32cebalo1e6NEscO-vpiI'    // API Token - taken from ionic.io
-  var tokens = ["cgvSXqLECxM:APA91bE30GkbLW_vjTMFf4whL64iaZPK4xROecaxcqXaAn_yoVY1F2WwufFz3IkDu26csxEIo8Y0YOdH6vGZnzsiduy1rKPUIL3Sc3gR_R0fRtlFr_IqN2VxoQB58yW0azzOMA2D2rWL"];   // these should be saved inside the server when each app is being registered with push notifi. service
+
+  // var tokens = ["cgvSXqLECxM:APA91bE30GkbLW_vjTMFf4whL64iaZPK4xROecaxcqXaAn_yoVY1F2WwufFz3IkDu26csxEIo8Y0YOdH6vGZnzsiduy1rKPUIL3Sc3gR_R0fRtlFr_IqN2VxoQB58yW0azzOMA2D2rWL"];   // these should be saved inside the server when each app is being registered with push notifi. service
   var profile = 'moraspirit';  // security-profile-name
 
-  var msg = {
-    "tokens": tokens,
-    "profile": profile,
-    "notification": {
-      "title": title,
-      "message": message,
-      "payload": {
-        "time": timeStamp
-      }
-    }
-  };
-  var myData = JSON.stringify(msg);
 
-  var options = {
-    hostname: 'api.ionic.io',
-    port: 443,   // bcs https
-    path: '/push/notifications',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + jwt
-    }
-  };
-  var req = https.request(options, function (res) {
-    //console.log('Status: ' + res.statusCode);
-    // console.log('Headers: ' + JSON.stringify(res.headers));
-    res.setEncoding('utf8');
-    res.on('data', function (body) {
-      console.log("Notification sent successfully!");
-      console.log('Body: ' + body);
-    });
-  });
-  req.on('error', function (e) {
-    console.log('problem with request: ' + e.message);
-  });
+  // Use connect method to connect to the Server
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log('Unable to connect to the mongoDB server. Error:', err);
+    } else {
+      //HURRAY!! We are connected. :)
+      console.log('Connection established to', url);
+
+      // Get the documents collection
+      var collection = db.collection('device_tokens');
+
+      // retrieve device tokens
+      collection.find({}).toArray(function (err, result) {
+        if (err) {
+          console.log(err);
+        } else if (result.length) {
+
+          var tokens = [];
+          result.forEach(function (document) {
+            tokens.push(document.token);
+          });
+
+          console.log(tokens);
+
+          var msg = {
+            "tokens": tokens,
+            "profile": profile,
+            "notification": {
+              "title": title,
+              "message": message,
+              "payload": {
+                "time": timeStamp
+              }
+            }
+          };
+          var myData = JSON.stringify(msg);
+
+          var options = {
+            hostname: 'api.ionic.io',
+            port: 443,   // bcs https
+            path: '/push/notifications',
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + jwt
+            }
+          };
+          var req = https.request(options, function (res) {
+            //console.log('Status: ' + res.statusCode);
+            // console.log('Headers: ' + JSON.stringify(res.headers));
+            res.setEncoding('utf8');
+            res.on('data', function (body) {
+              console.log("Notification sent successfully!");
+              console.log('Body: ' + body);
+            });
+          });
+          req.on('error', function (e) {
+            console.log('problem with request: ' + e.message);
+          });
 // write data to request body
-  req.write(myData);
-  req.end();
+          req.write(myData);
+          res.send("success");
+          req.end();
+
+
+        } else {
+          console.log('No devices are registered yet!!');
+        }
+      });
+
+
+      //Close connection
+      db.close();
+    }
+  });
+
+
+});
+
+// retrieve device token from mobile phone
+app.post('/saveDeviceToken', function (req, res) {
+  var token = req.body.token;
+
+  console.log(token);
+  res.send("success");
+
+  // save the token in db
+  // Use connect method to connect to the Server
+  MongoClient.connect(url, function (err, db) {
+    if (err) {
+      console.log('Unable to connect to the mongoDB server. Error:', err);
+    } else {
+      //HURRAY!! We are connected. :)
+      console.log('Connection established to', url);
+
+      // Get the documents collection
+      var collection = db.collection('device_tokens');
+
+      var deviceTokenJSONobject = {token: token};
+
+      // insert deviceToken in to db
+      collection.updateOne({token: token}, deviceTokenJSONobject, {upsert: true}, function (err, result) {
+        if (err) {
+          console.log("Error while saving device token in db" + err);
+        } else if (result.modifiedCount == 1) {
+
+          console.log('The device is already registered');
+        }
+        else {
+          console.log('Successfully saved new device token in db');
+        }
+      });
+
+      //Close connection
+      db.close();
+    }
+  });
 
 });
 

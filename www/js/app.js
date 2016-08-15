@@ -7,7 +7,7 @@
 
 // create the constant module
 
-angular.module('starter.constants', []).constant('API_HOST', 'http://139.59.0.34:3000');   //'http://139.59.0.34:3000' 
+angular.module('starter.constants', []).constant('API_HOST', 'http://139.59.0.34:3000');   //'http://139.59.0.34:3000'
 
 angular.module('starter',
 
@@ -18,7 +18,7 @@ angular.module('starter',
 )
 
 
-  .run(function ($ionicPlatform, $state) {
+  .run(function ($ionicPlatform, $state, $http, API_HOST) {
     $ionicPlatform.ready(function () {
 
       navigator.splashscreen.hide();
@@ -75,8 +75,13 @@ angular.module('starter',
         // data.registrationId
         var deviceToken = data.registrationId;
         console.log("registration ID is  " + deviceToken);
-        // send deviceToken to the server API that will be sending the push notifications and save there in an array or something
-        //new* this is not needed as using the IONIC IO dashboard to send notifications
+
+        var jsonObject = {token: deviceToken};
+
+        // send deviceToken to the server API
+        $http.post('http://139.59.0.34:3000' + '/saveDeviceToken', JSON.stringify(jsonObject))
+          .then(function(){console.log("sent device token to API server successfully!")}
+            , function(){console.log("Failed to send device token to API!")});
 
       });
 

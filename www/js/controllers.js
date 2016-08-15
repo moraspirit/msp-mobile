@@ -21,7 +21,7 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
         this.classList.toggle('active');
       });
     }
-    
+
     ////////////////////////////////////////
     // Layout Methods
     ////////////////////////////////////////
@@ -119,7 +119,6 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
     CoolFactory.hitTheServer('/albums/', '')
       .success(function (data) {
 
-        console.log(data.data);
         $scope.data.albums = data.data;
         window.localStorage.setItem('albums', JSON.stringify(data.data));
 
@@ -285,9 +284,9 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
 
   })
 
-  .controller('RatingsCtrl', function ($scope) {
+  .controller('RatingsCtrl', function ($scope, $http) {
 
-    var data = [
+   /* var data = [
       {
         "name": "SAB",
         "points": 1002
@@ -344,15 +343,15 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
         "name": "KEL",
         "points": 900
       }
-    ];
+    ];*/
 
-    $scope.rankings  = bindImage(data);
+   // $scope.rankings  = bindImage(data);
+    $scope.rankings = null;
 
-    /*$scope.rankings = null;
-
-    CoolFactory.hitTheServer('/rankings/', '')
+    $http.get('http://sports.moraspirit.com/getscores')
       .success(function (data) {
-
+        console.log(data[0]);
+        data = convertToArray(data[0]);
         data = bindImage(data);
         window.localStorage.setItem('rankings', JSON.stringify(data));
         $scope.rankings = data;
@@ -362,9 +361,6 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
           $scope.rankings = JSON.parse(window.localStorage.getItem('rankings'));
         }
       });
-*/
-
-
   })
 
 
@@ -381,6 +377,23 @@ function CoolFactory($http, API_HOST) {
   };
   return services;
 }
+
+// convert to array
+function convertToArray(data){
+
+  var arr = [];
+
+  for(var key in data){
+    arr.push(
+      {name:key,
+      points:parseInt(data[key])
+      }
+    );
+  }
+  console.log(arr);
+ return arr;
+}
+
 
 // function to add 'img' attribute to each object in JSON array
 function bindImage(data){
