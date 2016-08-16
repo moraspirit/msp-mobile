@@ -348,7 +348,7 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
    // $scope.rankings  = bindImage(data);
     $scope.rankings = null;
 
-    $http.get('http://b811a6b3.ngrok.io/getscores')
+    $http.get('http://sports.moraspirit.com/getscores')
       .success(function (data) {
         data = bindImage(data[0]);
         window.localStorage.setItem('rankings', JSON.stringify(data));
