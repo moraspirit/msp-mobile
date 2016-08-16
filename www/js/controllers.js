@@ -289,7 +289,7 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
    /* var data = [
       {
         "name": "SAB",
-        "points": 1002
+        "points": 1002,
       },
       {
         "name": "MOR",
@@ -348,11 +348,9 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
    // $scope.rankings  = bindImage(data);
     $scope.rankings = null;
 
-    $http.get('http://sports.moraspirit.com/getscores')
+    $http.get('http://b811a6b3.ngrok.io/getscores')
       .success(function (data) {
-        console.log(data[0]);
-        data = convertToArray(data[0]);
-        data = bindImage(data);
+        data = bindImage(data[0]);
         window.localStorage.setItem('rankings', JSON.stringify(data));
         $scope.rankings = data;
       })
@@ -377,23 +375,6 @@ function CoolFactory($http, API_HOST) {
   };
   return services;
 }
-
-// convert to array
-function convertToArray(data){
-
-  var arr = [];
-
-  for(var key in data){
-    arr.push(
-      {name:key,
-      points:parseInt(data[key])
-      }
-    );
-  }
-  console.log(arr);
- return arr;
-}
-
 
 // function to add 'img' attribute to each object in JSON array
 function bindImage(data){

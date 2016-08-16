@@ -190,7 +190,7 @@ angular.module('starter',
       push.on('error', function (e) {
         // e.message
         console.log("can't register for the push notification service ERROR: " + e.message);
-        alert("can't register for the push notification service ERROR: " + e.message);
+        //alert("can't register for the push notification service ERROR: " + e.message);
 
 
       });
