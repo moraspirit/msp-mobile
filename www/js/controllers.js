@@ -103,7 +103,6 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
     };
 
 
-
     $scope.doRefresh = function () {
       CoolFactory.hitTheServer('/albums/', '')
         .then(function (data) {
@@ -269,88 +268,102 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
     $scope.article = null;
     CoolFactory.hitTheServer('/articles/', id)
       .success(function (data) {
-        window.localStorage.setItem('articles'+id, JSON.stringify(data[0]));
+        window.localStorage.setItem('articles' + id, JSON.stringify(data[0]));
         $scope.article = data[0];
         //console.log(rows.data);
       })
       .error(function () {
 
-        if (window.localStorage.getItem('articles'+id) !== undefined) {
-          $scope.article = JSON.parse(window.localStorage.getItem('articles'+id));
+        if (window.localStorage.getItem('articles' + id) !== undefined) {
+          $scope.article = JSON.parse(window.localStorage.getItem('articles' + id));
         }
 
-      //console.log(rows.data);
-    });
+        //console.log(rows.data);
+      });
 
   })
 
   .controller('RatingsCtrl', function ($scope, $http) {
 
-   /* var data = [
-      {
-        "name": "SAB",
-        "points": 1002,
-      },
-      {
-        "name": "MOR",
-        "points": 1084
-      },
-      {
-        "name": "PER",
-        "points": 1003
-      },
-      {
-        "name": "COL",
-        "points": 1003
-      },
-      {
-        "name": "EST",
-        "points": 856
-      },
-      {
-        "name": "SEA",
-        "points": 888
-      },
-      {
-        "name": "VPA",
-        "points": 567
-      },
-      {
-        "name": "RHU",
-        "points": 899
-      },
-      {
-        "name": "UVA",
-        "points": 755
-      },
-      {
-        "name": "RAJ",
-        "points": 948
-      },
-      {
-        "name": "JAF",
-        "points": 845
-      },
-      {
-        "name": "WAY",
-        "points": 945
-      },
-      {
-        "name": "COL",
-        "points": 936
-      },
-      {
-        "name": "KEL",
-        "points": 900
-      }
-    ];*/
+    /* var data = [
+     {
+     "name": "SAB",
+     "points": 1002,
+     },
+     {
+     "name": "MOR",
+     "points": 1084
+     },
+     {
+     "name": "PER",
+     "points": 1003
+     },
+     {
+     "name": "COL",
+     "points": 1003
+     },
+     {
+     "name": "EST",
+     "points": 856
+     },
+     {
+     "name": "SEA",
+     "points": 888
+     },
+     {
+     "name": "VPA",
+     "points": 567
+     },
+     {
+     "name": "RHU",
+     "points": 899
+     },
+     {
+     "name": "UVA",
+     "points": 755
+     },
+     {
+     "name": "RAJ",
+     "points": 948
+     },
+     {
+     "name": "JAF",
+     "points": 845
+     },
+     {
+     "name": "WAY",
+     "points": 945
+     },
+     {
+     "name": "COL",
+     "points": 936
+     },
+     {
+     "name": "KEL",
+     "points": 900
+     }
+     ];*/
 
-   // $scope.rankings  = bindImage(data);
+    // $scope.rankings  = bindImage(data);
     $scope.rankings = null;
 
     $http.get('http://sports.moraspirit.com/getscores')
       .success(function (data) {
-        data = bindImage(data[0]);
+        data = bindImageANDparsePointsTOint(data[0]);
+
+        function compare(a, b) {
+          if (a.points < b.points)
+            return -1;
+          if (a.points > b.points)
+            return 1;
+          return 0;
+        }
+
+        data.sort(compare);
+
+        data = bindRank(data.reverse());
+
+        console.log(data);
         window.localStorage.setItem('rankings', JSON.stringify(data));
         $scope.rankings = data;
       })
@@ -360,11 +373,9 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
         }
       });
   })
-
-
   .controller('AboutCtrl', function ($scope) {
 
-  })
+  });
 
 
 // functions to do the http requests using the API_HOST string ( API_HOST = link of the NODE server)
@@ -377,10 +388,10 @@ function CoolFactory($http, API_HOST) {
 }
 
 // function to add 'img' attribute to each object in JSON array
-function bindImage(data){
-  data.forEach(function(record){
+function bindImageANDparsePointsTOint(data) {
+  data.forEach(function (record) {
 
-      switch(record.name) {
+      switch (record.name) {
         case 'MOR':
           record.img = 'img/uni_logos/MOR.png';
           record.name = 'UOM';
@@ -402,10 +413,24 @@ function bindImage(data){
           record.name = 'UOK';
           break;
         default:
-          record.img = 'img/uni_logos/'+ record.name + '.png';
+          record.img = 'img/uni_logos/' + record.name + '.png';
       }
-  }
+      record.points = parseInt(record.points);
+
+    }
   );
+  return data;
+}
+
+function bindRank(data) {
+  var rank = 1;
+  for (var i = 0; i < data.length - 1; i++) {
+    data[i].rank = rank;
+    if (data[i].points > data[i + 1].points) {
+      rank++;
+    }
+  }
+  data[data.length - 1].rank = rank;
   return data;
 }
 
