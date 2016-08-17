@@ -170,10 +170,15 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
 
   })
 
+
+  .controller('NotificationsCtrl', function ($scope) {
+    $scope.notifications = JSON.parse(window.localStorage.getItem('pushNotifications'));
+  })
+
   .controller('RecentScoresCtrl', function ($scope, $state) {
 
 
-    $scope.notifications = JSON.parse(window.localStorage.getItem('pushNotifications'));
+
 
   })
 

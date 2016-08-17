@@ -252,6 +252,7 @@ angular.module('starter',
         views: {
           'menuContent': {
             templateUrl: 'templates/notifications.html',
+            controller: 'NotificationsCtrl'
           }
         }
       })

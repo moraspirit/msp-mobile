@@ -1,81 +1,17 @@
-<ion-view view-title="SLUG 2016 Recent">
+<ion-view view-title="Notifications">
   <ion-content>
-    <ion-list >
-      <ion-item style="margin: 1px; padding: 5px;" >
+    <ion-list>
 
-        <div class="mblock" style="height: 86px;">
-          <center><h5 style=" font-size: 12px">
-
-            <img width="25px" height="25px" src="http://sports.moraspirit.com/logos/MOR.png" alt="">
-            <b class="text-uppercase" style="margin-left: 30px; margin-right: 10px; color:#4d4d4d">
-              RUGBY (MEN) - 1st ROUND</b>
-            <img width="25px" height="25px" src="http://sports.moraspirit.com/logos/SAB.png" alt="">
-
-          </h5>
-          </center>
-          <hr style="margin-top: 3px;margin-bottom:0px ; width: 80%   ">
-          <center><p style=" font-size: 12px;margin-top: 5px">
-            <span class="points-label pull-left marquee-points" style="margin-right: 4px;">25</span>
-            <strong style="font-family: 'Open Sans', sans-serif;font-size: 11px;">MOR vs SAB</strong>
-            <span class="points-label pull-right marquee-points" style="margin-left: 16px;">10 </span>
-          </p>
-          </center>
-          <h5 style="font-family: 'Open Sans', sans-serif;font-size: 10px; text-align: center; text-transform: uppercase; margin-top:3px"> Colombo won the match</h5>
+      <ion-item class="wrap" ng-repeat="notification in notifications | orderBy: 'time' : true">
+        {{notification.message}}
+        <br>
+        <div class="pull-left resent">
+          <i class="icon ion-clock"></i> {{notification.time}}
         </div>
-
-
-      </ion-item>
-      <ion-item style="margin: 1px; padding: 5px;" >
-
-        <div class="mblock" style="height: 86px;">
-          <center><h5 style=" font-size: 12px">
-
-            <img width="25px" height="25px" src="http://sports.moraspirit.com/logos/MOR.png" alt="">
-            <b class="text-uppercase" style="margin-left: 30px; margin-right: 10px; color:#4d4d4d">
-              RUGBY (MEN) - 1st ROUND</b>
-            <img width="25px" height="25px" src="http://sports.moraspirit.com/logos/SAB.png" alt="">
-
-          </h5>
-          </center>
-          <hr style="margin-top: 3px;margin-bottom:0px ; width: 80%   ">
-          <center><p style=" font-size: 12px;margin-top: 5px">
-            <span class="points-label pull-left marquee-points" style="margin-right: 4px;">25</span>
-            <strong style="font-family: 'Open Sans', sans-serif;font-size: 11px;">MOR vs SAB</strong>
-            <span class="points-label pull-right marquee-points" style="margin-left: 16px;">10 </span>
-          </p>
-          </center>
-          <h5 style="font-family: 'Open Sans', sans-serif;font-size: 10px; text-align: center; text-transform: uppercase; margin-top:3px"> Colombo won the match</h5>
-        </div>
-
-
-      </ion-item>
-
-      <ion-item style="margin: 1px; padding: 5px;" >
-
-        <div class="mblock" style="height: 86px;">
-          <center><h5 style=" font-size: 12px">
-
-            <img width="25px" height="25px" src="http://sports.moraspirit.com/logos/MOR.png" alt="">
-            <b class="text-uppercase" style="margin-left: 30px; margin-right: 10px; color:#4d4d4d">
-              RUGBY (MEN) - 1st ROUND</b>
-            <img width="25px" height="25px" src="http://sports.moraspirit.com/logos/SAB.png" alt="">
-
-          </h5>
-          </center>
-          <hr style="margin-top: 3px;margin-bottom:0px ; width: 80%  ">
-          <center><p style=" font-size: 12px;margin-top: 5px">
-            <span class="points-label pull-left marquee-points" style="margin-right: 4px;">25</span>
-            <strong style="font-family: 'Open Sans', sans-serif;font-size: 11px;">MOR vs SAB</strong>
-            <span class="points-label pull-right marquee-points" style="margin-left: 16px;">10 </span>
-          </p>
-          </center>
-          <h5 style="font-family: 'Open Sans', sans-serif;font-size: 10px; text-align: center; text-transform: uppercase; margin-top:3px"> Colombo won the match</h5>
-        </div>
-
-
       </ion-item>
     </ion-list>
-
-
   </ion-content>
 </ion-view>
+
+
+
