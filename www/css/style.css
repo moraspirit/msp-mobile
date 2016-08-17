@@ -51,3 +51,26 @@ Styles for navigation drawer
 .icon.mdi{
   color: #0d0d0d;
 }
+
+.mblock{
+  margin-top: 4px;
+  padding-top: 5px;
+  display: block;
+  padding-left: 25px;
+  padding-right: 25px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
+}
+
+.marquee-points{
+  font-size: 1.2em;
+}
+
+.points-label
+{
+  background-color: #11c1f3;
+  color: #fff;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
+  display: inline-block;
+  width: 10px;
+  padding: 0px 23px 0px 8px;
+}
