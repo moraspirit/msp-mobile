@@ -177,7 +177,46 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
 
   .controller('RecentScoresCtrl', function ($scope, $state) {
 
+    $scope.cards = [];
 
+    $scope.img = function (uni) {
+      return 'img/uni_logos/' + uni + '.png';
+    };
+
+    $scope.getTown = function (uniWon) {
+      switch (uniWon) {
+        case 'MOR':
+          return 'Moratuwa';
+        case 'SAB':
+          return 'Sabaragamuwa';
+        case 'PER':
+              return 'Peradeniya';
+        
+      }
+    };
+
+    // dummy data
+    $scope.cards = [{
+      match: 'RUGBY (MEN) - 1st ROUND',
+      uniWon: 'MOR',
+      uniLost: 'SAB',
+      uniWonPoints: 10,
+      uniLostPoints: 5,
+    },
+      {
+        match: 'Hockey (MEN) - 3rd ROUND',
+        uniWon: 'MOR',
+        uniLost: 'COL',
+        uniWonPoints: 25,
+        uniLostPoints: 15,
+      }, {
+        match: 'Swimming (Women) - Finals',
+        uniWon: 'PER',
+        uniLost: 'COL',
+        uniWonPoints: 7,
+        uniLostPoints: 4,
+      }
+    ];
 
 
   })
@@ -289,65 +328,6 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
   })
 
   .controller('RatingsCtrl', function ($scope, $http) {
-
-    /* var data = [
-     {
-     "name": "SAB",
-     "points": 1002,
-     },
-     {
-     "name": "MOR",
-     "points": 1084
-     },
-     {
-     "name": "PER",
-     "points": 1003
-     },
-     {
-     "name": "COL",
-     "points": 1003
-     },
-     {
-     "name": "EST",
-     "points": 856
-     },
-     {
-     "name": "SEA",
-     "points": 888
-     },
-     {
-     "name": "VPA",
-     "points": 567
-     },
-     {
-     "name": "RHU",
-     "points": 899
-     },
-     {
-     "name": "UVA",
-     "points": 755
-     },
-     {
-     "name": "RAJ",
-     "points": 948
-     },
-     {
-     "name": "JAF",
-     "points": 845
-     },
-     {
-     "name": "WAY",
-     "points": 945
-     },
-     {
-     "name": "COL",
-     "points": 936
-     },
-     {
-     "name": "KEL",
-     "points": 900
-     }
-     ];*/
 
     // $scope.rankings  = bindImage(data);
     $scope.rankings = null;
