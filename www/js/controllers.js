@@ -418,12 +418,8 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
             return 1;
           return 0;
         }
-
         data.sort(compare);
-
         data = bindRank(data.reverse());
-
-        console.log(data);
         window.localStorage.setItem('rankings', JSON.stringify(data));
         $scope.rankings = data;
       })
