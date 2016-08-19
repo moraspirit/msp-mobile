@@ -10,7 +10,7 @@
       <div class="rankingtable-cell">
         <ul class="rankingleader">
           <li ng-repeat="data in rankings | orderBy: 'points': true">
-            <span class="rankinglist_num">{{data.rank}}</span>
+            <span class="rankinglist_num" style="width: 22px;">{{data.rank}}</span>
             <img class="rankingimg" src="{{data.img}}" />
             <h2>{{data.name}}<span class="rankingnumber">{{data.points}}</span></h2>
           </li>

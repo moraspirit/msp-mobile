@@ -34,6 +34,7 @@ Styles for navigation drawer
   justify-content: center;
   align-content: stretch;
   align-items: center;
+
 }
 
 .wrap {
@@ -74,6 +75,7 @@ Styles for navigation drawer
 
 .points-label.pull-left {
   margin-right: 4px;
+
 }
 
 .points-label.pull-right {
@@ -128,4 +130,66 @@ Styles for navigation drawer
   text-transform: uppercase;
   margin-top: 3px;
 }
+
+/** rankings CSS **/
+.rankingimg {
+  width: 40px;
+  height: 40px;
+  float: left;
+  margin: 15px 34px;
+  margin-left: 11px;
+  border-radius: 100%;
+}
+
+
+.rankingleader {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 auto;
+  width: 100%;
+  height: 390px;
+}
+.rankingleader li {
+  background-color: #fff;
+  border-radius: 5px;
+  height: 70px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+}
+.rankingleader li .rankinglist_num {
+  float: left;
+  line-height: 40px;
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.65);
+  margin: 15px;
+  font-weight: bold;
+  width: 20px;
+  text-align: right;
+  margin-left: 10px;
+}
+.rankingleader li h2 {
+  display: block;
+  margin: 0;
+  font-size: 18px;
+  line-height: 40px;
+  font-weight: 300;
+  margin-top: 15px;
+  padding-right: 20px;
+}
+.rankingleader li h2 .rankingnumber {
+  float: right;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.65);
+  transition: color 0.3s;
+}
+
+.rankingtable {
+  display: table;
+  width: 100%;
+  position: absolute;
+  height: 100%; }
+
+.rankingtable-cell {
+  display: table-cell; }
 

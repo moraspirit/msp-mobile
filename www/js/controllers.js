@@ -190,15 +190,39 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
         case 'SAB':
           return 'Sabaragamuwa';
         case 'PER':
-              return 'Peradeniya';
-        
+          return 'Peradeniya';
+        case 'COL':
+          return 'Colombo';
+        case 'EST':
+          return 'Eastern';
+        case 'SEA':
+          return 'Peradeniya';
+        case 'VPA':
+          return 'VPA';
+        case 'RHU':
+          return 'Ruhuna';
+        case 'UVA':
+          return 'Uva';
+        case 'RAJ':
+          return 'Rajarata';
+        case 'JAF':
+          return 'Jaffna';
+        case 'WAY':
+          return 'Wayamba';
+        case 'KEL':
+          return 'Kelaniya';
+        case 'SJP':
+          return "J'PURA";
+        default:
+          return uniWon;
+
       }
     };
 
     // dummy data
     $scope.cards = [{
       match: 'RUGBY (MEN) - 1st ROUND',
-      uniWon: 'MOR',
+      uniWon: 'COL',
       uniLost: 'SAB',
       uniWonPoints: 10,
       uniLostPoints: 5,
@@ -213,9 +237,63 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
         match: 'Swimming (Women) - Finals',
         uniWon: 'PER',
         uniLost: 'COL',
+        uniWonPoints: 5,
+        uniLostPoints: 4,
+      }, {
+        match: 'Swimming (Men) - Finals',
+        uniWon: 'JAF',
+        uniLost: 'COL',
+        uniWonPoints: 7,
+        uniLostPoints: 3,
+      }, {
+        match: 'Karate - Finals',
+        uniWon: 'KEL',
+        uniLost: 'COL',
+        uniWonPoints: 7,
+        uniLostPoints: 6,
+      }, {
+        match: 'Tykwondo - Finals',
+        uniWon: 'RAJ',
+        uniLost: 'COL',
+        uniWonPoints: 9,
+        uniLostPoints: 5,
+      }, {
+        match: 'Fottball- Finals',
+        uniWon: 'RHU',
+        uniLost: 'COL',
+        uniWonPoints: 17,
+        uniLostPoints: 14,
+      }, {
+        match: 'Netball - Finals',
+        uniWon: 'SEA',
+        uniLost: 'COL',
+        uniWonPoints: 8,
+        uniLostPoints: 4,
+      }, {
+        match: 'Basketball - Finals',
+        uniWon: 'SJP',
+        uniLost: 'COL',
         uniWonPoints: 7,
         uniLostPoints: 4,
-      }
+      }, {
+        match: 'Badminton - Finals',
+        uniWon: 'UVA',
+        uniLost: 'COL',
+        uniWonPoints: 2,
+        uniLostPoints: 1,
+      }, {
+        match: 'Elle) - Finals',
+        uniWon: 'WAY',
+        uniLost: 'COL',
+        uniWonPoints: 2,
+        uniLostPoints: 1,
+      }, {
+        match: 'Rugby - Mens',
+        uniWon: 'EST',
+        uniLost: 'COL',
+        uniWonPoints: 7,
+        uniLostPoints: 4,
+      },
     ];
 
 
@@ -328,10 +406,7 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
   })
 
   .controller('RatingsCtrl', function ($scope, $http) {
-
-    // $scope.rankings  = bindImage(data);
     $scope.rankings = null;
-
     $http.get('http://sports.moraspirit.com/getscores')
       .success(function (data) {
         data = bindImageANDparsePointsTOint(data[0]);
@@ -409,10 +484,15 @@ function bindImageANDparsePointsTOint(data) {
 
 function bindRank(data) {
   var rank = 1;
+  var rankboost = 0;
   for (var i = 0; i < data.length - 1; i++) {
     data[i].rank = rank;
     if (data[i].points > data[i + 1].points) {
-      rank++;
+      rank += (rankboost + 1 );
+      rankboost = 0;
+    }
+    else{
+      rankboost++;
     }
   }
   data[data.length - 1].rank = rank;
