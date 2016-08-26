@@ -17,11 +17,11 @@ angular.module('starter',
     'ionic.service.push', 'ionic-material', 'ionicLazyLoad', 'starter.constants', 'ionic-cache-src']
 )
 
-
-  .run(function ($ionicPlatform, $state, $http, API_HOST) {
+  .run(function ($ionicPlatform, $state, $http, API_HOST, $stateParams) {
     $ionicPlatform.ready(function () {
 
       navigator.splashscreen.hide();
+
 
     /*   var push1 = new Ionic.Push({
        "debug": true,
@@ -60,7 +60,9 @@ angular.module('starter',
           senderID: "101029977116",
           sound: true,
           vibrate: true,
-          iconColor: 'lightgray'
+          iconColor: 'lightgray',
+          clearNotifications: false
+
 
         },
         ios: {
@@ -80,12 +82,10 @@ angular.module('starter',
 
         // send deviceToken to the server API
         $http.post('http://139.59.0.34:3000' + '/saveDeviceToken', JSON.stringify(jsonObject))
-          .then(function(){console.log("sent device token to API server successfully!")}
-            , function(){console.log("Failed to send device token to API!")});
+          .then(function(response){console.log("sent device token to API server successfully! response: "+ response.status)}
+            , function(response){console.log("Failed to send device token to API! response: "+response.status)});
 
       });
-
-
       // this block will run only when the app is on (not exit or in the background)
       // this block will run as soon as you open the app when there is push notification have sent to the device
       push.on('notification', function (data) {
@@ -102,10 +102,11 @@ angular.module('starter',
 
         // save the notification locally
         saveNotification(data.title, data.message, data.additionalData.payload.time );
+        if($state.current.name == 'app.notifications'){
+          console.log("current state is notifications");
+          $state.go($state.current, {}, {reload: true});
 
-
-
-
+        }
 
         // this block should call when a notification comes  -- move this block to the right place in the project
         /*     cordova.plugins.notification.badge.increase(1, function(badge){
@@ -124,10 +125,6 @@ angular.module('starter',
         if (data.additionalData.foreground) {
           console.log("App was in the foreground");
 
-          if($state.current.name == 'app.slug'){
-            console.log("current state is slug");
-            $state.go($state.current, {}, {reload: true});
-          }
 
 
         /*  // save the notification locally
@@ -163,7 +160,7 @@ angular.module('starter',
 
 
                 // route and go to the "recent" view
-                $state.go('app.slug');
+                $state.go('app.notifications');
 
 
               }
@@ -179,9 +176,9 @@ angular.module('starter',
 
         // true if the application is started (it was not  in the back ground) by clicking on the push notification, false if the app is already started.
         if (data.additionalData.coldstart) {
-          console.log("The app was started after the  push is clicked")
+          console.log("The app was started after the  push is clicked");
           //direct the route to the recent view
-          $state.go('app.slug');
+          $state.go('app.notifications');
         }
 
 
@@ -248,6 +245,7 @@ angular.module('starter',
         }
       })
       .state('app.notifications', {
+        cache: false,
         url: '/notifications',
         views: {
           'menuContent': {
@@ -258,7 +256,7 @@ angular.module('starter',
       })
 
       .state('app.slug', {
-        cache: false,
+
         url: '/slug',
         views: {
           'menuContent': {
@@ -302,15 +300,24 @@ function saveNotification(topic, message, time){
     notificationsArray.shift();
   }
 
-  console.log("previous notifications:- " + notificationsArray);
   if (notificationsArray) {
+    //check for duplicates
+    for(var key in notificationsArray){
+
+      if(notificationsArray[key].time == time){
+        console.log("duplicate detected");
+        return null;
+      }
+    }
+
     notificationsArray.push(notification);
-    console.log(notificationsArray);
     window.localStorage.setItem('pushNotifications', JSON.stringify(notificationsArray));
+    console.log("Notification saved in the app!");
   }
   else{
     tempArray.push(notification);
-    console.log(tempArray);
+
     window.localStorage.setItem('pushNotifications', JSON.stringify(tempArray));
+    console.log("Notification saved in the app!");
   }
 }

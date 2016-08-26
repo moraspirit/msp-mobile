@@ -8,6 +8,7 @@ var cors = require('cors');
 
 var https = require("https");
 var myParser = require("body-parser");
+var gcm = require('node-gcm');
 
 //lets require/import the mongodb native drivers.
 var mongodb = require('mongodb');
@@ -174,9 +175,8 @@ app.post('/push', function (req, res) {
 
   // set the notification data
   var title = req.body.title;
-  var message = req.body.message;
+  var msg = req.body.message;
   var timeStamp = (new Date()).toLocaleString();
-
   var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIxMDFhNWUyYy1hODE2LTQwZGItYWFiZS0yNmI4MDIyZDQ1OTgifQ.2tajbRdGiauVBg2Ui4M0Th32cebalo1e6NEscO-vpiI'    // API Token - taken from ionic.io
 
   // var tokens = ["cgvSXqLECxM:APA91bE30GkbLW_vjTMFf4whL64iaZPK4xROecaxcqXaAn_yoVY1F2WwufFz3IkDu26csxEIo8Y0YOdH6vGZnzsiduy1rKPUIL3Sc3gR_R0fRtlFr_IqN2VxoQB58yW0azzOMA2D2rWL"];   // these should be saved inside the server when each app is being registered with push notifi. service
@@ -207,45 +207,28 @@ app.post('/push', function (req, res) {
 
           console.log(tokens);
 
-          var msg = {
-            "tokens": tokens,
-            "profile": profile,
-            "notification": {
-              "title": title,
-              "message": message,
-              "payload": {
-                "time": timeStamp
-              }
-            }
-          };
-          var myData = JSON.stringify(msg);
 
-          var options = {
-            hostname: 'api.ionic.io',
-            port: 443,   // bcs https
-            path: '/push/notifications',
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + jwt
+          var apiKey = "AIzaSyCKWUYkrXOfPXTCtw6eJvlNh-n2WZw7fOk";
+          var service = new gcm.Sender(apiKey);
+          var message = new gcm.Message();
+          message.addData('title', title);
+          message.addData('message', msg);
+          message.addData('content-available', 1);
+          message.addData('payload', {time :timeStamp});
+
+
+          message.addData('style', 'inbox');
+          message.addData('summaryText', 'There are %n% notifications');
+          service.sendNoRetry(message, {registrationTokens: tokens}, function (err, response) {
+            if (err) {
+              console.log('problem with request: ' + err);
             }
-          };
-          var req = https.request(options, function (res) {
-            //console.log('Status: ' + res.statusCode);
-            // console.log('Headers: ' + JSON.stringify(res.headers));
-            res.setEncoding('utf8');
-            res.on('data', function (body) {
+            else {
               console.log("Notification sent successfully!");
-              console.log('Body: ' + body);
-            });
+              console.log('response: ' + JSON.stringify(response));
+              res.send("success");
+            }
           });
-          req.on('error', function (e) {
-            console.log('problem with request: ' + e.message);
-          });
-// write data to request body
-          req.write(myData);
-          res.send("success");
-          req.end();
 
 
         } else {
@@ -267,7 +250,7 @@ app.post('/saveDeviceToken', function (req, res) {
   var token = req.body.token;
 
   console.log(token);
-  res.send("success");
+
 
   // save the token in db
   // Use connect method to connect to the Server
@@ -287,12 +270,15 @@ app.post('/saveDeviceToken', function (req, res) {
       collection.updateOne({token: token}, deviceTokenJSONobject, {upsert: true}, function (err, result) {
         if (err) {
           console.log("Error while saving device token in db" + err);
+          res.send("error");
         } else if (result.modifiedCount == 1) {
 
           console.log('The device is already registered');
+          res.send("success");
         }
         else {
           console.log('Successfully saved new device token in db');
+          res.send("success");
         }
       });
 
