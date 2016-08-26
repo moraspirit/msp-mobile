@@ -1,5 +1,6 @@
 /**
- * Created by wathmal on 5/2/16.
+ * Created by wathmal on 5/2/16.+
+ * Concluded by Malith on 26/08/16
  */
 var express = require('express');
 var mysql = require('mysql');
@@ -10,14 +11,15 @@ var https = require("https");
 var myParser = require("body-parser");
 var gcm = require('node-gcm');
 
-//lets require/import the mongodb native drivers.
+//import the mongodb native drivers.
 var mongodb = require('mongodb');
 //"MongoClient" interface in order to connect to a mongodb server.
 var MongoClient = mongodb.MongoClient;
 // Connection URL. (This is where your mongodb server is running)
 var url = 'mongodb://mspmalith:123123@ds153765.mlab.com:53765/moraspiritpush';
 
-FB.setAccessToken('EAAOoAjs48vsBAEDsCtu0AsStZAveePZCXaJZB8NXTFdwFrAjRYodyJ828TwAaZABen2ZB3G38oEiyExGczNSByijxjpUBLmAZCXRzsQxUPhd2KeWrSEd2SwdMqK87xxRDDMlY1IzeNtXRtAf4HlH3SoHmZAxcWjVFUZD');
+var FB_ACCESS_TOKEN = 'EAAOoAjs48vsBAEDsCtu0AsStZAveePZCXaJZB8NXTFdwFrAjRYodyJ828TwAaZABen2ZB3G38oEiyExGczNSByijxjpUBLmAZCXRzsQxUPhd2KeWrSEd2SwdMqK87xxRDDMlY1IzeNtXRtAf4HlH3SoHmZAxcWjVFUZD';
+FB.setAccessToken(FB_ACCESS_TOKEN);
 
 var pool = mysql.createPool({
   host: 'moraspirit.com',
@@ -37,7 +39,6 @@ app.use(myParser.urlencoded({extended: true}));
 
 app.get('/', function (req, res) {
   var query = 'SELECT n.nid, n.title, u.name, n.created, fdb.body_summary, nfi.uri FROM (SELECT * from `msp_node_revision` NATURAL JOIN `msp_node` ) n LEFT JOIN `msp_field_data_body` fdb ON fdb.entity_id = n.nid LEFT JOIN (SELECT * FROM (SELECT entity_id, `field_featured_article_image_fid` AS fidd FROM `msp_field_data_field_featured_article_image` UNION SELECT entity_id, `field_sports_image_fid` AS fidd FROM `msp_field_revision_field_sports_image`) AS fi LEFT JOIN `msp_file_managed` fm ON fi.fidd = fm.fid) nfi ON nfi.entity_id = n.nid LEFT JOIN `msp_users` u ON n.uid= u.uid ORDER BY n.created DESC  LIMIT 10 ';
-
 
   // using connection pool
   pool.getConnection(function (err, connection) {
@@ -214,11 +215,24 @@ app.post('/push', function (req, res) {
           message.addData('title', title);
           message.addData('message', msg);
           message.addData('content-available', 1);
-          message.addData('payload', {time :timeStamp});
+          message.addData('payload', {time: timeStamp});
 
 
-          message.addData('style', 'inbox');
-          message.addData('summaryText', 'There are %n% notifications');
+          // this should be improved to a counter.....
+          var min = Math.ceil(1);
+          var max = Math.floor(1000);
+          var notId = Math.floor(Math.random() * (max - min)) + min;
+          console.log(notId);
+
+          message.addData('notId', notId);
+
+          /***
+           * For Inbox Stacking -  will use this after phonegap push plugin developers resolves ISSUE #314
+           */
+          //message.addData('style', 'inbox');
+          // message.addData('summaryText', 'There are %n% notifications');
+
+
           service.sendNoRetry(message, {registrationTokens: tokens}, function (err, response) {
             if (err) {
               console.log('problem with request: ' + err);
