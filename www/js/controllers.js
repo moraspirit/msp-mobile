@@ -1,5 +1,5 @@
-angular.module('starter.controllers', ['starter.constants', 'ionic.service.core', 'ionic.service.push', 'ionic-cache-src']).factory('CoolFactory', CoolFactory)
-
+angular.module('starter.controllers', ['starter.constants', 'ionic.service.core', 'ionic.service.push', 'ionic-cache-src'])
+  .factory('CoolFactory', CoolFactory)
   .filter('URLmaker', function () {
     return function (input) {
       // do some bounds checking here to ensure it has that index.
@@ -92,8 +92,8 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
     };
   })
 
-  .controller('AlbumController', function ($scope, $stateParams, $http, CoolFactory) {
-
+  .controller('AlbumController', function ($scope, $stateParams, $http, CoolFactory,$ionicLoading) {
+    $ionicLoading.show({template:'<ion-spinner class="spinner-assertive"></ion-spinner>'});
     $scope.data = {};
     $scope.data.albums = [];
     $scope.permissionToLoadMore = false;
@@ -120,7 +120,6 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
 
         $scope.data.albums = data.data;
         window.localStorage.setItem('albums', JSON.stringify(data.data));
-
         $scope.permissionToLoadMore = true;
       })
       .error(function () {
@@ -129,7 +128,9 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
           $scope.data.albums = JSON.parse(window.localStorage.getItem('albums'));
           $scope.permissionToLoadMore = true;
         }
-      });
+      }).finally(function () {
+      $ionicLoading.hide();
+    });
 
     $scope.hasMoreData = true;
 
@@ -171,12 +172,14 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
   })
 
 
-  .controller('NotificationsCtrl', function ($scope) {
+  .controller('NotificationsCtrl', function ($scope, $ionicLoading) {
+    $ionicLoading.show({template:'<ion-spinner class="spinner-assertive"></ion-spinner>'});
     $scope.notifications = JSON.parse(window.localStorage.getItem('pushNotifications'));
+    $ionicLoading.hide();
   })
 
   .controller('RecentScoresCtrl', function ($scope, $state) {
-
+    //$ionicLoading.show({template:'<ion-spinner class="spinner-assertive"></ion-spinner>'});
     $scope.cards = [];
 
     $scope.img = function (uni) {
@@ -299,8 +302,8 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
 
   })
 
-  .controller('ArticlesController', function ($http, API_HOST, $scope, $stateParams, ionicMaterialInk, CoolFactory, $cordovaSocialSharing) {
-    //ionicMaterialInk.displayEffect();
+  .controller('ArticlesController', function ($http, API_HOST, $scope, $stateParams, ionicMaterialInk, CoolFactory, $cordovaSocialSharing, $ionicLoading) {
+    $ionicLoading.show({template:'<ion-spinner class="spinner-assertive"></ion-spinner>'});
     $scope.data = {};
     $scope.data.articles = [];
     $scope.permissionToLoadMore = false;
@@ -328,7 +331,9 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
           $scope.data.articles = JSON.parse(window.localStorage.getItem('articles'));
           $scope.permissionToLoadMore = true;
         }
-      });
+      }).finally(function () {
+      $ionicLoading.hide();
+    });
 
     $scope.hasMoreData = true;
 
@@ -383,8 +388,8 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
 
   })
 
-  .controller('ArticleController', function ($http, $scope, $stateParams, CoolFactory) {
-
+  .controller('ArticleController', function ($http, $scope, $stateParams, CoolFactory, $ionicLoading) {
+    $ionicLoading.show({template:'<ion-spinner class="spinner-assertive"></ion-spinner>'});
     //article id
     var id = $stateParams.id;
     $scope.article = null;
@@ -401,11 +406,14 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
         }
 
         //console.log(rows.data);
-      });
+      }).finally(function () {
+      $ionicLoading.hide();
+    });
 
   })
 
-  .controller('RatingsCtrl', function ($scope, $http) {
+  .controller('RatingsCtrl', function ($scope, $http, $ionicLoading) {
+    $ionicLoading.show({template:'<ion-spinner class="spinner-assertive"></ion-spinner>'});
     $scope.rankings = null;
     $http.get('http://sports.moraspirit.com/getscores')
       .success(function (data) {
@@ -427,7 +435,9 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
         if (window.localStorage.getItem('rankings') !== undefined) {
           $scope.rankings = JSON.parse(window.localStorage.getItem('rankings'));
         }
-      });
+      }).finally(function () {
+      $ionicLoading.hide();
+    });
   })
   .controller('AboutCtrl', function ($scope) {
 

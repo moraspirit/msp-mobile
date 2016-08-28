@@ -22,7 +22,7 @@ const PORT_NO = 3000;
 FB.setAccessToken(FB_ACCESS_TOKEN);
 var MongoClient = mongodb.MongoClient;
 
-// TODO: credintials???
+// TODO: credentials???
 var pool = mysql.createPool({
   host: 'moraspirit.com',
   user: 'morasp5_slug2016',
