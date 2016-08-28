@@ -1,7 +1,7 @@
 <ion-view view-title="Gallery">
   <ion-content lazy-scroll >
     <ion-refresher on-refresh="doRefresh()"></ion-refresher>
-    <div id="albumContainer" class="list half">
+    <div id="albumListLeft" class="list half">
 
       <div ng-repeat="album in data.albums | limitTo:numberOfItemsToDisplay" ng-if="$odd && album.id!='213000905390257'"  ng-click="goToAlbum(album.id)">
         <div class="card card-gallery item item-text-wrap">
@@ -16,7 +16,6 @@
             </a>
             <a class="tab-item stable-bg positive-900">
               <i class="icon ion-chatbubbles"></i>
-
               {{album.comments.summary.total_count}}
             </a>
           </div>
@@ -24,13 +23,12 @@
       </div>
     </div>
 
-    <div class="list half" style="padding: 16px 20px 16px 0px;
-">
-      <div ng-repeat="album in data.albums | limitTo:numberOfItemsToDisplay" ng-if="$even && id!='213000905390257'"  ng-click="goToAlbum(album.id)">
+    <div class="list half" id="albumListRight">
+      <div ng-repeat="album in data.albums | limitTo:numberOfItemsToDisplay" ng-if="$even && id!= coverPhotoId"  ng-click="goToAlbum(album.id)">
 
         <div  class="card card-gallery item item-text-wrap">
           <div class="ink dark-bg">
-            <h2 style="text-transform: uppercase">{{album.name}}</h2>
+            <h2>{{album.name}}</h2>
             <img class="full-image" image-lazy-src="{{album.cover_photo.id | FbAlbumCoverURL}}" image-lazy-loader="lines">  >
           </div>
           <div class="item tabs tabs-secondary tabs-icon-left">
@@ -47,17 +45,12 @@
       </div>
     </div>
 
-
-    <!-- // loadMore() is called when the user scrolls greater than distance away from the bottom of the content.-->
     <ion-infinite-scroll
       immediate-check="false"
       ng-if="hasMoreData"
       on-infinite="loadMore()"
-      distance="1%"
-
-    >
+      distance="1%">
     </ion-infinite-scroll>
-
 
   </ion-content>
 </ion-view>

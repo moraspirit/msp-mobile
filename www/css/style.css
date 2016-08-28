@@ -195,7 +195,11 @@ Styles for navigation drawer
 
 /* Album view */
 
-#albumContainer{
+#albumListLeft{
   padding: 16px 10px 16px 0px;
+}
+
+#albumListRight{
+  padding: 16px 20px 16px 0px;
 }
 

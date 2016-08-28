@@ -7,6 +7,7 @@ angular.module('moraSpirit',
 )
   .constant('API_HOST', 'http://139.59.0.34:3000')
   .constant('GCM_SENDER_ID', '101029977116')
+  .constant('FB_COVER_PHOTOES_ALBUM_ID', '213000905390257')
 
   .run(function ($ionicPlatform, $state, $http, $log, GCM_SENDER_ID) {
     $ionicPlatform.ready(function () {

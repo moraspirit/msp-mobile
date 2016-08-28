@@ -97,7 +97,8 @@ angular.module('moraSpirit.controllers', ['ionic.service.core', 'ionic.service.p
     };
   })
 
-  .controller('AlbumController', function ($scope, $stateParams, $http, CoolFactory, $ionicLoading, $filter, $log) {
+  .controller('AlbumController', function ($scope, $stateParams, $http, CoolFactory, $ionicLoading, $filter, $log, FB_COVER_PHOTOES_ALBUM_ID) {
+    $scope.coverPhotoId = FB_COVER_PHOTOES_ALBUM_ID;
     $ionicLoading.show({template: '<ion-spinner class="spinner-assertive" icon="lines"></ion-spinner>'});
     $scope.data = {};
     $scope.data.albums = [];
