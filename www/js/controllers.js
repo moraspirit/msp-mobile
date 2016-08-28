@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['starter.constants', 'ionic.service.core', 'ionic.service.push', 'ionic-cache-src'])
+angular.module('moraSpirit.controllers', ['ionic.service.core', 'ionic.service.push', 'ionic-cache-src'])
   .factory('CoolFactory', CoolFactory)
   .filter('URLmaker', function () {
   return function (input) {
@@ -403,7 +403,7 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
       $ionicLoading.hide();
     });
   })
-  
+
   .controller('AboutCtrl', function ($scope) {
   });
 

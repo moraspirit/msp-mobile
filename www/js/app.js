@@ -1,69 +1,27 @@
-// Ionic Starter App
+angular.module('moraSpirit',
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter'  is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
-
-// create the constant module
-
-angular.module('starter.constants', []).constant('API_HOST', 'http://139.59.0.34:3000');   //'http://139.59.0.34:3000'
-
-angular.module('starter',
-
-  ['ionic','ionic.service.core',
-    'starter.controllers',
+  ['ionic', 'ionic.service.core',
+    'moraSpirit.controllers',
     'ngCordova', 'nl2br',
-    'ionic.service.push', 'ionic-material', 'ionicLazyLoad', 'starter.constants', 'ionic-cache-src']
+    'ionic.service.push', 'ionic-material', 'ionicLazyLoad', 'ionic-cache-src']
 )
+  .constant('API_HOST', 'http://139.59.0.34:3000')
+  .constant('GCM_SENDER_ID', '101029977116')
 
-  .run(function ($ionicPlatform, $state, $http, API_HOST, $stateParams) {
+  .run(function ($ionicPlatform, $state, $http, $log) {
     $ionicPlatform.ready(function () {
-
       navigator.splashscreen.hide();
-
-
-    /*   var push1 = new Ionic.Push({
-       "debug": true,
-       "onNotification": function (notification) {
-       var payload = notification.payload;
-       console.log(notification, payload);
-       },
-       "onRegister": function (data) {
-       console.log(data.token);
-       },
-       "pluginConfig": {
-       "ios": {
-       "badge": true,
-       "sound": true
-       },
-       "android": {
-       "iconColor": "#343434",
-       "senderID": "101029977116",
-       "sound": true,
-       "vibrate": true,
-       }
-       }
-       });
-
-       var callback = function (pushToken) {
-       console.log(pushToken.token);
-       };
-
-       push1.register(callback);*/
 
       // Clear the badge number automatically if the user taps on the app icon
       // cordova.plugins.notification.badge.configure({ autoClear: true });
 
       var push = PushNotification.init({
         android: {
-          senderID: "101029977116",
+          senderID: GCM_SENDER_ID,
           sound: true,
           vibrate: true,
           iconColor: 'lightgray',
           clearNotifications: false
-
-
         },
         ios: {
           alert: "true",
@@ -74,19 +32,20 @@ angular.module('starter',
       });
 
       push.on('registration', function (data) {
-        // data.registrationId
         var deviceToken = data.registrationId;
-        console.log("registration ID is  " + deviceToken);
-
+        $log.log("registration ID is  " + deviceToken);
         var jsonObject = {token: deviceToken};
 
         // send deviceToken to the server API
         $http.post('http://6126f222.ngrok.io' + '/saveDeviceToken', JSON.stringify(jsonObject))
-          .then(function(response){console.log("sent device token to API server successfully! response: "+ response.status)}
-            , function(response){console.log("Failed to send device token to API! response: "+response.status)});
-
+          .then(function (response) {
+              $log.log("sent device token to API server successfully! response: " + response.status)
+            }
+            , function (response) {
+              $log.log("Failed to send device token to API! response: " + response.status)
+            });
       });
-      // this block will run only when the app is on (not exit or in the background)
+      // this block will run only when the app is on (in the foreground or in the background)
       // this block will run as soon as you open the app when there is push notification have sent to the device
       push.on('notification', function (data) {
         // data.message,
@@ -96,16 +55,10 @@ angular.module('starter',
         // data.image,
         // data.additionalData
 
-        console.log(data.title);
-        console.log(data.message);
-        console.log(data.additionalData.payload.time);
-
         // save the notification locally
-        saveNotification(data.title, data.message, data.additionalData.payload.time );
-        if($state.current.name == 'app.notifications'){
-          console.log("current state is notifications");
+        saveNotification(data.title, data.message, data.additionalData.payload.time);
+        if ($state.current.name == 'app.notifications') {
           $state.go($state.current, {}, {reload: true});
-
         }
 
         // this block should call when a notification comes  -- move this block to the right place in the project
@@ -113,24 +66,17 @@ angular.module('starter',
          console.log('badge is now setup!!! as ' + badge);
          }, Object);*/
 
-
         // clear notifications badge - this block should call when the "recent" view is opened  -- move this block to the right place in the project
         /*   cordova.plugins.notification.badge.clear(function (badge) {
          console.log("notification badge is cleared");
          });
          */
 
-
         // when the notification was received while the app was in the foreground
         if (data.additionalData.foreground) {
           console.log("App was in the foreground");
 
-
-
-        /*  // save the notification locally
-          saveNotification(data.title, data.message);*/
-
-          // make a toast message!!!
+          // make a toast message.
           window.plugins.toast.showWithOptions(
             {
               message: data.message,
@@ -149,65 +95,44 @@ angular.module('starter',
             },
             // on success
             function (result) {
-              console.log("Toast message successful");
+              $log.log("Toast message successful");
               navigator.vibrate(500);
-
-
               // if the toast was touched
               if (result && result.event) {
-                console.log("The toast was tapped");
+                $log.log("The toast was tapped");
                 navigator.vibrate([20, 20]);
-
-
                 // route and go to the "recent" view
                 $state.go('app.notifications');
-
-
               }
             },
             // on failure
             function () {
-              console.log("Toast message error")
+              $log.error("Toast message error")
             }
           );
-
-
         }
-
         // true if the application is started (it was not  in the back ground) by clicking on the push notification, false if the app is already started.
         if (data.additionalData.coldstart) {
           console.log("The app was started after the  push is clicked");
           //direct the route to the recent view
           $state.go('app.notifications');
         }
-
-
       });
 
       push.on('error', function (e) {
-        // e.message
-        console.log("can't register for the push notification service ERROR: " + e.message);
-        //alert("can't register for the push notification service ERROR: " + e.message);
-
-
+        $log.warn("can't register for the push notification service ERROR: " + e.message);
       });
-
     });
-
-
   })
 
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
-
       .state('app', {
         url: '/app',
         abstract: true,
         templateUrl: 'templates/menu.html',
         controller: 'AppCtrl'
-
       })
-
       .state('app.articles', {
         url: '/articles',
         views: {
@@ -223,18 +148,9 @@ angular.module('starter',
           'menuContent': {
             templateUrl: 'templates/article-full.html',
             controller: 'ArticleController'
-          },
-          'fabContent': {
-            // template: '<button id="fab-tweet" class="button button-fab button-fab-top-right expanded button-energized-900 flap"><i class="icon ion-social-twitter"></i></button>',
-            // controller: function ($timeout) {
-            //   $timeout(function () {
-            //     document.getElementById('fab-tweet').classList.toggle('on');
-            //   }, 200);
-            // }
           }
         }
       })
-
       .state('app.album', {
         url: '/album',
         views: {
@@ -254,9 +170,7 @@ angular.module('starter',
           }
         }
       })
-
       .state('app.slug', {
-
         url: '/slug',
         views: {
           'menuContent': {
@@ -265,7 +179,6 @@ angular.module('starter',
           }
         }
       })
-
       .state('app.rankings', {
         url: '/rankings',
         views: {
@@ -275,7 +188,6 @@ angular.module('starter',
           }
         }
       })
-
       .state('app.about', {
         url: '/about',
         views: {
@@ -289,35 +201,35 @@ angular.module('starter',
     $urlRouterProvider.otherwise('/app/articles');
   });
 
-
-function saveNotification(topic, message, time){
-  // save the notification locally
-  var notification = {topic: topic, message: message, time:time};
+/**
+ * Save a notification locally
+ * @param topic
+ * @param message
+ * @param time
+ * @returns {null}
+ */
+function saveNotification(topic, message, time) {
+  var notification = {topic: topic, message: message, time: time};
   var tempArray = [];
   var notificationsArray = JSON.parse(window.localStorage.getItem('pushNotifications'));
 
-  if(notificationsArray && notificationsArray.length > 20){
+  if (notificationsArray && notificationsArray.length > 20) {
     notificationsArray.shift();
   }
-
   if (notificationsArray) {
     //check for duplicates
-    for(var key in notificationsArray){
-
-      if(notificationsArray[key].time == time){
-        console.log("duplicate detected");
+    for (var key in notificationsArray) {
+      if (notificationsArray[key].time == time) {
         return null;
       }
     }
-
     notificationsArray.push(notification);
     window.localStorage.setItem('pushNotifications', JSON.stringify(notificationsArray));
-    console.log("Notification saved in the app!");
+    $log.log("Notification saved in the app!");
   }
-  else{
+  else {
     tempArray.push(notification);
-
     window.localStorage.setItem('pushNotifications', JSON.stringify(tempArray));
-    console.log("Notification saved in the app!");
+    $log.log("Notification saved in the app!");
   }
 }
