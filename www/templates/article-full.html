@@ -1,21 +1,16 @@
 <ion-view view-title="">
   <ion-content>
-    <div class="hero" style="background-image: url('{{article.uri | URLmaker}}') {{backgroundStyle}}" >
-      <div class="content">
 
-      </div>
+    <div class="hero" style="background-image: url('{{article.uri | URLmaker}}')" >
     </div>
     <div class="mid-bar dark-bg z1 padding">
-      <h3 style="">{{article.title}}</h3>
-      <p style="text-transform: uppercase;font-size: small;">on {{article.created}}  &nbsp; by {{article.name}}</p>
+      <h3>{{article.title}}</h3>
+      <p id="articleFullCredits">on {{article.created}}  &nbsp; by {{article.name}}</p>
     </div>
-
     <div class="content double-padding">
-      <!--post content-->
       <div class="field-item even" property="content:encoded">
         <p ng-bind-html="article.body_value | nl2br"></p>
       </div>
-
     </div>
 
   </ion-content>

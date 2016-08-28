@@ -203,3 +203,9 @@ Styles for navigation drawer
   padding: 16px 20px 16px 0px;
 }
 
+/* Article full view */
+
+#articleFullCredits{
+  text-transform: uppercase;
+  font-size: small;
+}
