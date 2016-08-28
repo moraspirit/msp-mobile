@@ -90,7 +90,7 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
     };
   })
 
-  .controller('AlbumController', function ($scope, $stateParams, $http, CoolFactory, $ionicLoading, $filter) {
+  .controller('AlbumController', function ($scope, $stateParams, $http, CoolFactory, $ionicLoading, $filter, $log) {
     $ionicLoading.show({template: '<ion-spinner class="spinner-assertive" icon="lines"></ion-spinner>'});
     $scope.data = {};
     $scope.data.albums = [];
@@ -99,7 +99,6 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
       navigator.vibrate(20);
       window.open($filter('FBurl')(id));
     };
-
 
     $scope.doRefresh = function () {
       CoolFactory.hitTheServer('/albums/', '')
@@ -112,16 +111,14 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
       $scope.$broadcast('scroll.refreshComplete');
     };
 
-
     CoolFactory.hitTheServer('/albums/', '')
       .success(function (data) {
-
         $scope.data.albums = data.data;
         window.localStorage.setItem('albums', JSON.stringify(data.data));
         $scope.permissionToLoadMore = true;
       })
       .error(function () {
-        console.log("No internet connection! retrieving data from cache");
+        $log.info("No internet connection!");
         if (window.localStorage.getItem('albums') !== undefined) {
           $scope.data.albums = JSON.parse(window.localStorage.getItem('albums'));
           $scope.permissionToLoadMore = true;
@@ -129,46 +126,34 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
       }).finally(function () {
       $ionicLoading.hide();
     });
-
     $scope.hasMoreData = true;
 
-    // infinity scroll
-
-    //initial values
+    // infinity scroll initial values
     $scope.numberOfItemsToDisplay = 10;
     $scope.articleOffset = 1;
-
     $scope.items = [];
-
     $scope.loadMore = function () {
       if (!$scope.permissionToLoadMore) {
         return;
       }
       $scope.numberOfItemsToDisplay += 10;
       $scope.articleOffset += 10;
-
       CoolFactory.hitTheServer('/albumsMore/', $scope.articleOffset).success(function (items) {
-
         if (items.data.length > 0) {
           items.data.forEach(function (entry) {
             $scope.data.albums.push(entry);
           });
         } else {
           $scope.hasMoreData = false;
-          console.log("All the albums are loaded!! no more to load...");
+          $log.info("All the albums are loaded!! no more to load...");
         }
-
         $scope.$broadcast('scroll.infiniteScrollComplete');
       });
     };
-
     $scope.$on('$stateChangeSuccess', function () {
       $scope.loadMore();
     });
-
-
   })
-
 
   .controller('NotificationsCtrl', function ($scope, $ionicLoading) {
     $ionicLoading.show({template: '<ion-spinner class="spinner-assertive"  icon="lines"></ion-spinner>'});
@@ -300,19 +285,17 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
 
   })
 
-  .controller('ArticlesController', function ($http, API_HOST, $scope, $stateParams, ionicMaterialInk, CoolFactory, $cordovaSocialSharing, $ionicLoading) {
+  .controller('ArticlesController', function ($http, API_HOST, $scope, $stateParams, ionicMaterialInk, CoolFactory, $cordovaSocialSharing, $ionicLoading, $log) {
     $ionicLoading.show({template: '<ion-spinner class="spinner-assertive"  icon="lines"></ion-spinner>'});
     $scope.data = {};
     $scope.data.articles = [];
     $scope.permissionToLoadMore = false;
-    //CoolFactory.$inject = ['$http', 'API_HOST'];
 
     $scope.doRefresh = function () {
       CoolFactory.hitTheServer('/articles', '')
         .then(function (rows) {
           $scope.data.articles = rows.data;
         });
-
       //Stop the ion-refresher from spinning
       $scope.$broadcast('scroll.refreshComplete');
     };
@@ -324,7 +307,7 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
         $scope.permissionToLoadMore = true;
       })
       .error(function () {
-        console.log("No internet connection! retrieving data from cache");
+        $log.info("No internet connection! retrieving data from cache");
         if (window.localStorage.getItem('articles') !== undefined) {
           $scope.data.articles = JSON.parse(window.localStorage.getItem('articles'));
           $scope.permissionToLoadMore = true;
@@ -334,15 +317,10 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
     });
 
     $scope.hasMoreData = true;
-
-    // infinity scroll
-
-    //initial values
+    //infinity scroll initial values
     $scope.numberOfItemsToDisplay = 10;
     $scope.articleOffset = 1;
-
     $scope.items = [];
-
     $scope.loadMore = function () {
       if (!$scope.permissionToLoadMore) {
         return;
@@ -357,57 +335,45 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
           });
         } else {
           $scope.hasMoreData = false;
-          console.log("All the articles are loaded!! no more to load...");
+          $log.info("All the articles are loaded!! no more to load...");
         }
-
         $scope.$broadcast('scroll.infiniteScrollComplete');
       });
     };
-
     $scope.$on('$stateChangeSuccess', function () {
       $scope.loadMore();
     });
 
-
     // Share via native share sheet
     $scope.shareAnywhere = function (message, subject, file, link) {
-
-      //vibrate
       navigator.vibrate(20);
-
       $cordovaSocialSharing
         .share(message, subject, file, link)
-        .then(function (result) {
-          //alert("Success " + result);
+        .then(function () {
+         $log.log('Native share window opened');
         }, function (err) {
           alert("Cannot share right now! " + err);
+          $log.error("Cannot share right now! " + err);
         });
     }
-
   })
 
   .controller('ArticleController', function ($http, $scope, $stateParams, CoolFactory, $ionicLoading) {
     $ionicLoading.show({template: '<ion-spinner class="spinner-assertive"  icon="lines"></ion-spinner>'});
-    //article id
     var id = $stateParams.id;
     $scope.article = null;
     CoolFactory.hitTheServer('/articles/', id)
       .success(function (data) {
         window.localStorage.setItem('articles' + id, JSON.stringify(data[0]));
         $scope.article = data[0];
-        //console.log(rows.data);
       })
       .error(function () {
-
         if (window.localStorage.getItem('articles' + id) !== undefined) {
           $scope.article = JSON.parse(window.localStorage.getItem('articles' + id));
         }
-
-        //console.log(rows.data);
       }).finally(function () {
       $ionicLoading.hide();
     });
-
   })
 
   .controller('RatingsCtrl', function ($scope, $http, $ionicLoading) {
@@ -424,7 +390,6 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
             return 1;
           return 0;
         }
-
         data.sort(compare);
         data = bindRank(data.reverse());
         window.localStorage.setItem('rankings', JSON.stringify(data));
@@ -438,10 +403,9 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
       $ionicLoading.hide();
     });
   })
+  
   .controller('AboutCtrl', function ($scope) {
-
   });
-
 
 // functions to do the http requests using the API_HOST string ( API_HOST = link of the NODE server)
 function CoolFactory($http, API_HOST) {
@@ -481,7 +445,6 @@ function bindImageANDparsePointsTOint(data) {
           record.img = 'img/uni_logos/' + record.name + '.png';
       }
       record.points = parseInt(record.points);
-
     }
   );
   return data;
