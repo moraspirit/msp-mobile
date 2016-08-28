@@ -16,6 +16,13 @@ angular.module('moraSpirit.controllers', ['ionic.service.core', 'ionic.service.p
       }
     };
   })
+  .filter('FbAlbumCoverURL', function () {
+    return function (id) {
+      if (id) {
+        return 'http://graph.facebook.com/'+id+'/picture?type=normal';
+      }
+    };
+  })
 
   .controller('AppCtrl', function ($scope) {
     $scope.isExpanded = false;

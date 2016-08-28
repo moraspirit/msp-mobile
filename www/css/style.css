@@ -193,3 +193,9 @@ Styles for navigation drawer
 .rankingtable-cell {
   display: table-cell; }
 
+/* Album view */
+
+#albumContainer{
+  padding: 16px 10px 16px 0px;
+}
+
