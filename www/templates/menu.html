@@ -8,20 +8,18 @@
       </ion-nav-back-button>
 
       <ion-nav-buttons side="left">
-
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
-
       </ion-nav-buttons>
 
-     <ion-nav-buttons side="right">
-       <a href="#/app/notifications"><button menu-close class="button button-icon button-clear ion-ios-bell" style="margin-right: 19px">
-       </button></a>
+      <ion-nav-buttons side="right">
+        <a href="#/app/notifications">
+          <button menu-close class="button button-icon button-clear ion-ios-bell" id="notificationBell">
+          </button>
+        </a>
       </ion-nav-buttons>
 
     </ion-nav-bar>
-
-    <ion-nav-view name="fabContent"></ion-nav-view>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
 
@@ -29,11 +27,11 @@
   <ion-side-menu side="left">
     <ion-header-bar class="expanded">
       <div class="menu-bottom">
-        <img src="img/msp_text_logo_300.png" style="width: 75%; height: auto">
+        <img src="img/msp_text_logo_300.png" id="moraLogo">
       </div>
     </ion-header-bar>
     <ion-content class="has-expanded-header">
-      <ion-list style="padding-top: 8px;">
+      <ion-list id="sideMenu">
         <ion-item menu-close href="#/app/articles" class="item-icon-left">
           <i class='icon mdi mdi-file-document'></i>
           Articles
@@ -42,8 +40,8 @@
           <i class='icon mdi mdi-image-multiple'></i>
           Gallery
         </ion-item>
-        <hr style="opacity: 0.3" />
-        <ion-item menu-close style="opacity: 0.5; font-weight: 500; padding-top: 14px; padding-bottom: 14px; color:#0d0d0d">
+        <hr/>
+        <ion-item menu-close id="subMenuTitle">
           SLUG 2016
         </ion-item>
         <ion-item menu-close href="#/app/slug" class="item-icon-left">
@@ -54,17 +52,13 @@
           <i class='icon mdi mdi-trophy-variant'></i>
           Rankings
         </ion-item>
-
-        <hr style="opacity: 0.3" />
-
+        <hr/>
         <ion-item menu-close href="#/app/about" class="item-icon-left">
           <i class='icon mdi mdi-information'></i>
           About
         </ion-item>
-
       </ion-list>
     </ion-content>
   </ion-side-menu>
-
 
 </ion-side-menus>

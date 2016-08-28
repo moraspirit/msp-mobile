@@ -209,3 +209,30 @@ Styles for navigation drawer
   text-transform: uppercase;
   font-size: small;
 }
+
+/*navigation bar*/
+
+#notificationBell{
+  margin-right: 19px;
+}
+
+#moraLogo{
+  width: 75%;
+  height: auto
+}
+
+#sideMenu{
+  padding-top: 8px;
+}
+
+#sideMenu hr{
+  opacity: 0.3;
+}
+
+#subMenuTitle{
+  opacity: 0.6;
+  font-weight: 500;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  color:#0d0d0d
+}
