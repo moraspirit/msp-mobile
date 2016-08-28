@@ -14,7 +14,8 @@
     "gulp-sass": "^2.0.4",
     "mongodb": "^2.2.5",
     "mysql": "^2.10.2",
-    "node-gcm": "^0.14.4"
+    "node-gcm": "^0.14.4",
+    "winston": "^2.2.0"
   },
   "devDependencies": {
     "bower": "^1.3.3",
