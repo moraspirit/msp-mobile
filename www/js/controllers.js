@@ -1,16 +1,23 @@
 angular.module('starter.controllers', ['starter.constants', 'ionic.service.core', 'ionic.service.push', 'ionic-cache-src'])
   .factory('CoolFactory', CoolFactory)
   .filter('URLmaker', function () {
-    return function (input) {
-      // do some bounds checking here to ensure it has that index.
-      if (input) {
-        var splittedString = input.split('/');
-        return 'http://moraspirit.com/sites/default/files/styles/teaser_image/public/' + splittedString[2] + '/' + splittedString[3] + '/' + splittedString[4];
+  return function (input) {
+    // do some bounds checking here to ensure it has that index.
+    if (input) {
+      var splittedString = input.split('/');
+      return 'http://moraspirit.com/sites/default/files/styles/teaser_image/public/' + splittedString[2] + '/' + splittedString[3] + '/' + splittedString[4];
+    }
+  };
+})
+  .filter('FBurl', function () {
+    return function (id) {
+      if (id) {
+        return 'https://www.facebook.com/moraspirit.fanpage/photos/?tab=album&album_id=' + id;
       }
     };
   })
 
-  .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicBackdrop) {
+  .controller('AppCtrl', function ($scope) {
     $scope.isExpanded = false;
     $scope.hasHeaderFabLeft = false;
     $scope.hasHeaderFabRight = false;
@@ -22,18 +29,12 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
       });
     }
 
-    ////////////////////////////////////////
-    // Layout Methods
-    ////////////////////////////////////////
-
     $scope.hideNavBar = function () {
       document.getElementsByTagName('ion-nav-bar')[0].style.display = 'none';
     };
-
     $scope.showNavBar = function () {
       document.getElementsByTagName('ion-nav-bar')[0].style.display = 'block';
     };
-
     $scope.noHeader = function () {
       var content = document.getElementsByTagName('ion-content');
       for (var i = 0; i < content.length; i++) {
@@ -42,11 +43,9 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
         }
       }
     };
-
     $scope.setExpanded = function (bool) {
       $scope.isExpanded = bool;
     };
-
     $scope.setHeaderFab = function (location) {
       var hasHeaderFabLeft = false;
       var hasHeaderFabRight = false;
@@ -59,7 +58,6 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
           hasHeaderFabRight = true;
           break;
       }
-
       $scope.hasHeaderFabLeft = hasHeaderFabLeft;
       $scope.hasHeaderFabRight = hasHeaderFabRight;
     };
@@ -92,14 +90,14 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
     };
   })
 
-  .controller('AlbumController', function ($scope, $stateParams, $http, CoolFactory,$ionicLoading) {
-    $ionicLoading.show({template:'<ion-spinner class="spinner-assertive"></ion-spinner>'});
+  .controller('AlbumController', function ($scope, $stateParams, $http, CoolFactory, $ionicLoading, $filter) {
+    $ionicLoading.show({template: '<ion-spinner class="spinner-assertive" icon="lines"></ion-spinner>'});
     $scope.data = {};
     $scope.data.albums = [];
     $scope.permissionToLoadMore = false;
     $scope.goToAlbum = function (id) {
       navigator.vibrate(20);
-      window.open('https://www.facebook.com/moraspirit.fanpage/photos/?tab=album&album_id=' + id);
+      window.open($filter('FBurl')(id));
     };
 
 
@@ -173,7 +171,7 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
 
 
   .controller('NotificationsCtrl', function ($scope, $ionicLoading) {
-    $ionicLoading.show({template:'<ion-spinner class="spinner-assertive"></ion-spinner>'});
+    $ionicLoading.show({template: '<ion-spinner class="spinner-assertive"  icon="lines"></ion-spinner>'});
     $scope.notifications = JSON.parse(window.localStorage.getItem('pushNotifications'));
     $ionicLoading.hide();
   })
@@ -303,7 +301,7 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
   })
 
   .controller('ArticlesController', function ($http, API_HOST, $scope, $stateParams, ionicMaterialInk, CoolFactory, $cordovaSocialSharing, $ionicLoading) {
-    $ionicLoading.show({template:'<ion-spinner class="spinner-assertive"></ion-spinner>'});
+    $ionicLoading.show({template: '<ion-spinner class="spinner-assertive"  icon="lines"></ion-spinner>'});
     $scope.data = {};
     $scope.data.articles = [];
     $scope.permissionToLoadMore = false;
@@ -389,7 +387,7 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
   })
 
   .controller('ArticleController', function ($http, $scope, $stateParams, CoolFactory, $ionicLoading) {
-    $ionicLoading.show({template:'<ion-spinner class="spinner-assertive"></ion-spinner>'});
+    $ionicLoading.show({template: '<ion-spinner class="spinner-assertive"  icon="lines"></ion-spinner>'});
     //article id
     var id = $stateParams.id;
     $scope.article = null;
@@ -413,7 +411,7 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
   })
 
   .controller('RatingsCtrl', function ($scope, $http, $ionicLoading) {
-    $ionicLoading.show({template:'<ion-spinner class="spinner-assertive"></ion-spinner>'});
+    $ionicLoading.show({template: '<ion-spinner class="spinner-assertive"  icon="lines"></ion-spinner>'});
     $scope.rankings = null;
     $http.get('http://sports.moraspirit.com/getscores')
       .success(function (data) {
@@ -426,6 +424,7 @@ angular.module('starter.controllers', ['starter.constants', 'ionic.service.core'
             return 1;
           return 0;
         }
+
         data.sort(compare);
         data = bindRank(data.reverse());
         window.localStorage.setItem('rankings', JSON.stringify(data));
@@ -497,7 +496,7 @@ function bindRank(data) {
       rank += (rankboost + 1 );
       rankboost = 0;
     }
-    else{
+    else {
       rankboost++;
     }
   }
