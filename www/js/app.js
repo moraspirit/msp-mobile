@@ -58,6 +58,8 @@ angular.module('moraSpirit',
 
         // save the notification locally
         saveNotification(data.title, data.message, data.additionalData.payload.time);
+        $log.log("Notification saved in the app!");
+        
         if ($state.current.name == 'app.notifications') {
           $state.go($state.current, {}, {reload: true});
         }
@@ -226,11 +228,9 @@ function saveNotification(topic, message, time) {
     }
     notificationsArray.push(notification);
     window.localStorage.setItem('pushNotifications', JSON.stringify(notificationsArray));
-    $log.log("Notification saved in the app!");
   }
   else {
     tempArray.push(notification);
     window.localStorage.setItem('pushNotifications', JSON.stringify(tempArray));
-    $log.log("Notification saved in the app!");
   }
 }

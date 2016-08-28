@@ -1,17 +1,13 @@
 <ion-view view-title="SLUG Recent">
   <ion-content>
     <ion-list ng-repeat="card in cards" >
-
       <ion-item class="SlugRecent" >
-
         <div class="mblock">
           <center><h5 class="srPics">
-
             <img width="25px" height="25px" src="{{img(card.uniWon)}}" alt="" class="srImgL">
             <b class="srB">
               {{card.match | uppercase}}</b>
             <img width="25px" height="25px" src="{{img(card.uniLost)}}" alt="" class="srImgR">
-
           </h5>
           </center>
           <hr class="srHr">
@@ -23,10 +19,7 @@
           </center>
           <h5 class="srRslt"> {{getTown(card.uniWon)}} won the match</h5>
         </div>
-
       </ion-item>
-
     </ion-list>
-
   </ion-content>
 </ion-view>
