@@ -8,7 +8,7 @@ angular.module('moraSpirit',
   .constant('API_HOST', 'http://139.59.0.34:3000')
   .constant('GCM_SENDER_ID', '101029977116')
 
-  .run(function ($ionicPlatform, $state, $http, $log) {
+  .run(function ($ionicPlatform, $state, $http, $log, GCM_SENDER_ID) {
     $ionicPlatform.ready(function () {
       navigator.splashscreen.hide();
 
