@@ -168,13 +168,12 @@ app.post('/push', function (req, res) {
 
   var title = req.body.title;
   var msg = req.body.message;
-  var timeStamp = (new Date()).toLocaleString();
+  var timeStamp = (new Date()).toLocaleString('en-US');
 
   MongoClient.connect(MONGO_URL, function (err, db) {
     if (err) {
       winston.log('error', 'Unable to connect to the mongoDB server. Error:'+ err);
     } else {
-      winston.log('info','Connection established to' +  MONGO_URL );
       var collection = db.collection('device_tokens');
       collection.find({}).toArray(function (err, result) {
         if (err) {
@@ -209,7 +208,7 @@ app.post('/push', function (req, res) {
             }
             else {
               winston.log('info', "Notification sent successfully!");
-              winston.log('info', 'Response from GCM: ' + JSON.stringify(response));
+              winston.log('info', 'Response from GCM. multicast_id: '+ response.multicast_id + ' success: ' + response.success + ' failure: '+response.failure );
               res.send("success"); // TODO: refactor this!
             }
           });
@@ -233,7 +232,6 @@ app.post('/saveDeviceToken', function (req, res) {
     if (err) {
       winston.log('error', 'Unable to connect to the mongoDB server. Error:'+ err);
     } else {
-      winston.log('info', 'Connection established to'+ MONGO_URL);
       var collection = db.collection('device_tokens');
       var deviceTokenJSONObject = {token: token};
       collection.updateOne({token: token}, deviceTokenJSONObject, {upsert: true}, function (err, result) {

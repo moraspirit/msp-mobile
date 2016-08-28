@@ -1,14 +1,14 @@
 angular.module('moraSpirit.controllers', ['ionic.service.core', 'ionic.service.push', 'ionic-cache-src'])
   .factory('CoolFactory', CoolFactory)
   .filter('URLmaker', function () {
-  return function (input) {
-    // do some bounds checking here to ensure it has that index.
-    if (input) {
-      var splittedString = input.split('/');
-      return 'http://moraspirit.com/sites/default/files/styles/teaser_image/public/' + splittedString[2] + '/' + splittedString[3] + '/' + splittedString[4];
-    }
-  };
-})
+    return function (input) {
+      // do some bounds checking here to ensure it has that index.
+      if (input) {
+        var splittedString = input.split('/');
+        return 'http://moraspirit.com/sites/default/files/styles/teaser_image/public/' + splittedString[2] + '/' + splittedString[3] + '/' + splittedString[4];
+      }
+    };
+  })
   .filter('FBurl', function () {
     return function (id) {
       if (id) {
@@ -19,7 +19,7 @@ angular.module('moraSpirit.controllers', ['ionic.service.core', 'ionic.service.p
   .filter('FbAlbumCoverURL', function () {
     return function (id) {
       if (id) {
-        return 'http://graph.facebook.com/'+id+'/picture?type=normal';
+        return 'http://graph.facebook.com/' + id + '/picture?type=normal';
       }
     };
   })
@@ -163,9 +163,75 @@ angular.module('moraSpirit.controllers', ['ionic.service.core', 'ionic.service.p
     });
   })
 
-  .controller('NotificationsCtrl', function ($scope, $ionicLoading) {
+  .controller('NotificationsCtrl', function ($scope, $ionicLoading, $filter) {
     $ionicLoading.show({template: '<ion-spinner class="spinner-assertive"  icon="lines"></ion-spinner>'});
+
     $scope.notifications = JSON.parse(window.localStorage.getItem('pushNotifications'));
+
+    $scope.displayNotificationTime = function (dateTime) {
+      if (dateTime) {
+        // var currentDateTime = prepareDateTime($filter('date')(Date.now(), 'M/d/yyyy,h:mm:ss a ', '+0500'));
+        var currentDateTime = prepareDateTime(new Date().toLocaleString('en-US'));
+        var notificationDateTime = prepareDateTime(dateTime);
+
+
+        //    localStorage.clear();
+        console.log('current time: ' + currentDateTime);
+        console.log(' notification time: ' + notificationDateTime);
+
+        // main logic starts  *******  day month year hour minute second AMorPM
+
+
+        // If in the same year
+        if (currentDateTime[2].localeCompare(notificationDateTime[2]) == 0) {
+          console.log('C' + currentDateTime[2]);
+          console.log('N' + notificationDateTime[2]);
+
+          // If in the same week
+          if (true) {
+
+
+            // If in Today
+            if (false) {
+
+              // If in this hour
+              if (true) {
+                // If in this minute
+                if (true) {
+                  return 'Just now';
+                }
+                else {
+                  return 'x' + ' minutes ago';
+                }
+              }
+              else {
+                return 'x'+ ' hours ago';
+              }
+            }
+            else {
+              return 'Yesterday'
+            }
+          }
+          else {
+            return 'currentDateTime[0]' +  ' at' + currentDateTime[3] + ':' + currentDateTime[4] + ' ' + currentDateTime[5];
+          }
+
+
+        }
+        else {
+
+          return 'Last year';
+        }
+
+
+        return dateTime;
+      }
+      else {
+        return dateTime;
+      }
+
+    };
+
     $ionicLoading.hide();
   })
 
@@ -358,7 +424,7 @@ angular.module('moraSpirit.controllers', ['ionic.service.core', 'ionic.service.p
       $cordovaSocialSharing
         .share(message, subject, file, link)
         .then(function () {
-         $log.log('Native share window opened');
+          $log.log('Native share window opened');
         }, function (err) {
           alert("Cannot share right now! " + err);
           $log.error("Cannot share right now! " + err);
@@ -398,6 +464,7 @@ angular.module('moraSpirit.controllers', ['ionic.service.core', 'ionic.service.p
             return 1;
           return 0;
         }
+
         data.sort(compare);
         data = bindRank(data.reverse());
         window.localStorage.setItem('rankings', JSON.stringify(data));
@@ -475,3 +542,21 @@ function bindRank(data) {
   return data;
 }
 
+function prepareDateTime(dateTime) {
+  var dateTimeArr = [];  //  month day year hour minute second AMorPM
+  var arr = dateTime.split(',');
+
+  var date = arr[0].trim();
+  var time = arr[1].trim();
+
+  var arr = date.split('/');
+  dateTimeArr.push(arr[0]);
+  dateTimeArr.push(arr[1]);
+  dateTimeArr.push(arr[2]);
+  var arr2 = time.split(':');
+  dateTimeArr.push(arr2[0]);
+  dateTimeArr.push(arr2[1]);
+  dateTimeArr.push(arr2[2].split(' ')[1]);
+
+  return dateTimeArr;
+}
