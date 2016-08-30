@@ -163,75 +163,31 @@ angular.module('moraSpirit.controllers', ['ionic.service.core', 'ionic.service.p
     });
   })
 
-  .controller('NotificationsCtrl', function ($scope, $ionicLoading, $filter) {
+  .controller('NotificationsCtrl', function ($scope, $ionicLoading) {
     $ionicLoading.show({template: '<ion-spinner class="spinner-assertive"  icon="lines"></ion-spinner>'});
 
-    $scope.notifications = JSON.parse(window.localStorage.getItem('pushNotifications'));
+    // clear badge
+    cordova.plugins.notification.badge.set(0);
 
+    $scope.notifications = JSON.parse(window.localStorage.getItem('pushNotifications'));
     $scope.displayNotificationTime = function (dateTime) {
       if (dateTime) {
-        // var currentDateTime = prepareDateTime($filter('date')(Date.now(), 'M/d/yyyy,h:mm:ss a ', '+0500'));
         var currentDateTime = prepareDateTime(new Date().toLocaleString('en-US'));
         var notificationDateTime = prepareDateTime(dateTime);
+        var monthsNames = [" ", "Jan", "Feb", "March", "April", "May", "June", "July", "August", "Sept", "Oct", "Nov", "Dec"]
 
-
-        //    localStorage.clear();
-        console.log('current time: ' + currentDateTime);
-        console.log(' notification time: ' + notificationDateTime);
-
-        // main logic starts  *******  day month year hour minute second AMorPM
-
-
-        // If in the same year
-        if (currentDateTime[2].localeCompare(notificationDateTime[2]) == 0) {
-          console.log('C' + currentDateTime[2]);
-          console.log('N' + notificationDateTime[2]);
-
-          // If in the same week
-          if (true) {
-
-
-            // If in Today
-            if (false) {
-
-              // If in this hour
-              if (true) {
-                // If in this minute
-                if (true) {
-                  return 'Just now';
-                }
-                else {
-                  return 'x' + ' minutes ago';
-                }
-              }
-              else {
-                return 'x'+ ' hours ago';
-              }
-            }
-            else {
-              return 'Yesterday'
-            }
-          }
-          else {
-            return 'currentDateTime[0]' +  ' at' + currentDateTime[3] + ':' + currentDateTime[4] + ' ' + currentDateTime[5];
-          }
-
-
+        // If in Today
+        if (currentDateTime[1].localeCompare(notificationDateTime[1]) == 0) {
+          return 'Today at ' + notificationDateTime[3] + ":" + notificationDateTime[4] + ' ' +notificationDateTime[5];
         }
         else {
-
-          return 'Last year';
+          return monthsNames[currentDateTime[0]] + ' '+ currentDateTime[1]+ ' at ' + currentDateTime[3] + ':' + currentDateTime[4] + ' ' + currentDateTime[5];
         }
-
-
-        return dateTime;
       }
       else {
         return dateTime;
       }
-
     };
-
     $ionicLoading.hide();
   })
 

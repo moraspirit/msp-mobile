@@ -59,25 +59,15 @@ angular.module('moraSpirit',
         // save the notification locally
         saveNotification(data.title, data.message, data.additionalData.payload.time);
         $log.log("Notification saved in the app!");
-        
+
         if ($state.current.name == 'app.notifications') {
           $state.go($state.current, {}, {reload: true});
         }
-
-        // this block should call when a notification comes  -- move this block to the right place in the project
-        /*     cordova.plugins.notification.badge.increase(1, function(badge){
-         console.log('badge is now setup!!! as ' + badge);
-         }, Object);*/
-
-        // clear notifications badge - this block should call when the "recent" view is opened  -- move this block to the right place in the project
-        /*   cordova.plugins.notification.badge.clear(function (badge) {
-         console.log("notification badge is cleared");
-         });
-         */
+        // increase badge count
+        //cordova.plugins.notification.badge.increase(1);
 
         // when the notification was received while the app was in the foreground
         if (data.additionalData.foreground) {
-          console.log("App was in the foreground");
 
           // make a toast message.
           window.plugins.toast.showWithOptions(
@@ -104,6 +94,8 @@ angular.module('moraSpirit',
               if (result && result.event) {
                 $log.log("The toast was tapped");
                 navigator.vibrate([20, 20]);
+                // clear notifications badge
+                //cordova.plugins.notification.badge.set(0);
                 // route and go to the "recent" view
                 $state.go('app.notifications');
               }
@@ -117,6 +109,8 @@ angular.module('moraSpirit',
         // true if the application is started (it was not  in the back ground) by clicking on the push notification, false if the app is already started.
         if (data.additionalData.coldstart) {
           console.log("The app was started after the  push is clicked");
+          // clear notifications badge
+          //cordova.plugins.notification.badge.set(0);
           //direct the route to the recent view
           $state.go('app.notifications');
         }

@@ -233,3 +233,7 @@ Styles for navigation drawer
   color:#0d0d0d
 }
 
+/* notification view */
+.pull-left.resent{
+  font-size: 12px;
+}
