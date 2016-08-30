@@ -246,23 +246,15 @@ Styles for navigation drawer
   padding-bottom: 10px;
 }
 
-#para1{
-  font-style: italic;
-  margin: 0 0 15px;
-  font-size: 16px;
-  font-weight: 100;
-  line-height: 29px;
-}
-
 #ourMission {
   font-size: 22px;
   color: #ff0000;
   margin: 5px 0px 10px
 }
 
-#para2 {
-  font-style: normal;
+.aboutPara {
+  font-family: 'Open Sans', sans-serif;
   margin: 5px 0px 15px;
   font-size: 16px;
-  font-weight: 300;
+
 }
