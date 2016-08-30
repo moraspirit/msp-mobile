@@ -425,14 +425,13 @@ angular.module('moraSpirit.controllers', ['ionic.service.core', 'ionic.service.p
         data = bindRank(data.reverse());
         window.localStorage.setItem('rankings', JSON.stringify(data));
         $scope.rankings = data;
+        $ionicLoading.hide();
       })
       .error(function () {
         if (window.localStorage.getItem('rankings') !== undefined) {
           $scope.rankings = JSON.parse(window.localStorage.getItem('rankings'));
         }
-      }).finally(function () {
-      $ionicLoading.hide();
-    });
+      });
   })
 
   .controller('AboutCtrl', function ($scope) {
