@@ -38,7 +38,7 @@ angular.module('moraSpirit',
         var jsonObject = {token: deviceToken};
 
         // send deviceToken to the server API
-        $http.post('http://6126f222.ngrok.io' + '/saveDeviceToken', JSON.stringify(jsonObject))
+        $http.post('http://139.59.0.34:3000' + '/saveDeviceToken', JSON.stringify(jsonObject))
           .then(function (response) {
               $log.log("sent device token to API server successfully! response: " + response.status)
             }
