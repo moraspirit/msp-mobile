@@ -107,7 +107,6 @@ angular.module('moraSpirit.controllers', ['ionic.service.core', 'ionic.service.p
       navigator.vibrate(20);
       window.open($filter('FBurl')(id));
     };
-
     $scope.doRefresh = function () {
       CoolFactory.hitTheServer('/albums/', '')
         .then(function (data) {

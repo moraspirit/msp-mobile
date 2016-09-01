@@ -168,7 +168,7 @@ app.post('/push', function (req, res) {
 
   var title = req.body.title;
   var msg = req.body.message;
-  var timeStamp = (new Date()).toLocaleString('en-US');
+  var timeStamp = (new Date()).toLocaleString();
 
   MongoClient.connect(MONGO_URL, function (err, db) {
     if (err) {
