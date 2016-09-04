@@ -165,9 +165,6 @@ angular.module('moraSpirit.controllers', ['ionic.service.core', 'ionic.service.p
   .controller('NotificationsCtrl', function ($scope, $ionicLoading) {
     $ionicLoading.show({template: '<ion-spinner class="spinner-assertive"  icon="lines"></ion-spinner>'});
 
-    // clear badge
-    cordova.plugins.notification.badge.set(0);
-
     $scope.notifications = JSON.parse(window.localStorage.getItem('pushNotifications'));
     $scope.displayNotificationTime = function (dateTime) {
       if (dateTime) {
@@ -179,7 +176,7 @@ angular.module('moraSpirit.controllers', ['ionic.service.core', 'ionic.service.p
           return 'Today at ' + notificationDateTime[3] + ":" + notificationDateTime[4] + ' ' +notificationDateTime[5];
         }
         else {
-          return monthsNames[currentDateTime[1]] + ' '+ currentDateTime[0]+ ' at ' + currentDateTime[3] + ':' + currentDateTime[4] + ' ' + currentDateTime[5];
+          return monthsNames[notificationDateTime[1]] + ' '+ notificationDateTime[0]+ ' at ' + notificationDateTime[3] + ':' + notificationDateTime[4] + ' ' + notificationDateTime[5];
         }
       }
       else {
