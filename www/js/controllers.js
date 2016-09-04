@@ -171,16 +171,15 @@ angular.module('moraSpirit.controllers', ['ionic.service.core', 'ionic.service.p
     $scope.notifications = JSON.parse(window.localStorage.getItem('pushNotifications'));
     $scope.displayNotificationTime = function (dateTime) {
       if (dateTime) {
-        var currentDateTime = prepareDateTime(new Date().toLocaleString('en-US'));
+        var currentDateTime = prepareDateTime(new Date().toLocaleString('en-IN'));
         var notificationDateTime = prepareDateTime(dateTime);
         var monthsNames = [" ", "Jan", "Feb", "March", "April", "May", "June", "July", "August", "Sept", "Oct", "Nov", "Dec"]
-
         // If in Today
-        if (currentDateTime[1].localeCompare(notificationDateTime[1]) == 0) {
+        if (currentDateTime[0].localeCompare(notificationDateTime[0]) == 0) {
           return 'Today at ' + notificationDateTime[3] + ":" + notificationDateTime[4] + ' ' +notificationDateTime[5];
         }
         else {
-          return monthsNames[currentDateTime[0]] + ' '+ currentDateTime[1]+ ' at ' + currentDateTime[3] + ':' + currentDateTime[4] + ' ' + currentDateTime[5];
+          return monthsNames[currentDateTime[1]] + ' '+ currentDateTime[0]+ ' at ' + currentDateTime[3] + ':' + currentDateTime[4] + ' ' + currentDateTime[5];
         }
       }
       else {
