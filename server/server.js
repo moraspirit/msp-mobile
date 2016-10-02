@@ -16,7 +16,7 @@ var mongodb = require('mongodb');
 // constants  TODO: move these to a configuration file???
 var MONGO_URL = 'mongodb://mspmalith:123123@ds153765.mlab.com:53765/moraspiritpush';
 var GCM_API_KEY = "AIzaSyCKWUYkrXOfPXTCtw6eJvlNh-n2WZw7fOk";
-var FB_ACCESS_TOKEN = 'EAAOoAjs48vsBAEDsCtu0AsStZAveePZCXaJZB8NXTFdwFrAjRYodyJ828TwAaZABen2ZB3G38oEiyExGczNSByijxjpUBLmAZCXRzsQxUPhd2KeWrSEd2SwdMqK87xxRDDMlY1IzeNtXRtAf4HlH3SoHmZAxcWjVFUZD';
+var FB_ACCESS_TOKEN = 'EAAOoAjs48vsBAL8y6AsJJGy85z0tq1iyZAIQpNSKkfuHpGZCd9ZCaZCSOsNjjOrx7r5hJ7KUURxk9qZB7ZC28Aw7xaQyivdzkpjsuxO4YpjNGok1C3qZAvLlAcg8khWZCOHM3Nni3GawDwjvZAn9sQr2G3smyc0RzZBbmSuZBZCSEmHIZBAZDZD';
 const PORT_NO = 3000;
 
 FB.setAccessToken(FB_ACCESS_TOKEN);
